@@ -1,0 +1,74 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""          MY OLD VIMPERATOR STYLES                """"""""""""""""
+
+" Entire bottom line
+hi CmdLine                              color: #dcdccc; background: #353535; font-family: Inconsolata; font-size: 12px; padding: 0px; vertical-align: middle; border: none;
+" the url, [x/x] buffers and page progress text
+hi StatusLine                           color: #dcdccc; background: #353535; font-family: Inconsolata; font-size: 14px; margin-top: 1px;
+
+" Commandline completions
+hi CompDesc                             color: #dcdccc; width: 50%;
+hi CompItem[selected]                   background: #4f4f4f;
+" Used in the URL column of `bmarks`
+hi CompResult                           color: #dcdccc; width: 45%; overflow: hidden;
+hi CompTitle                            color: #dcdccc; background: #3f3f3f; font-weight: bold;
+hi CompTitle>*                          color: #dcdccc; font-weight: bold; border-top: 1px solid gray; border-bottom: 1px solid gray; padding: 1px 0.5ex;
+
+" Highlight in search results
+hi Filter                               color: #385f38; background: #f8f893;
+
+
+" Hints
+hi Hint                                 color: white; background-color: #262626; border-color: ButtonShadow; font-family: Inconsolata; font-size: 14px; border-width: 0px; border-style: solid; padding 0 1px;
+hi Hint::after                          content: attr(number);
+hi HintActive                           color: black; background: #385f38;
+hi HintElem                             color: black; background-color: #3f4040;
+hi HintImage                            opacity: .5;
+
+
+" Used in wrapping error messages as the background
+hi InfoMsg                              color: #dcdccc; background: #3f3f3f;
+
+" Syntax error in vimperatorrc, bad command input, etc.
+hi ErrorMsg                             color: #80d4aa; background-color: #2f2f2f; font-weight: bold;
+hi LineNr                               color: #9fafaf; background-color: #262626;
+
+" Used in CARET or COMMAND modes
+hi ModeMsg                              color: #ffcfaf; background: #353535;
+hi MoreMsg                              color: #ffffff; background: #353535; font-weight: bold; -moz-border-radius: 5px; padding-left: 5px;
+hi Normal                               color: #dcdccc; background: #353535;
+
+" Used in :`js tr<TAB>`
+hi Boolean                              color: #dca3a3;
+hi Function                             color: #efef8f;
+hi Null                                 color: #8cd0d3;
+hi Number                               color: #8cd0d3;
+hi Object                               color: #dc8c6c;
+hi String                               color: #cc9393;
+
+
+" Hide the > arrow in the prompt
+hi Prompt                               color: #353535;
+
+" "Follow Hint..." or "Press ENTER..." in `jumps` or `bmarks`
+hi PromptText                           color: #9f9f9f;
+
+hi Question                             color: #080; background: #222; font-weight: bold; -moz-border-radius: 5px; padding-left: 5px;
+
+
+" `tabs` indicator characters
+hi Indicator                            color: #dfcfaf;
+
+" `pageinfo` or `jumps`
+hi Title                                color: #dcdccc; background: #3f3f3f; font-weight: bold;
+
+" Info field of `bmarks`
+hi Keyword                              color: #f0dfaf;
+hi Tag                                  color: #8cd0d3;
+hi URL                                  color: #7f9f7f; text-decoration: none; padding: 0 2px;
+hi URL:hover                            color: #880; background-color: #222; -moz-border-radius: 5px; cursor: pointer;
+
+" Empty line ~s
+hi NonText                              color: #5b605e; font-weight: bold;
+
+hi ContentSeparator                     border:none;

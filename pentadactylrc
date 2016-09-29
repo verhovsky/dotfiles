@@ -1,0 +1,43 @@
+colorscheme zenburn
+
+" link hint colors
+"hi HintElem background-color: #f8f893 !important; color: #385f38 !important;
+" blink when clicking on link
+"hi HintActive background-color: #ffffe0 !important; color: #284f28 !important;
+
+" don't beep or flash when reaching top/bottom of page
+set visualbell
+highlight Bell display: none !important;
+
+
+" set characters used for link hints
+set hintkeys=uhetonpgcrasid
+
+" scrolling
+nmap -builtin -builtin j 5j
+nmap -builtin -builtin k 7k
+nmap -builtin -builtin J <C-d>
+nmap -builtin -builtin K <C-u>
+
+" tabbing, more i3 like
+nmap -builtin -builtin s <C-n>
+nmap -builtin -builtin h <C-p>
+nmap -builtin -builtin <silent> <C-s> :tabmove! +1<CR>
+nmap -builtin -builtin <silent> <C-h> :tabmove! -1<CR>
+
+" to match tabbing up there
+nmap -builtin -builtin S L
+
+" Don't require shift to zoom in
+nmap -builtin -builtin = +
+
+" don't bring up the menu when hitting the Alt key
+set! ui.key.menuAccessKey=
+
+" Show status bar in fullscreen
+"au Fullscreen .* :set guioptions+=s
+
+" increase status bar font size
+hi CmdLine -append font-size:16px
+
+" vim: set ft=pentadactyl:

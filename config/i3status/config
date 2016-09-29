@@ -1,0 +1,71 @@
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        color_good = '#88b090'
+        color_degraded = '#ccdc90'
+        color_bad = '#e89393'
+        interval = 5
+}
+
+#order += "ipv6"
+# order += "disk /"
+#order += "run_watch DHCP"
+#order += "run_watch VPN"
+#order += "wireless wlan0"
+# order += "ethernet eth0"
+# order += "load"
+# order += "battery 0"
+# order += "cpu_usage 0"
+#order += "cpu_temperature 0"
+order += "tztime local"
+
+wireless wlan0 {
+        format_up = "%essid=%ip"
+        format_down = "-W"
+}
+
+ethernet eth0 {
+        format_up = "+E%ip"
+        format_down = "-E"
+}
+
+battery 0 {
+        format = "%percentage"
+}
+
+run_watch DHCP {
+        pidfile = "/var/run/dhclient*.pid"
+        format = "%title"
+}
+
+run_watch VPN {
+        pidfile = "/var/run/vpnc/pid"
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M"
+}
+
+load {
+        format = "%1min"
+}
+
+cpu_usage {
+        format = "%usage"
+}
+
+cpu_temperature 0 {
+        format = "%degrees"
+}
+
+disk "/" {
+        format = "/%percentage_used"
+}
+
+disk "/data" {
+        format = "/data/%percentage_used"
+}

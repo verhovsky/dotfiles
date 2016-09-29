@@ -1,0 +1,99 @@
+# Install command-line tools using Homebrew
+
+# Make sure we’re using the latest Homebrew
+brew update
+
+# Check for any problems
+brew doctor
+
+# Upgrade any already-installed formulae
+brew upgrade
+
+
+# Install GNU core utilities (those that come with OS X are outdated)
+# Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
+brew install coreutils
+#sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
+
+# Install some other useful utilities like `sponge`
+brew install moreutils
+# Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
+brew install findutils
+# Install GNU `sed`, overwriting the built-in `sed`
+brew install gnu-sed --default-names
+# Install `OpenSSH`, overwriting the built-in `ssh`
+brew install openssh
+brew install fish # fish-shell
+brew install gcc # a compiler
+brew install wget # download files
+brew install youtube-dl # download youtube videos
+brew install tmux # a terminal multiplexer
+
+# Install Python
+brew tap homebrew/science
+brew install python
+brew install python3
+pip install nose pyparsing
+pip install mechanize requests beautifulsoup4
+pip install numpy scipy matplotlib pandas scikit-learn
+pip install theano
+
+# Install IPython
+brew install zeromq # Necessary for pyzmq
+brew install pyqt # Necessary for the qtconsole
+pip install pyzmq
+pip isntall pygments
+pip install jinja2
+pip install tornado
+pip install ipython
+# Neovim python module. Neovim complains if you don't have it
+pip install neovim
+
+
+# Crypto Miner
+#brew install bfg
+# Reverse engineering firware
+#brew install binwalk
+# Brute force zip files
+#brew install fcrackzip
+# Data carving
+#brew install foremost
+# Hash length extension attack
+#brew install hashpump
+#brew install john # (the Ripper)
+# port-knocking server
+#brew install knock
+#brew install nmap
+#brew install pngcheck
+#brew install sqlmap
+#brew install tcpflow
+#brew install tcpreplay
+# tcp dump file analysis
+#brew install tcptrace
+#brew install ucspi-tcp # `tcpserver` et al.
+
+brew install the_silver_searcher
+#brew install exiv2
+brew install git
+brew install node # This installs `npm` too using the recommended installation method
+#brew install pv
+#brew install rename
+#brew install rhino
+brew install tree
+
+brew install trash
+
+# Life in the CLI
+brew install cmus
+brew install irssi
+brew install newsbeuter
+
+# mpv
+brew tap mpv-player/mpv
+brew install --HEAD mpv-player/mpv/libass-ct
+brew install mpv
+brew linkapps
+
+
+# Remove outdated versions from the cellar
+brew cleanup

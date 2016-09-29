@@ -1,0 +1,10 @@
+# ignore most things in config/
+config/*
+
+# except these directories
+!config/fish
+!config/i3
+!config/i3status
+!config/mpv
+!config/nvim
+!config/youtube-dl

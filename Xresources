@@ -1,0 +1,62 @@
+URxvt.font: xft:Dina:size=10
+
+
+URxvt*termName: rxvt-unicode-256color
+
+!urxvt scrolling options:
+URxvt*saveLines: 12000
+URxvt*scrollstyle: plain
+URxvt*scrollBar: false
+URxvt*urgentOnBell: true
+URxvt*cursorColor: #555
+URxvt*cursorColor2: #cee
+URxvt*cursorBlink: true
+URxvt*cursorUnderline: false
+
+# hide mouse pointer as soon as start typing
+URxvt.pointerBlank: true
+URxvt*pointerBlankDelay: 1
+
+# fade unfocused windows
+URxvt*fading: 40
+URxvt*fadeColor: #000000
+# global colors that also work for xterm
+!urxvt color scheme:
+*background: #222222
+*foreground: #aaaaaa
+! color for URL
+*colorUL : #8dabcd
+! black
+*color0 : #2f4f4f
+*color8 : #000000
+! red
+*color1 : #ffa500
+*color9 : #a1481e
+! green
+*color2 : #81c181
+*color10 : #6c9339
+! yellow
+*color3 : #f8f893
+*color11 : #fce94f
+! blue
+*color4 : #8faf9f
+*color12 : #709080
+! magenta
+*color5 : #bf9b76
+*color13 : #ad5234
+! cyan
+*color6 : #6abbb4
+*color14 : #2a6560
+! white
+*color7 : #f9f8ff
+*color15 : #857b6f
+!urxvt extensions:
+URxvt.perl-ext-common: default,matcher
+!enabling clickable links:
+xvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.keysym.C-Delete: perl:matcher:last
+URxvt.keysym.M-Delete: perl:matcher:list
+!disable literally printing the terminal
+URxvt.print-pipe: "cat > /dev/null"

@@ -1,0 +1,35 @@
+## Todo after running init_everything.sh
+
+set caps lock to Ctrl
+dock left
+disable dictation
+
+change date display settings (24 hour + seconds + date)
+
+give spectacle accessibility permissions
+start spectacle at login
+
+remove touchpad gestures
+
+keyboard shortcuts
+	command-shift-, System Preferences…
+	Command-shift-E (chromium Extensions)
+	ctrl-tab terminal (Show Next Tab, Show Previous Tab)
+shortest possible delay on key repeat
+add dvorak-programmer keyboard, make command-option-space cycle keyboards
+
+in Users & Groups >> Login Options unset "Show the Sleep, Restart..."
+
+turn off keyboard brightness
+turn bluetooth off + hide icon in menu bar
+
+hide finder toolbar
+
+open ~/init/fonts.zip
+open ~/init/fonts/*
+
+set up git auth (keychain/ssh)
+
+desktop bg
+
+uninstall apps
