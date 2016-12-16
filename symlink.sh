@@ -32,6 +32,9 @@ then
 
     mkdir -p ~/Library/KeyBindings
     ln -s ~/dotfiles/system_wide_emacs_movement.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
+
+    # by default Terminal.app doesn't read .bashrc, but .profile works
+    echo source ~/.bashrc > ~/.profile
   else
     ln -s ~/dotfiles/Xresources ~/.Xresources
     ln -s ~/dotfiles/xinitrc ~/.xinitrc
@@ -50,3 +53,4 @@ then
 else
   echo "Aborted."
 fi
+

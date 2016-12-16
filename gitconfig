@@ -81,9 +81,6 @@
 	whitespace = fix
 
 [core]
-        # Make `nvim` the default editor for commit messages
-        editor = nvim
-
 	# Use custom `.gitignore`
 	excludesfile = ~/.gitignore
 
