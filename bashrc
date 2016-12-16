@@ -26,6 +26,7 @@ e() {
     fi
 }
 alias ee="ls -alhv"
+alias eu="ssh gpu"
 alias u="cd"
 alias uu="cd .."
 alias uuu="cd ../.."
@@ -163,8 +164,8 @@ pw() { # get full path to current directory or to a specified file in current di
 }
 
 # If running on Linux, some aliases and functions won't work and should be redefined
-if [[ $(uname) == "Linux" ]]; then
-    . ~/.bash_linux.fish
+if [[ $(uname) == "Linux" ]] && [[ -f ~/.bash_linux ]]; then
+    . ~/.bash_linux
 fi
 # local config file not tracked by git
 if [[ -f ~/.bash_local ]]; then

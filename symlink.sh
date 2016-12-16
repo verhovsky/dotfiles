@@ -26,6 +26,7 @@ then
   echo "Symlinking the new config files. Assuming files are saved in ~/dotfiles"
   ln -s ~/dotfiles/config ~/.config
   ln -s ~/dotfiles/spacemacs ~/.spacemacs
+  ln -s ~/dotfiles/bashrc ~/.bashrc
   if [ "$(uname)" = "Darwin" ]; then
     ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
     ln -s ~/dotfiles/tmux/mac_tmux ~/.tmux
