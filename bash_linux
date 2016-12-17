@@ -29,5 +29,5 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 
 
 # CUDA for programming the GPU
-set -gx PATH $PATH /usr/local/cuda/bin
-set -gx LD_LIBRARY_PATH $LD_LIBRARY_PATH /usr/local/cuda/lib64
+# PATH=$PATH:/usr/local/cuda/bin
+# LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
