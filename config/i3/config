@@ -30,7 +30,7 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 # start a browser
-bindsym $mod+e exec google-chrome
+bindsym $mod+e exec firefox
 
 # kill focused window
 bindsym $mod+Shift+quotedbl kill

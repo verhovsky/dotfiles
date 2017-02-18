@@ -4,7 +4,7 @@ xrdb -merge ~/.Xresources
 setxkbmap -layout us -variant dvorak
 setxkbmap -layout us -variant dvp
 # remap caps to esc
-setxkbmap -option caps:escape
+setxkbmap -option caps:ctrl_modifier
 # set key repeat rate and delay
 xset r rate 200 30
 
