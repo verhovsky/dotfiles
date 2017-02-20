@@ -3,7 +3,7 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
 # Set emacs as the default editor
-export EDITOR="emacs"
+export EDITOR="nvim"
 export VISUAL=$EDITOR
 
 # list of 200,000 english words
