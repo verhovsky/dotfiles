@@ -3,3 +3,4 @@ backups/*
 undo/*
 swaps/*
 bundle/*
+!bundle/Vundle.vim
