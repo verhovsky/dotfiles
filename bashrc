@@ -22,7 +22,7 @@ e() {
         # create one or more directories and cd into the last one
         # maybe this is a bad idea
         mkdir $@
-        cd ${@: -1} 
+        cd ${@: -1}
     fi
 }
 alias ee="ls -alhv"
@@ -78,7 +78,7 @@ alias amend="git amend"
 
 # Commands with options
 alias lisp="clisp -q"
-alias chrome="open -a /Applications/Chromium.app"
+alias chrome="open -a /Applications/Google\ Chrome.app"
 alias news="newsbeuter -q"
 alias c="cloc ."
 alias x="dtrx" # uncompress file
@@ -147,7 +147,7 @@ pandas() { # python prompt with pandas
     else
         ipython3 --no-banner --no-confirm-exit -ic "from pylab import *; import pandas as pd; pd.set_option('display.width', 270); df = pd.read_csv('$1'); df.head();"
     fi
-} 
+}
 
 
 export PATH="$PATH:/usr/local/bin"

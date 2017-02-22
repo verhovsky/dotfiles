@@ -33,6 +33,8 @@ Plugin 'camelcasemotion'
 Plugin 'terryma/vim-expand-region'
 Plugin 'rking/ag.vim'
 Plugin 'luochen1990/rainbow'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Raimondi/delimitMate'
 
 Plugin 'dag/vim-fish'
 Plugin 'elixir-lang/vim-elixir'
@@ -40,6 +42,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'lua.vim'
 Plugin 'hylang/vim-hy'
 Plugin 'fidian/hexmode'
+Plugin 'fatih/vim-go'
 
 
 call vundle#end()            " required
@@ -50,7 +53,7 @@ syntax on
 set background=dark
 " let g:zenburn_high_Contrast=1
 " let g:zenburn_old_Visual=1
-colorscheme base16-ocean
+colorscheme zenburn
 " airline themeing
 let g:airline_theme='murmur'
 let g:airline_left_sep  = ''
@@ -119,7 +122,7 @@ set shiftround  " When at 3 spaces and I hit >>, go to 4, not 5.
 
 set nofoldenable  " Disable hiding things based on their indent level
 
-set nonumber " hide line numbers
+" set nonumber " hide line numbers
 set hlsearch " Highlight searches
 set incsearch " Highlight dynamically as pattern is typed
 set ignorecase " Use case insensitive search...
