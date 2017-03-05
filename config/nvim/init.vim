@@ -12,20 +12,24 @@ call vundle#begin('~/.config/nvim/bundle')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" colorschemes
 Plugin 'jnurmine/zenburn'
 Plugin 'chriskempson/base16-vim'
 
-Plugin 'ervandew/supertab'
-Plugin 'alvan/vim-closetag'
-"Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-rsi'
 Plugin 'tpope/vim-sleuth'
-"Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-ragtag'
+Plugin 'tpope/vim-endwise'
+
+Plugin 'ervandew/supertab'
+Plugin 'alvan/vim-closetag'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'jiangmiao/auto-pairs'
+" nicer looking status bar
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/vim-easy-align'
@@ -33,9 +37,13 @@ Plugin 'camelcasemotion'
 Plugin 'terryma/vim-expand-region'
 Plugin 'rking/ag.vim'
 Plugin 'luochen1990/rainbow'
+" open files by hitting ctrlp and typing the name
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
+" open a git diff in a seperate window when commiting
+Plugin 'rhysd/committia.vim'
 
+" languages
 Plugin 'dag/vim-fish'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'xolox/vim-misc'
