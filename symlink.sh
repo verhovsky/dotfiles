@@ -40,6 +40,8 @@ then
     ln -s ~/dotfiles/bash_linux ~/.bash_linux
     ln -s ~/dotfiles/Xresources ~/.Xresources
     ln -s ~/dotfiles/xinitrc ~/.xinitrc
+	# ubuntu doesn't run xinitrc or xsession
+    ln -s ~/dotfiles/xinitrc ~/.xsessionrc
   fi
   ln -s ~/dotfiles/gitconfig ~/.gitconfig
   ln -s ~/dotfiles/gitignore ~/.gitignore
