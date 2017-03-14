@@ -45,7 +45,6 @@ alias spy="ipython --no-banner --no-confirm-exit -i -c 'import pandas as pd; imp
 alias py2="ipython2 --no-banner --no-confirm-exit -i"
 alias py3="ipython3 --no-banner --no-confirm-exit -i"
 alias yt="youtube-dl"
-alias chrome="open -a /Applications/Google\ Chrome\ Canary.app"
 alias d="cd ~/dotfiles"
 alias dl="cd ~/Downloads"
 alias p="cd ~/Documents"
@@ -103,6 +102,11 @@ alias pipall="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 p
 alias pip2all="pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip2 install -U; pip2 install --upgrade pip"
 alias pip3all="pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U; pip3 install --upgrade pip"
 
+# Generate new ssh key as recommended by
+# https://blog.g3rt.nl/upgrade-your-ssh-keys.html
+# the `-C ''` prevents storing hostname with ssh key
+alias ssh-key="ssh-keygen -o -a 100 -t ed25519 -C ''"
+
 # Get OS X Software Updates, and update installed Homebrew and npm packages
 # alias update='sudo softwareupdate -l; brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g;'
 alias update="brew update; brew upgrade; brew linkapps; brew cleanup; sudo softwareupdate -i -a; pip2all; pip3all"
@@ -111,13 +115,17 @@ alias update="brew update; brew upgrade; brew linkapps; brew cleanup; sudo softw
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true; and killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false; and killall Finder"
 
-# Hide/show all desktop icons (useful when presenting)
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false; and killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true; and killall Finder"
+## macOS utilities
+alias chrome="open -a /Applications/Google\ Chrome\ Canary.app"
+# preview files
+alias q="qlmanage -p"
 
 # Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
-# (useful when executing time-consuming commands)
 alias badge="tput bel"
+
+# Hide/show all desktop icons
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false; and killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true; and killall Finder"
 
 # Change working directory to the top-most Finder window location
 # alias cdf="cd `osascript -e tell app \"Finder\" to POSIX path of (insertion location as alias)`"
