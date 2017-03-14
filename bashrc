@@ -118,7 +118,9 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false; and k
 ## macOS utilities
 alias chrome="open -a /Applications/Google\ Chrome\ Canary.app"
 # preview files
-alias q="qlmanage -p"
+q () {
+    qlmanage -p $@ &>/dev/null
+}
 
 # Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
 alias badge="tput bel"
