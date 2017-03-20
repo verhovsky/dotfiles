@@ -50,6 +50,8 @@ then
   ln -s ~/dotfiles/pentadactylrc ~/.pentadactylrc
   ln -s ~/dotfiles/inputrc ~/.inputrc
 
+  cp ~/dotfiles/agignore ~/.agignore
+
   echo
   echo "Done. Restart your terminal"
   echo
