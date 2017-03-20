@@ -109,7 +109,7 @@ alias ssh-key="ssh-keygen -o -a 100 -t ed25519 -C ''"
 
 # Get OS X Software Updates, and update installed Homebrew and npm packages
 # alias update='sudo softwareupdate -l; brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g;'
-alias update="brew update; brew upgrade; brew linkapps; brew cleanup; sudo softwareupdate -i -a; pip2all; pip3all"
+alias update="brew update; brew upgrade; brew cleanup; sudo softwareupdate -i -a; pip2all; pip3all"
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true; and killall Finder"
