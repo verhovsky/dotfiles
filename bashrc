@@ -111,10 +111,6 @@ alias ssh-key="ssh-keygen -o -a 100 -t ed25519 -C ''"
 # alias update='sudo softwareupdate -l; brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g;'
 alias update="brew update; brew upgrade; brew cleanup; sudo softwareupdate -i -a; pip2all; pip3all"
 
-# Show/hide hidden files in Finder
-alias show="defaults write com.apple.finder AppleShowAllFiles -bool true; and killall Finder"
-alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false; and killall Finder"
-
 ## macOS utilities
 alias chrome="open -a /Applications/Google\ Chrome\ Canary.app"
 # preview files
