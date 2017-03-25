@@ -180,7 +180,7 @@ bar {
 	strip_workspace_numbers yes
 
 	#tray_output none
-	position bottom
+	position top
 	status_command i3status
 	colors {
 		background $bg
