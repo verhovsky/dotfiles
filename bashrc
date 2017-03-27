@@ -12,18 +12,17 @@ export WORDLIST="/usr/share/dict/words"
 PS1="(\w) "
 
 e() {
-    if [[ $# -eq 0 ]]; then
+    # if there are no arguments, act like ls
+    if [[ ( $# -eq 0 ) ||  ( -d $@ ) ]]; then
         ls -v
-    elif [[ -d $1 ]]; then
-        cd "$@"
-    elif [[ -f $1 ]]; then
+    elif [[ -f $@ ]]; then
         $EDITOR $@
-    else
-        # create one or more directories and cd into the last one
-        # maybe this is a bad idea
-        mkdir $@
-        cd ${@: -1}
     fi
+}
+# make a directory and cd into it
+mkd() {
+    mkdir $@
+    cd ${@: -1}
 }
 alias ee="ls -alhv"
 alias eu="ssh gpu"
