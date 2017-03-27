@@ -12,20 +12,24 @@ call vundle#begin('~/.config/nvim/bundle')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" colorschemes
 Plugin 'jnurmine/zenburn'
 Plugin 'chriskempson/base16-vim'
 
-Plugin 'ervandew/supertab'
-Plugin 'alvan/vim-closetag'
-"Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-rsi'
 Plugin 'tpope/vim-sleuth'
-"Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-ragtag'
+Plugin 'tpope/vim-endwise'
+
+Plugin 'ervandew/supertab'
+Plugin 'alvan/vim-closetag'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'jiangmiao/auto-pairs'
+" nicer looking status bar
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/vim-easy-align'
@@ -33,17 +37,20 @@ Plugin 'camelcasemotion'
 Plugin 'terryma/vim-expand-region'
 Plugin 'rking/ag.vim'
 Plugin 'luochen1990/rainbow'
+" open files by hitting ctrlp and typing the name
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
+" open a git diff in a seperate window when commiting
+Plugin 'rhysd/committia.vim'
 
+" languages
 Plugin 'dag/vim-fish'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'xolox/vim-misc'
 Plugin 'lua.vim'
 Plugin 'hylang/vim-hy'
 Plugin 'fidian/hexmode'
-Plugin 'fatih/vim-go'
-
+" Plugin 'fatih/vim-go'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -165,11 +172,14 @@ set noesckeys
 " set listchars=tab:»·,trail:·
 " set list
 
+" increase how many previous lines the terminal saves from the default of 1000
+let g:terminal_scrollback_buffer_size = 100000
+
 " remap <Leader> to the space bar
 let mapleader = " "
 
 " reload nvimrc and install plugins
-nmap <Leader>bi :silent! source ~/.nvim/nvimrc<cr>:PluginInstall<cr>
+nmap <Leader>bi :silent! source ~/.config/nvim/init.vim<cr>:PluginInstall<cr>
 " copy entire file
 map <Leader>ca ggVG"*y
 " ?
@@ -188,7 +198,10 @@ map <Leader>sg :sp<cr>:grep<space>
 map <Leader>vg :vsp<cr>:grep
 map <Leader>w <C-w>w
 map <Leader>x :exec getline(".")<cr>
-map <Leader>f :Ag
+map <Leader>f :Ag<space>
+map <Leader>t :terminal<cr>
+map <Leader>co :e ~/.config/nvim/init.vim<cr>
+
 " open new file
 nnoremap <Leader>o :CtrlP<CR>
 " enter visual mode
@@ -218,6 +231,16 @@ map <C-s> <esc>:w<CR>
 imap <C-s> <esc>:w<CR>li
 map <C-t> <esc>:tabnew<CR>
 map <C-x> <C-w>c
+
+" move between windows with dvorak homerow
+:tnoremap <A-h> <C-\><C-n><C-w>h
+:tnoremap <A-t> <C-\><C-n><C-w>j
+:tnoremap <A-n> <C-\><C-n><C-w>k
+:tnoremap <A-s> <C-\><C-n><C-w>l
+:nnoremap <A-h> <C-w>h
+:nnoremap <A-t> <C-w>j
+:nnoremap <A-n> <C-w>k
+:nnoremap <A-s> <C-w>l
 
 " Treat a wrapped line like multiple lines
 nmap k gk
