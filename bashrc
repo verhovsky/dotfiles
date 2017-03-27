@@ -57,13 +57,13 @@ alias g="git"
 # View abbreviated SHA, description, and history graph of the latest 20 commits
 alias gl="git log --pretty=oneline -n 20 --graph --abbrev-commit"
 # view abbreviated SHA, description, time since commit, username, and history graph of all commits
-# alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 # View the current working tree status using the short format
 alias gs="git status -s"
 # Show the diff between the latest commit and the current state
 alias gd="git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 # `git di $number` shows the diff between the state `$number` revisions ago and the current state
-# alias gdi="d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+alias gdi="d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 # Make a commit, showing a full diff for all changes
 alias gc="git commit -v"
 alias ga="git add"
