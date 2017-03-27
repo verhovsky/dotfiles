@@ -1,5 +1,16 @@
-alias t="rm"
+# t for trash
+# behaves like macOS by moving files to a directory
+# which is cleared later
+t() {
+    mkdir ~/.Trash;
+    mv ${@: -1} ~/.Trash
+}
+# for when you actually want to delete a file
 alias tt="rm -rf"
+# for when you actually, seriously, no joking want to delete a file
+# (as long as you don't have an unencrypted ssd
+# and aren't using a journaling file system. see `man shred`)
+#alias ttt="shred -zn 3 --remove"
 alias eu="tmux attach 2>/dev/null || tmux"
 alias p="cd /data/work"
 alias top="top"
