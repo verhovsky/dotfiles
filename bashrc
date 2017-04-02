@@ -21,7 +21,7 @@ e() {
 }
 # make a directory and cd into it
 mkd() {
-    mkdir $@
+    mkdir -p $@
     cd ${@: -1}
 }
 alias ee="ls -alhv"
