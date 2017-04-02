@@ -117,6 +117,11 @@ q () {
     qlmanage -p $@ &>/dev/null
 }
 
+# finds a process and kills it
+find_kill() {
+    kill `ps aux | grep $@ | awk '{print $2}'`
+}
+
 # Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
 alias badge="tput bel"
 
@@ -125,7 +130,7 @@ alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false; an
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true; and killall Finder"
 
 # Change working directory to the top-most Finder window location
-# alias cdf="cd `osascript -e tell app \"Finder\" to POSIX path of (insertion location as alias)`"
+alias cdf="cd `osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`"
 
 o() { # with no arguments 'o' opens the current directory, otherwise opens the given location
     if [[ "$#" -eq 0 ]]; then
@@ -193,3 +198,6 @@ export HISTFILE=~/.bash_eternal_history
 # Force prompt to write history after every command.
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+# stop collecting bash history in the current terminal
+# useful for copy pasting sensitive data
+alias hide="unset HISTFILE"
