@@ -9,7 +9,10 @@ export VISUAL=$EDITOR
 # list of 200,000 english words
 export WORDLIST="/usr/share/dict/words"
 
-PS1="(\w) "
+# the full path to the current directory in bold, followed by a newline
+# https://stackoverflow.com/questions/2924697/how-does-one-output-bold-text-in-bash
+# \w is $(pw)
+PS1="\033[1m\w\033[0m\n"
 
 e() {
     # if there are no arguments, act like ls
@@ -101,10 +104,11 @@ alias pipall="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 p
 alias pip2all="pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip2 install -U; pip2 install --upgrade pip"
 alias pip3all="pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U; pip3 install --upgrade pip"
 
-# Generate new ssh key as recommended by
-# https://blog.g3rt.nl/upgrade-your-ssh-keys.html
+# Generate new ssh key as recommended by https://blog.g3rt.nl/upgrade-your-ssh-keys.html
 # the `-C ''` prevents storing hostname with ssh key
-alias ssh-key="ssh-keygen -o -a 100 -t ed25519 -C ''"
+alias new-ssh-key="ssh-keygen -o -a 100 -t ed25519 -C ''"
+# copy my ssh key to macOS clipboard
+alias ssh-key="cat ~/.ssh/id_ed25519.pub | pbcopy"
 
 # Get OS X Software Updates, and update installed Homebrew and npm packages
 # alias update='sudo softwareupdate -l; brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g;'
@@ -130,7 +134,9 @@ alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false; an
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true; and killall Finder"
 
 # Change working directory to the top-most Finder window location
-alias cdf="cd `osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`"
+cdf() {
+    cd $(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')
+}
 
 o() { # with no arguments 'o' opens the current directory, otherwise opens the given location
     if [[ "$#" -eq 0 ]]; then
@@ -143,12 +149,17 @@ o() { # with no arguments 'o' opens the current directory, otherwise opens the g
 # Start a server serving the current directory and open that server directory in chrome
 # argv is the port. By default uses port 8000
 http() {
-    if [[ "$#" -eq 0 ]]; then
-        chrome http://localhost:8000
+    if [[ "$#" -eq 2 ]]; then
+        chrome http://$2:$1
+        python3 -m http.server $1 --bind $2
     else
-        chrome http://localhost:$1
+        if [[ "$#" -eq 1 ]]; then
+            chrome http://127.0.0.1:$1
+        else
+            chrome http://127.0.0.1:8000
+        fi
+        python3 -m http.server $1
     fi
-    python -m SimpleHTTPServer $1
 }
 
 pandas() { # python prompt with pandas
@@ -162,10 +173,11 @@ pandas() { # python prompt with pandas
 
 export PATH="$PATH:/usr/local/bin"
 export PATH=$PATH:~/Library/Android/sdk/platform-tools/
+# cargo is rust's package manager
+export PATH=$PATH:~/.cargo/bin
 
 
 pw() { # get full path to current directory or to a specified file in current directory
-
     if [[ "$#" -eq 0 ]]; then
         pwd
     else

@@ -55,14 +55,12 @@ Plugin 'fidian/hexmode'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" Enable syntax highlighting
-syntax on
-set background=dark
-" let g:zenburn_high_Contrast=1
-" let g:zenburn_old_Visual=1
-colorscheme zenburn
+" Disable syntax highlighting
+syntax off
+set background=light
+" colorscheme base16-grayscale-light
 " airline themeing
-let g:airline_theme='murmur'
+let g:airline_theme='sol'
 let g:airline_left_sep  = ''
 let g:airline_right_sep = ''
 let g:airline_section_y = '' " hide file encoding information
