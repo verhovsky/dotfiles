@@ -12,7 +12,7 @@ export WORDLIST="/usr/share/dict/words"
 # the full path to the current directory in bold, followed by a newline
 # https://stackoverflow.com/questions/2924697/how-does-one-output-bold-text-in-bash
 # \w is $(pw)
-PS1="\033[1m\w\033[0m\n"
+PS1="\033[1m\w\033[0m "
 
 e() {
     # if there are no arguments, act like ls
@@ -28,7 +28,6 @@ mkd() {
     cd ${@: -1}
 }
 alias ee="ls -alhv"
-alias eu="ssh gpu"
 alias u="cd"
 alias uu="cd .."
 alias uuu="cd ../.."
