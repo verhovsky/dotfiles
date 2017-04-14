@@ -8,11 +8,7 @@ export VISUAL=$EDITOR
 
 # list of 200,000 english words
 export WORDLIST="/usr/share/dict/words"
-
-# the full path to the current directory in bold, followed by a newline
-# https://stackoverflow.com/questions/2924697/how-does-one-output-bold-text-in-bash
-# \w is $(pw)
-PS1="\033[1m\w\033[0m "
+PS1="(\w) "
 
 e() {
     # if there are no arguments, act like ls
@@ -112,6 +108,12 @@ alias ssh-key="cat ~/.ssh/id_ed25519.pub | pbcopy"
 # Get OS X Software Updates, and update installed Homebrew and npm packages
 # alias update='sudo softwareupdate -l; brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g;'
 alias update="brew update; brew upgrade; brew cleanup; sudo softwareupdate -i -a; pip2all; pip3all"
+
+# Ag interprets the second argument as the direcotory to search in, usually my query just has space in it
+agg () {
+    ag "$*"
+}
+
 
 ## macOS utilities
 alias chrome="open -a /Applications/Google\ Chrome\ Canary.app"
