@@ -5,16 +5,13 @@ t() {
     mkdir ~/.Trash;
     mv ${@: -1} ~/.Trash
 }
-# for when you actually want to delete a file
 alias tt="rm -rf"
-# for when you actually, seriously, no joking want to delete a file
-# (as long as you don't have an unencrypted ssd
-# and aren't using a journaling file system. see `man shred`)
+# for when you actually want to delete a file
+# (as long as you don't have an unencrypted ssd and aren't using a journaling file system. see `man shred`)
 #alias ttt="shred -zn 3 --remove"
+
 alias eu="tmux attach 2>/dev/null || tmux"
-alias p="cd /data/work"
 alias top="top"
-alias t="rm -rf"
 alias bat="cat /sys/class/power_supply/BAT0/capacity"
 
 # set python3 as default
@@ -38,7 +35,7 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 
 # Switch between dvorak (default) and qwerty. Useful because everyone designs keyboard shortcuts for QWERTY
 alias keyboard_options="setxkbmap -option caps:ctrl_modifier; setxkbmap -option altwin:swap_lalt_lwin; xset r rate 200 30"
-alias reset_keyboard="setxkbmap -layout us -variant dvorak; setxkbmap -layout us -variant dvp; keyboard_options"
+alias reset_keyboard="setxkbmap -layout us -variant dvp; keyboard_options"
 alias us_keyboard="setxkbmap -layout us; keyboard_options"
 
 # CUDA for programming the GPU

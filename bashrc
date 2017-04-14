@@ -214,3 +214,7 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # stop collecting bash history in the current terminal
 # useful for copy pasting sensitive data
 alias hide="unset HISTFILE"
+
+# if ssh [ip] works but ssh [hostname] doesn't, this might solve it
+# http://stackoverflow.com/a/40754476/3064538
+alias fix-ssh="sudo killall -HUP mDNSResponder"
