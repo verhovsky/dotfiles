@@ -131,16 +131,16 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(tao-yin
-                         tao-yang
-                         minimal
-                         minimal-light)
+   dotspacemacs-themes '(tao-yang
+                         tao-yin
+                         minimal-light
+                         minimal)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 24
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -148,7 +148,7 @@ values."
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
    ;; (default "SPC")
-   dotspacemacs-emacs-command-key "SPC"
+   dotspacemacs-emacs-command-key "M-m"
    ;; The key used for Vim Ex commands (default ":")
    dotspacemacs-ex-command-key ":"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -297,7 +297,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setq powerline-default-separator 'nil)
   )
 
 
@@ -308,6 +307,8 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  (setq powerline-default-separator 'nil)
+  (toggle-frame-fullscreen)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
