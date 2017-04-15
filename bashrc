@@ -3,7 +3,7 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
 # Set emacs as the default editor
-export EDITOR="nvim"
+export EDITOR="emacs"
 export VISUAL=$EDITOR
 
 # list of 200,000 english words
@@ -114,6 +114,9 @@ agg () {
     ag "$*"
 }
 
+# if ssh [ip] works but ssh [hostname] doesn't, this might solve it
+# http://stackoverflow.com/a/40754476/3064538
+alias fix-dns="sudo killall -HUP mDNSResponder"
 
 ## macOS utilities
 alias chrome="open -a /Applications/Google\ Chrome\ Canary.app"
@@ -214,7 +217,3 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # stop collecting bash history in the current terminal
 # useful for copy pasting sensitive data
 alias hide="unset HISTFILE"
-
-# if ssh [ip] works but ssh [hostname] doesn't, this might solve it
-# http://stackoverflow.com/a/40754476/3064538
-alias fix-ssh="sudo killall -HUP mDNSResponder"
