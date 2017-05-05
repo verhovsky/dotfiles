@@ -22,7 +22,7 @@ brew install findutils
 # Install GNU `sed`, overwriting the built-in `sed`
 brew install gnu-sed --with-default-names
 # Install `OpenSSH`, overwriting the built-in `ssh`
-brew install homebrew/dupes/openssh
+brew install openssh
 brew install gcc # a compiler
 brew install wget # download files
 brew install youtube-dl # download youtube videos
