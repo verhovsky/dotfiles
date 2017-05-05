@@ -8,6 +8,9 @@ export VISUAL=$EDITOR
 
 # list of 200,000 english words
 export WORDLIST="/usr/share/dict/words"
+
+# The PS1 is the string bash prints after it finishes running a command
+# \w means the full path of current working directory
 PS1="(\w) "
 
 e() {
@@ -74,16 +77,24 @@ alias amend="git amend"
 
 # Commands with options
 alias lisp="clisp -q"
-alias chrome="open -a /Applications/Google\ Chrome.app"
 alias news="newsbeuter -q"
-alias c="cloc ."
-alias x="dtrx" # uncompress file
+# count how many lines of code are in the current directory
+alias c="cloc --vcs=git ."
+# make a copy of a website for offline viewing
+# https://www.guyrutenberg.com/2014/05/02/make-offline-mirror-of-a-site-using-wget/
+alias mirror="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent"
+
+# Open urls from the commandline. 
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
+alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
+alias b="chrome-canary"
 
 # Copy tmux buffer into system clipboard
 alias tmcp="tmux show-buffer | pbcopy"
 
-# get the day of the year for a given day
-alias day="python2 /Users/space/Documents/scripts/day.py"
+# get the day of the year (April 27 2017 is 117)
+alias day="python3 -c 'import datetime; print(datetime.datetime.now().timetuple().tm_yday)'"
 
 # Python
 alias c='python3 -ic "from math import *"'
@@ -114,6 +125,9 @@ agg () {
     ag "$*"
 }
 
+# is a string a top level domain?
+alias is-tld="curl -s https://data.iana.org/TLD/tlds-alpha-by-domain.txt | ag"
+
 # if ssh [ip] works but ssh [hostname] doesn't, this might solve it
 # http://stackoverflow.com/a/40754476/3064538
 alias fix-dns="sudo killall -HUP mDNSResponder"
@@ -125,22 +139,15 @@ q () {
     qlmanage -p $@ &>/dev/null
 }
 
-# finds a process and kills it
-find_kill() {
-    kill `ps aux | grep $@ | awk '{print $2}'`
-}
-
 # Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
 alias badge="tput bel"
 
 # Hide/show all desktop icons
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false; and killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true; and killall Finder"
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
-# Change working directory to the top-most Finder window location
-cdf() {
-    cd $(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')
-}
+# cd into the top-most Finder window directory
+alias cdf='cd "$(osascript -e "tell application \"Finder\" to if window 1 exists then if target of window 1 as string is not \":\" then get POSIX path of (target of window 1 as alias)")"'
 
 o() { # with no arguments 'o' opens the current directory, otherwise opens the given location
     if [[ "$#" -eq 0 ]]; then
@@ -175,11 +182,10 @@ pandas() { # python prompt with pandas
 }
 
 
-export PATH="$PATH:/usr/local/bin"
-export PATH=$PATH:~/Library/Android/sdk/platform-tools/
-# cargo is rust's package manager
-export PATH=$PATH:~/.cargo/bin
-
+# finds a process and kills it
+find_kill() {
+    kill `ps aux | grep $@ | awk '{print $2}'`
+}
 
 pw() { # get full path to current directory or to a specified file in current directory
     if [[ "$#" -eq 0 ]]; then
@@ -197,13 +203,28 @@ fi
 if [[ -f ~/.bash_local ]]; then
     . ~/.bash_local
 fi
-export CUDA_HOME=/usr/local/cuda
-export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
-PATH=${CUDA_HOME}/bin:${PATH}
 
-# Eternal bash history.
-# ---------------------
-# Undocumented feature which sets the size to "unlimited".
+# macOS comes with an older version of git in /usr/bin/git. You probably want to
+# `brew install git` for the newer version, brew puts a file `git` into
+# `/usr/local/bin/git`.
+# When you execute a `command` in bash, it checks if that command is a built in function,
+# if not it goes through every director in $PATH (left to right) and executes the 
+# first file with the filename `command` it finds. We want all the files we installed
+# ourselves (through homebrew) to be the first ones it looks for.
+PATH=/usr/local/bin$PATH
+PATH=$PATH:~/Library/Android/sdk/platform-tools/
+
+# cargo is rust's package manager
+PATH=$PATH:~/.cargo/bin
+
+# cuda is nvidia's proprietary library for programming their GPUs
+# cudnn is an extension to cuda for running neural networks specifically
+# one day, when it doesn't cost billions of dollars to develop computing hardware,
+# we won't have to use proprietary software to use hardware we own
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
+PATH=/usr/local/cuda/bin:${PATH} # don't need to export variables that are already defined
+
+# store a list of all the commands I've every issued in bash in ~/.bash_eternal_history
 # http://stackoverflow.com/questions/9457233/unlimited-bash-history
 export HISTFILESIZE=
 export HISTSIZE=
@@ -216,4 +237,4 @@ export HISTFILE=~/.bash_eternal_history
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # stop collecting bash history in the current terminal
 # useful for copy pasting sensitive data
-alias hide="unset HISTFILE"
+alias forget="unset HISTFILE"
