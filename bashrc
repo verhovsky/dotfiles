@@ -11,48 +11,31 @@ export WORDLIST="/usr/share/dict/words"
 
 # The PS1 is the string bash prints after it finishes running a command
 # \w means the full path of current working directory
-PS1="(\w) "
+PS1="\w )( "
 
-e() {
-    # if there are no arguments, act like ls
-    if [[ ( $# -eq 0 ) ||  ( -d $@ ) ]]; then
-        ls -v
-    elif [[ -f $@ ]]; then
-        $EDITOR $@
-    fi
-}
-# make a directory and cd into it
+# create a list of directories and cd into the last one.
 mkd() {
+    # in bash, you can refer to "all of the functions arguments" as either $@ or $*
+    # $@ means pass each argument on its own
+    # $* means pass all arguments as a single argument. Wrap it in quotes to be extra safe.
     mkdir -p $@
-    cd ${@: -1}
+    cd ${@: -1} # the last argument
 }
+alias e="ls"
 alias ee="ls -alhv"
 alias u="cd"
-alias uu="cd .."
+alias uu="cd ../"
 alias uuu="cd ../.."
 alias uuuu="cd ../../.."
 alias uuuuu="cd ../../../.."
-# Shortcuts
-a() {
-    sudo !!
-}
 alias n=$EDITOR
-alias p="cd ~/Documents"
-alias t="trash"
-alias i="python3"
-alias py="ipython --no-banner --no-confirm-exit -i"
-alias spy="ipython --no-banner --no-confirm-exit -i -c 'import pandas as pd; import numpy as np; from matplotlib import pyplot as plt; import seaborn as sns; sns.set()'"
-alias py2="ipython2 --no-banner --no-confirm-exit -i"
-alias py3="ipython3 --no-banner --no-confirm-exit -i"
-alias yt="youtube-dl"
-alias d="cd ~/dotfiles"
-alias dl="cd ~/Downloads"
-alias p="cd ~/Documents"
-
 alias h="history"
 alias t="trash"
-alias i="python3"
-alias n=$EDITOR
+alias yt="youtube-dl"
+
+alias d="cd ~/dotfiles"
+alias dl="cd ~/Downloads"
+
 alias g="git"
 # View abbreviated SHA, description, and history graph of the latest 20 commits
 alias gl="git log --pretty=oneline -n 20 --graph --abbrev-commit"
@@ -70,25 +53,35 @@ alias ga="git add"
 # Commit all changes
 alias gca="git add -A && git commit -av"
 
-alias gp="git push"
-alias gpl="git pull"
+alias gp="git p"
+alias gpl="git pl"
+alias gpll="git pull"
 alias gcl="git clone"
 alias amend="git amend"
 
 # Commands with options
 alias lisp="clisp -q"
-alias news="newsbeuter -q"
 # count how many lines of code are in the current directory
 alias c="cloc --vcs=git ."
 # make a copy of a website for offline viewing
 # https://www.guyrutenberg.com/2014/05/02/make-offline-mirror-of-a-site-using-wget/
 alias mirror="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent"
+y () {
+     yarn $@ --silent --no-emoji
+}
+
+# Python
+alias py2="ipython2 --no-banner --no-confirm-exit"
+alias py3="ipython3 --no-banner --no-confirm-exit"
+alias py="py3"
 
 # Open urls from the commandline. 
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
 alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
-alias b="chrome-canary"
+alias safari="open -a Safari"
+alias browser="safari"
+alias b="browser"
 
 # Copy tmux buffer into system clipboard
 alias tmcp="tmux show-buffer | pbcopy"
@@ -96,19 +89,14 @@ alias tmcp="tmux show-buffer | pbcopy"
 # get the day of the year (April 27 2017 is 117)
 alias day="python3 -c 'import datetime; print(datetime.datetime.now().timetuple().tm_yday)'"
 
-# Python
-alias c='python3 -ic "from math import *"'
-# ipython with a few libraries
-alias py="ipython --no-banner --no-confirm-exit"
-alias spy="ipython --no-banner --no-confirm-exit -i -c 'import pandas as pd; import numpy as np; import theano; import theano.tensor as T; from matplotlib import pyplot as plt; import seaborn as sns; sns.set()'"
-alias py2="ipython2 --no-banner --no-confirm-exit"
-alias spy2="ipython2 --no-banner --no-confirm-exit -i -c 'import pandas as pd; import numpy as np; import theano; import theano.tensor as T; from matplotlib import pyplot as plt; import seaborn as sns; sns.set()'"
-alias py3="ipython3 --no-banner --no-confirm-exit"
-alias spy3="ipython3 --no-banner --no-confirm-exit -i -c 'import pandas as pd; import numpy as np; import theano; import theano.tensor as T; from matplotlib import pyplot as plt; import seaborn as sns; sns.set()'"
-# Update all pip packages. https://github.com/pypa/pip/issues/59
-alias pipall="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U; pip install --upgrade pip"
+# Updating
+# all pip packages. https://github.com/pypa/pip/issues/59
 alias pip2all="pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip2 install -U; pip2 install --upgrade pip"
 alias pip3all="pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U; pip3 install --upgrade pip"
+alias pipall="pip2all; pip3all"
+alias yarnall="yarn self-update; yarn global upgrade" 
+alias macos-update="sudo softwareupdate -i -a"
+alias update="brew upgrade; pipall; macos-update"
 
 # Generate new ssh key as recommended by https://blog.g3rt.nl/upgrade-your-ssh-keys.html
 # the `-C ''` prevents storing hostname with ssh key
@@ -116,9 +104,8 @@ alias new-ssh-key="ssh-keygen -o -a 100 -t ed25519 -C ''"
 # copy my ssh key to macOS clipboard
 alias ssh-key="cat ~/.ssh/id_ed25519.pub | pbcopy"
 
-# Get OS X Software Updates, and update installed Homebrew and npm packages
-# alias update='sudo softwareupdate -l; brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g;'
-alias update="brew update; brew upgrade; brew cleanup; sudo softwareupdate -i -a; pip2all; pip3all"
+# if you need need a quick source of url-safe random data
+alias random_hash="head -c 1024 /dev/urandom | shasum -a 256"
 
 # Ag interprets the second argument as the direcotory to search in, usually my query just has space in it
 agg () {
@@ -132,14 +119,7 @@ alias is-tld="curl -s https://data.iana.org/TLD/tlds-alpha-by-domain.txt | ag"
 # http://stackoverflow.com/a/40754476/3064538
 alias fix-dns="sudo killall -HUP mDNSResponder"
 
-## macOS utilities
-alias chrome="open -a /Applications/Google\ Chrome\ Canary.app"
-# preview files
-q () {
-    qlmanage -p $@ &>/dev/null
-}
-
-# Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
+# Ring the terminal bell, and put a badge on Terminal.app's Dock icon
 alias badge="tput bel"
 
 # Hide/show all desktop icons
@@ -150,37 +130,18 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 alias cdf='cd "$(osascript -e "tell application \"Finder\" to if window 1 exists then if target of window 1 as string is not \":\" then get POSIX path of (target of window 1 as alias)")"'
 
 o() { # with no arguments 'o' opens the current directory, otherwise opens the given location
-    if [[ "$#" -eq 0 ]]; then
-        open .
-    else
-        open $1
-    fi
+    open ${1:-.} # if $1 doesn't exist, open "."
 }
 
 # Start a server serving the current directory and open that server directory in chrome
-# argv is the port. By default uses port 8000
+# usage: http [port (default: 8000)] [hostname or ip]
 http() {
-    if [[ "$#" -eq 2 ]]; then
-        chrome http://$2:$1
-        python3 -m http.server $1 --bind $2
-    else
-        if [[ "$#" -eq 1 ]]; then
-            chrome http://127.0.0.1:$1
-        else
-            chrome http://127.0.0.1:8000
-        fi
-        python3 -m http.server $1
-    fi
-}
+    port=${1:-8000} # default to 8000 if no port name given
+    hostname=${2:-$(hostname)} # default to the computer hostname if no hostname/ip address given
 
-pandas() { # python prompt with pandas
-    if [[ "#$" -eq 0 ]]; then
-        ipython3 --no-banner --no-confirm-exit -ic "from pylab import *; import pandas as pd; pd.set_option('display.width', 270)"
-    else
-        ipython3 --no-banner --no-confirm-exit -ic "from pylab import *; import pandas as pd; pd.set_option('display.width', 270); df = pd.read_csv('$1'); df.head();"
-    fi
+    browser http://$hostname:$port
+    python3 -m http.server $port --bind $hostname
 }
-
 
 # finds a process and kills it
 find_kill() {
@@ -195,14 +156,9 @@ pw() { # get full path to current directory or to a specified file in current di
     fi
 }
 
-# If running on Linux, some aliases and functions won't work and should be redefined
-if [[ $(uname) == "Linux" ]] && [[ -f ~/.bash_linux ]]; then
-    . ~/.bash_linux
-fi
-# local config file not tracked by git
-if [[ -f ~/.bash_local ]]; then
-    . ~/.bash_local
-fi
+# enable recursive wildcard
+# **/*.arc now matches a.arc b/c.arc d/e/f.arc
+shopt -s globstar
 
 # macOS comes with an older version of git in /usr/bin/git. You probably want to
 # `brew install git` for the newer version, brew puts a file `git` into
@@ -211,7 +167,21 @@ fi
 # if not it goes through every director in $PATH (left to right) and executes the 
 # first file with the filename `command` it finds. We want all the files we installed
 # ourselves (through homebrew) to be the first ones it looks for.
-PATH=/usr/local/bin$PATH
+PATH=/usr/local/bin:$PATH
+
+# macOS comes with a bunch of outdated commands. We want to use
+# GNU's versions of these utilities. This might break your system, which is
+# why brew doesn't install it in /usr/local/bin and makes you add a separate
+# line to your bashrc.
+# Most stack overflow answers are written for GNU's coreutils though.
+# Concistency across all my systems is a plus too.
+PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+# Use the `man` command to learn more about different commands
+# This is similar to path, in that if you `man ls` it will show you the
+# man page of the brew installed `ls` rather than the one that came with your macos
+# see `brew info coreutils` 
+MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
 PATH=$PATH:~/Library/Android/sdk/platform-tools/
 
 # cargo is rust's package manager
@@ -222,7 +192,7 @@ PATH=$PATH:~/.cargo/bin
 # one day, when it doesn't cost billions of dollars to develop computing hardware,
 # we won't have to use proprietary software to use hardware we own
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-PATH=/usr/local/cuda/bin:${PATH} # don't need to export variables that are already defined
+PATH=/usr/local/cuda/bin:$PATH # don't need to export variables that are already defined
 
 # store a list of all the commands I've every issued in bash in ~/.bash_eternal_history
 # http://stackoverflow.com/questions/9457233/unlimited-bash-history
@@ -238,3 +208,12 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # stop collecting bash history in the current terminal
 # useful for copy pasting sensitive data
 alias forget="unset HISTFILE"
+
+# If running on Linux, some aliases and functions won't work and should be redefined
+if [[ $(uname) == "Linux" ]] && [[ -f ~/.bash_linux ]]; then
+    . ~/.bash_linux
+fi
+# local config file not tracked by git
+if [[ -f ~/.bash_local ]]; then
+    . ~/.bash_local
+fi
