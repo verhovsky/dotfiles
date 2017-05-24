@@ -73,7 +73,13 @@ brew install redis
 #brew install rhino
 brew install tree
 
-brew install trash # use macOS trash from the command line
+# read RFCs
+brew install bfontaine/utils/rfc
+
+brew install urbit # a distributed computing project
+brew install trash # use macOS trash instead of rm
+
+brew install ffmpeg --with-fdk-aac --with-ffplay --with-freetype --with-frei0r --with-libass --with-libvo-aacenc --with-libvorbis --with-libvpx --with-opencore-amr --with-openjpeg --with-opus --with-openssl --with-rtmpdump --with-schroedinger --with-speex --with-theora --with-tools --with-x265 --with-faac --with-lame --with-x264 --with-xvid
 
 # mpv
 brew install mpv
