@@ -28,7 +28,7 @@ brew install wget # download files
 brew install youtube-dl # download youtube videos
 brew install tmux # a terminal multiplexer
 
-brew install emacs
+brew install emacs --with-cocoa --with-gnutls --with-imagemagick
 
 # Install Python
 brew install python
