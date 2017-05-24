@@ -122,6 +122,7 @@
 	untracked = cyan
 
 [diff]
+  compactionHeuristic = true
 
 	# Detect copies as well as renames
 	renames = copies
