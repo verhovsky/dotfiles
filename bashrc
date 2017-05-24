@@ -116,7 +116,7 @@ agg () {
 alias is-tld="curl -s https://data.iana.org/TLD/tlds-alpha-by-domain.txt | ag"
 
 # if ssh [ip] works but ssh [hostname] doesn't, this might solve it
-# http://stackoverflow.com/a/40754476/3064538
+# https://stackoverflow.com/a/40754476/3064538
 alias fix-dns="sudo killall -HUP mDNSResponder"
 
 # Ring the terminal bell, and put a badge on Terminal.app's Dock icon
@@ -133,11 +133,11 @@ o() { # with no arguments 'o' opens the current directory, otherwise opens the g
     open ${1:-.} # if $1 doesn't exist, open "."
 }
 
-# Start a server serving the current directory and open that server directory in chrome
-# usage: http [port (default: 8000)] [hostname or ip]
+# Start a server serving the current directory and open that server directory in the browser
+# usage: http [port]
 http() {
-    port=${1:-8000} # default to 8000 if no port name given
-    hostname=${2:-$(hostname)} # default to the computer hostname if no hostname/ip address given
+    port=${1:-8484} # default to 8484 if no port name given
+    hostname=${2:-$(hostname)} # default to the computer hostname
 
     browser http://$hostname:$port
     python3 -m http.server $port --bind $hostname
@@ -195,15 +195,15 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 PATH=/usr/local/cuda/bin:$PATH # don't need to export variables that are already defined
 
 # store a list of all the commands I've every issued in bash in ~/.bash_eternal_history
-# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+# https://stackoverflow.com/questions/9457233/unlimited-bash-history
 export HISTFILESIZE=
 export HISTSIZE=
 export HISTTIMEFORMAT="[%F %T] "
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
-# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+# https://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
 export HISTFILE=~/.bash_eternal_history
 # Force prompt to write history after every command.
-# http://superuser.com/questions/20900/bash-history-loss
+# https://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # stop collecting bash history in the current terminal
 # useful for copy pasting sensitive data
