@@ -2,8 +2,7 @@
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
-# Set emacs as the default editor
-export EDITOR="emacs"
+export EDITOR="nvim"
 export VISUAL=$EDITOR
 
 # list of 200,000 english words
@@ -80,7 +79,7 @@ alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
 alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
 alias safari="open -a Safari"
-alias browser="safari"
+alias browser="chrome"
 alias b="browser"
 
 # Copy tmux buffer into system clipboard
