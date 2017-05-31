@@ -79,6 +79,13 @@ brew install trash # use macOS trash instead of rm
 
 brew install ffmpeg --with-fdk-aac --with-ffplay --with-freetype --with-frei0r --with-libass --with-libvo-aacenc --with-libvorbis --with-libvpx --with-opencore-amr --with-openjpeg --with-opus --with-openssl --with-rtmpdump --with-schroedinger --with-speex --with-theora --with-tools --with-x265 --with-faac --with-lame --with-x264 --with-xvid
 
+# apps
+brew cask install google-chrome
+brew cask install android-file-transfer
+brew cask install mpv
+brew cask install qlmarkdown
+brew cask install wireshark
+
 # mpv
 brew install mpv
 brew linkapps
