@@ -64,14 +64,12 @@ brew install nmap
 #brew install ucspi-tcp # `tcpserver` et al.
 
 brew install ag
-#brew install exiv2
+brew install exiv2 # used to change exif data
 brew install git
-brew install node # This installs `npm` too using the recommended installation method
+brew install node # installs `npm` too
 brew install redis
-#brew install pv
-#brew install rename
-#brew install rhino
 brew install tree
+brew install pass # a command line password manager
 
 # read RFCs
 brew install bfontaine/utils/rfc
