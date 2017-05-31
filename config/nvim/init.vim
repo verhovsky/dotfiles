@@ -163,8 +163,6 @@ set confirm
 set cmdheight=2 " Avoid many cases of having to "press <Enter> to continue"
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=0
-" Remove the delay when hitting esc in insert mode
-set noesckeys
 
 " show trailing whitespace
 " set listchars=tab:»·,trail:·
