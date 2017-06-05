@@ -30,6 +30,11 @@ alias uuuuu="cd ../../../.."
 alias n=$EDITOR
 alias h="history"
 alias t="trash"
+alias tt="rm -rf"
+# for when you actually want to delete a file
+# (as long as you don't have an unencrypted ssd and aren't using a journaling file system. see `man shred`)
+#alias ttt="shred -zn 3 --remove"
+
 alias yt="youtube-dl"
 
 alias d="cd ~/dotfiles"
@@ -74,7 +79,7 @@ alias py2="ipython2 --no-banner --no-confirm-exit"
 alias py3="ipython3 --no-banner --no-confirm-exit"
 alias py="py3"
 
-# Open urls from the commandline. 
+# Open urls from the commandline.
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
 alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
@@ -93,7 +98,7 @@ alias day="python3 -c 'import datetime; print(datetime.datetime.now().timetuple(
 alias pip2all="pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip2 install -U; pip2 install --upgrade pip"
 alias pip3all="pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U; pip3 install --upgrade pip"
 alias pipall="pip2all; pip3all"
-alias yarnall="yarn self-update; yarn global upgrade" 
+alias yarnall="yarn self-update; yarn global upgrade"
 alias macos-update="sudo softwareupdate -i -a"
 alias update="brew upgrade; pipall; macos-update"
 
@@ -163,7 +168,7 @@ shopt -s globstar
 # `brew install git` for the newer version, brew puts a file `git` into
 # `/usr/local/bin/git`.
 # When you execute a `command` in bash, it checks if that command is a built in function,
-# if not it goes through every director in $PATH (left to right) and executes the 
+# if not it goes through every director in $PATH (left to right) and executes the
 # first file with the filename `command` it finds. We want all the files we installed
 # ourselves (through homebrew) to be the first ones it looks for.
 PATH=/usr/local/bin:$PATH
@@ -178,7 +183,7 @@ PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 # Use the `man` command to learn more about different commands
 # This is similar to path, in that if you `man ls` it will show you the
 # man page of the brew installed `ls` rather than the one that came with your macos
-# see `brew info coreutils` 
+# see `brew info coreutils`
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 PATH=$PATH:~/Library/Android/sdk/platform-tools/

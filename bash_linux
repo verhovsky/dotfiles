@@ -1,15 +1,3 @@
-# t for trash
-# behaves like macOS by moving files to a directory
-# which is cleared later
-t() {
-    mkdir ~/.Trash;
-    mv ${@: -1} ~/.Trash
-}
-alias tt="rm -rf"
-# for when you actually want to delete a file
-# (as long as you don't have an unencrypted ssd and aren't using a journaling file system. see `man shred`)
-#alias ttt="shred -zn 3 --remove"
-
 alias eu="tmux attach 2>/dev/null || tmux"
 alias top="top"
 alias bat="cat /sys/class/power_supply/BAT0/capacity"
