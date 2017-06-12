@@ -106,7 +106,7 @@ alias update="brew upgrade; pipall; macos-update"
 # the `-C ''` prevents storing hostname with ssh key
 alias new-ssh-key="ssh-keygen -o -a 100 -t ed25519 -C ''"
 # copy my ssh key to macOS clipboard
-alias ssh-key="cat ~/.ssh/id_ed25519.pub | pbcopy"
+alias ssh-key="cat ~/.ssh/id_ed25519.pub"
 
 # if you need need a quick source of url-safe random data
 alias random-hash="head -c 1024 /dev/urandom | shasum -a 256"
