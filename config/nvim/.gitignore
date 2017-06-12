@@ -2,5 +2,5 @@
 backups/*
 undo/*
 swaps/*
-bundle/*
-!bundle/Vundle.vim
+plugged/*
+!autoload/plug.vim

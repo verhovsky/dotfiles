@@ -1,59 +1,52 @@
-set nocompatible " required by vundle
-filetype off     " required by vundle
+set nocompatible
+
 if &shell =~# 'fish$'
     set shell=sh " fish is not POSIX compatible, and breaks plugins
 endif
 
+call plug#begin()
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-rsi'
+  Plug 'tpope/vim-sleuth'
+  Plug 'tpope/vim-ragtag'
+  Plug 'tpope/vim-endwise'
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin('~/.config/nvim/bundle')
+  Plug 'ntpeters/vim-better-whitespace'
+  Plug 'ervandew/supertab'
+  Plug 'alvan/vim-closetag'
+  "Plug 'Valloric/YouCompleteMe'
+  Plug 'jiangmiao/auto-pairs'
+  " nicer looking status bar
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'junegunn/vim-easy-align'
+  Plug 'vim-scripts/camelcasemotion'
+  Plug 'terryma/vim-expand-region'
+  Plug 'rking/ag.vim'
+  Plug 'luochen1990/rainbow'
+  " open files by hitting ctrlp and typing the name
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'Raimondi/delimitMate'
+  " open a git diff in a seperate window when commiting
+  Plug 'rhysd/committia.vim'
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
-" colorschemes
-Plugin 'jnurmine/zenburn'
-Plugin 'chriskempson/base16-vim'
+  Plug 'chr4/sslsecure.vim'
 
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-rsi'
-Plugin 'tpope/vim-sleuth'
-Plugin 'tpope/vim-ragtag'
-Plugin 'tpope/vim-endwise'
-
-Plugin 'ervandew/supertab'
-Plugin 'alvan/vim-closetag'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'jiangmiao/auto-pairs'
-" nicer looking status bar
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'camelcasemotion'
-Plugin 'terryma/vim-expand-region'
-Plugin 'rking/ag.vim'
-Plugin 'luochen1990/rainbow'
-" open files by hitting ctrlp and typing the name
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'Raimondi/delimitMate'
-" open a git diff in a seperate window when commiting
-Plugin 'rhysd/committia.vim'
-
-" languages
-Plugin 'dag/vim-fish'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'xolox/vim-misc'
-Plugin 'lua.vim'
-Plugin 'hylang/vim-hy'
-Plugin 'fidian/hexmode'
-" Plugin 'fatih/vim-go'
-
-call vundle#end()            " required
-filetype plugin indent on    " required
+  Plug 'dag/vim-fish'
+  Plug 'elixir-lang/vim-elixir'
+  Plug 'xolox/vim-misc'
+  Plug 'vim-scripts/lua.vim'
+  Plug 'hylang/vim-hy'
+  Plug 'fidian/hexmode'
+  "Plug 'fatih/vim-go'
+call plug#end()
 
 " Disable syntax highlighting
 syntax off
@@ -83,17 +76,16 @@ augroup myfiletypes
   autocmd FileType python setlocal expandtab
   "autocmd FileType python setlocal colorcolumn=80 " a little too distracting
 
+  " Strip trailing white space when saving files
+  autocmd BufEnter * EnableStripWhitespaceOnSave
+
   " add hylang
   autocmd BufRead,BufNewFile *.hy set filetype=lisp
 
 augroup END
 
 " Start vim in insert mode when editing git commit messages
-au FileType gitcommit 1 | startinsert
-
-" Strip trailing white space when saving files
-" probably a little dangeous
-au BufWritePre * :%s/\s\+$//e
+"au FileType gitcommit 1 | startinsert
 
 " Treat .json files as .js
 autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
@@ -164,10 +156,6 @@ set cmdheight=2 " Avoid many cases of having to "press <Enter> to continue"
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=0
 
-" show trailing whitespace
-" set listchars=tab:»·,trail:·
-" set list
-
 " increase how many previous lines the terminal saves from the default of 1000
 let g:terminal_scrollback_buffer_size = 100000
 
@@ -175,7 +163,7 @@ let g:terminal_scrollback_buffer_size = 100000
 let mapleader = " "
 
 " reload nvimrc and install plugins
-nmap <Leader>bi :silent! source ~/.config/nvim/init.vim<cr>:PluginInstall<cr>
+nmap <Leader>bi :silent! source ~/.config/nvim/init.vim<cr>:PlugInstall<cr>
 " copy entire file
 map <Leader>ca ggVG"*y
 " ?
@@ -194,7 +182,9 @@ map <Leader>sg :sp<cr>:grep<space>
 map <Leader>vg :vsp<cr>:grep
 map <Leader>w <C-w>w
 map <Leader>x :exec getline(".")<cr>
-map <Leader>f :Ag<space>
+map <Leader>fs <esc>:w<CR>
+map <Leader>/ :Ag<space>
+
 map <Leader>t :terminal<cr>
 map <Leader>co :e ~/.config/nvim/init.vim<cr>
 
@@ -220,11 +210,6 @@ nmap ga <Plug>(EasyAlign)
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-" Press control-s in any mode to save the file
-" Note that remapping C-s requires flow control to be disabled
-" (e.g. in .bashrc or .zshrc)
-map <C-s> <esc>:w<CR>
-imap <C-s> <esc>:w<CR>li
 map <C-t> <esc>:tabnew<CR>
 map <C-x> <C-w>c
 
