@@ -15,9 +15,9 @@ then
   sudo rm -rf ~/.pentadactyl > /dev/null 2>&1
   sudo rm -rf ~/.inputrc > /dev/null 2>&1
   sudo rm -rf ~/.config > /dev/null 2>&1
+  sudo rm -rf ~/.tmux.conf > /dev/null 2>&1
+  sudo rm -rf ~/.tmux > /dev/null 2>&1
   if [ "$(uname)" = "Darwin" ]; then
-    sudo rm -rf ~/.tmux.conf > /dev/null 2>&1
-    sudo rm -rf ~/.tmux > /dev/null 2>&1
   else
     sudo rm -rf ~/.Xresources > /dev/null 2>&1
     sudo rm -rf ~/.xinitrc > /dev/null 2>&1
@@ -27,10 +27,10 @@ then
   ln -s ~/dotfiles/config ~/.config
   ln -s ~/dotfiles/spacemacs ~/.spacemacs
   ln -s ~/dotfiles/bashrc ~/.bashrc
-  if [ "$(uname)" = "Darwin" ]; then
-    ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
-    ln -s ~/dotfiles/tmux/mac_tmux ~/.tmux
+  ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
+  ln -s ~/dotfiles/tmux/mac_tmux ~/.tmux
 
+  if [ "$(uname)" = "Darwin" ]; then
     mkdir -p ~/Library/KeyBindings
     ln -s ~/dotfiles/system_wide_emacs_movement.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
 
