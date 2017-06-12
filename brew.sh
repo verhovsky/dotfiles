@@ -35,9 +35,9 @@ brew install nmap # scan networks for computers and what those computers are
 
 brew install youtube-dl # download videos from the internet
 brew install tmux # a terminal multiplexer
-brew install emacs --with-cocoa --with-gnutls --with-imagemagick
+brew install neovim
 
-brew install ag # search file contents
+brew install pt # search file contents
 brew install node # installs `npm` too
 brew install redis # a database
 brew install tree # like recursive `ls`, prints all files in all directories in current directory

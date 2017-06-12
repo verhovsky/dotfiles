@@ -66,7 +66,7 @@ alias amend="git amend"
 # Commands with options
 alias lisp="clisp -q"
 # count how many lines of code are in the current directory
-alias c="cloc --vcs=git ."
+alias cloc="cloc --vcs=git ."
 # make a copy of a website for offline viewing
 # https://www.guyrutenberg.com/2014/05/02/make-offline-mirror-of-a-site-using-wget/
 alias mirror="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent"
@@ -109,7 +109,7 @@ alias new-ssh-key="ssh-keygen -o -a 100 -t ed25519 -C ''"
 alias ssh-key="cat ~/.ssh/id_ed25519.pub | pbcopy"
 
 # if you need need a quick source of url-safe random data
-alias random_hash="head -c 1024 /dev/urandom | shasum -a 256"
+alias random-hash="head -c 1024 /dev/urandom | shasum -a 256"
 
 # Ag interprets the second argument as the direcotory to search in, usually my query just has space in it
 agg () {
@@ -190,6 +190,9 @@ PATH=$PATH:~/Library/Android/sdk/platform-tools/
 
 # cargo is rust's package manager
 PATH=$PATH:~/.cargo/bin
+
+# where to put go code
+export GOPATH=~/go
 
 # cuda is nvidia's proprietary library for programming their GPUs
 # cudnn is an extension to cuda for running neural networks specifically
