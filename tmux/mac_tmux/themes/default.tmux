@@ -4,22 +4,11 @@
 set -g default-terminal "screen-256color"
 
 # -------------
-# start with window 1 (instead of 0)
-# -------------
-set -g base-index 1
-
-# -------------
-# start with pane 1
-# -------------
-set -g pane-base-index 1
-
-# -------------
 # status line
 # -------------
-#set-option -g status-position top
-set -g status-utf8 on
+set-option -g status-position top
 set -g status-justify left
-#set -g status-bg black
+set -g status-bg black
 set -g status-bg colour236
 set -g status-fg white
 set -g status-interval 4
@@ -80,5 +69,4 @@ set-option -g message-fg black
 # -------------
 set -g status-left ''
 set -g status-right-length 150
-set -g status-right " #(bash ~/.tmux/scripts/remaining_battery.sh)  -  #(bash ~/.tmux/scripts/decimal_time.sh)  -  %a %b %d %R " # Fri Jun 19 08:32
-set -g status-utf8 on
+set -g status-right " #(bash ~/.tmux/scripts/decimal_time.sh)  -  %a %b %d %R " # Fri Jun 19 08:32
