@@ -15,6 +15,7 @@ call plug#begin()
   Plug 'tpope/vim-ragtag'
   Plug 'tpope/vim-endwise'
 
+  Plug 'davidhalter/jedi-vim'
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'ervandew/supertab'
   Plug 'alvan/vim-closetag'
