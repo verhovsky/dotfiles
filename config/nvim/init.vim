@@ -47,6 +47,7 @@ call plug#begin()
   Plug 'hylang/vim-hy'
   Plug 'fidian/hexmode'
   "Plug 'fatih/vim-go'
+  Plug 'urbit/hoon.vim'
 call plug#end()
 
 " Disable syntax highlighting
@@ -83,6 +84,9 @@ augroup myfiletypes
   " add hylang
   autocmd BufRead,BufNewFile *.hy set filetype=lisp
 
+
+  autocmd BufRead,BufNewFile *.hoon setlocal commentstring=::\ %s
+
 augroup END
 
 " Start vim in insert mode when editing git commit messages
@@ -117,6 +121,10 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set shiftround  " When at 3 spaces and I hit >>, go to 4, not 5.
+
+" show tabs
+set list
+set listchars=tab:▸·
 
 set nofoldenable  " Disable hiding things based on their indent level
 

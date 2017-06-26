@@ -20,15 +20,19 @@ mkd() {
     mkdir -p $@
     cd ${@: -1} # the last argument
 }
-alias e="ls"
-alias ee="ls -alhv"
+alias e="ls -t" # last modified date
+alias ee="ls -talhv"
 alias u="cd"
 alias uu="cd ../"
 alias uuu="cd ../.."
 alias uuuu="cd ../../.."
 alias uuuuu="cd ../../../.."
 alias n=$EDITOR
+# alias nn="$EDITOR your_most_important_file"
+alias nnn="$EDITOR ~/.bashrc"
+alias nnnn="$EDITOR ~/.config/nvim/init.vim"
 alias h="history"
+alias m="man"
 alias t="trash"
 alias tt="rm -rf"
 # for when you actually want to delete a file
@@ -112,6 +116,7 @@ alias ssh-key="cat ~/.ssh/id_ed25519.pub"
 
 # if you need need a quick source of url-safe random data
 alias random-hash="head -c 1024 /dev/urandom | shasum -a 256"
+alias random-number="shuf -i 1-1000000000000000000 -n 1"
 
 # Ag interprets the second argument as the direcotory to search in, usually my query just has space in it
 agg () {
