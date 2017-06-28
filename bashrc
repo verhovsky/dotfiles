@@ -99,6 +99,8 @@ alias tmcp="tmux show-buffer | pbcopy"
 # get the day of the year (April 27 2017 is 117)
 alias day="python3 -c 'import datetime; print(datetime.datetime.now().timetuple().tm_yday)'"
 
+alias chmox="chmod +x"
+
 # Updating
 # all pip packages. https://github.com/pypa/pip/issues/59
 alias pip2all="pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip2 install -U; pip2 install --upgrade pip"
