@@ -10,7 +10,7 @@ export WORDLIST="/usr/share/dict/words"
 
 # The PS1 is the string bash prints after it finishes running a command
 # \w means the full path of current working directory
-PS1="\u@\H:\w$ "
+PS1="\H:\w \u$ "
 
 # create a list of directories and cd into the last one.
 mkd() {
