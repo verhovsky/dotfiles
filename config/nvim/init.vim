@@ -15,7 +15,8 @@ call plug#begin()
   Plug 'tpope/vim-ragtag'
   Plug 'tpope/vim-endwise'
 
-  Plug 'davidhalter/jedi-vim'
+  Plug 'vim-syntastic/syntastic'
+  " Plug 'davidhalter/jedi-vim', {'for': 'python'}
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'ervandew/supertab'
   Plug 'alvan/vim-closetag'
@@ -46,14 +47,19 @@ call plug#begin()
   Plug 'vim-scripts/lua.vim'
   Plug 'hylang/vim-hy'
   Plug 'fidian/hexmode'
-  "Plug 'fatih/vim-go'
+  Plug 'fatih/vim-go'
   Plug 'urbit/hoon.vim'
+  Plug 'idris-hackers/idris-vim'
+
+  Plug 'chriskempson/base16-vim'
+  Plug 'jnurmine/Zenburn'
 call plug#end()
 
-" Disable syntax highlighting
-syntax off
-set background=light
-" colorscheme base16-grayscale-light
+" syntax highlighting
+syntax on
+" set background=light
+colorscheme zenburn
+
 " airline themeing
 let g:airline_theme='sol'
 let g:airline_left_sep  = ''
@@ -84,6 +90,8 @@ augroup myfiletypes
   " add hylang
   autocmd BufRead,BufNewFile *.hy set filetype=lisp
 
+  " don't move back a character when exiting insert mode
+  autocmd InsertLeave * :normal `^
 
   autocmd BufRead,BufNewFile *.hoon setlocal commentstring=::\ %s
 
