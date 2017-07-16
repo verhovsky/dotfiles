@@ -1,9 +1,9 @@
 # Prefer US English and UTF-8
-set -g LC_ALL="en_US.UTF-8"
-set -g LANG="en_US.UTF-8"
+set -g LC_ALL "en_US.UTF-8"
+set -g LANG "en_US.UTF-8"
 
 # Set nvim as the default editor
-set -g EDITOR "emacs"
+set -g EDITOR "nvim"
 set -g VISUAL $EDITOR
 
 # list of 200,000 english words
