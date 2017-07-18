@@ -226,10 +226,10 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 alias forget="unset HISTFILE"
 
 # If running on Linux, some aliases and functions won't work and should be redefined
-if [[ $(uname) == "Linux" ]] && [[ -f ~/.bash_linux ]]; then
-    . ~/.bash_linux
+if [[ $(uname) == "Linux" ]] && [[ -f ~/.bashlinux ]]; then
+    . ~/.bashlinux
 fi
 # local config file not tracked by git
-if [[ -f ~/.bash_local ]]; then
-    . ~/.bash_local
+if [[ -f ~/.bashlocal ]]; then
+    . ~/.bashlocal
 fi

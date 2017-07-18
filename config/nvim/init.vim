@@ -80,8 +80,6 @@ augroup myfiletypes
   autocmd FileType python setlocal softtabstop=4
   autocmd FileType python setlocal shiftwidth=4
   autocmd FileType python setlocal textwidth=100
-  autocmd FileType python setlocal smarttab
-  autocmd FileType python setlocal expandtab
   "autocmd FileType python setlocal colorcolumn=80 " a little too distracting
 
   " Strip trailing white space when saving files
