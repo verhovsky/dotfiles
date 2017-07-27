@@ -151,9 +151,10 @@ o() { # with no arguments 'o' opens the current directory, otherwise opens the g
 # usage: http [port]
 http() {
     port=${1:-8484} # default to 8484 if no port name given
+    hostname=${2:-$(hostname)} # default to the computer hostname
 
-    browser http://0.0.0.0:$port
-    python3 -m http.server $port
+    browser http://$hostname:$port
+    python3 -m http.server $port --bind $hostname
 }
 
 # finds a process and kills it
