@@ -42,6 +42,7 @@ brew install node # installs `npm` too
 brew install redis # a database
 brew install tree # like recursive `ls`, prints all files in all directories in current directory
 brew install pass # a command line password manager
+brew install rg # searching for strings
 
 brew install exiv2 # used to change exif data
 

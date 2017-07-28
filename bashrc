@@ -121,13 +121,13 @@ alias random-hash="head -c 1024 /dev/urandom | shasum -a 256"
 alias random-base64="head -c 1024 /dev/urandom | base64"
 alias random-number="shuf -i 1-1000000000000000000 -n 1"
 
-# Ag interprets the second argument as the direcotory to search in, usually my query just has space in it
-agg () {
-    ag "$*"
+# Rg interprets the second argument as the direcotory to search in, usually my query just has space in it
+rgg () {
+    rg "$*"
 }
 
 # is a string a top level domain?
-alias is-tld="curl -s https://data.iana.org/TLD/tlds-alpha-by-domain.txt | ag"
+alias is-tld="curl -s https://data.iana.org/TLD/tlds-alpha-by-domain.txt | rg"
 
 # if ssh [ip] works but ssh [hostname] doesn't, this might solve it
 # https://stackoverflow.com/a/40754476/3064538

@@ -93,6 +93,8 @@ augroup myfiletypes
 
   autocmd BufRead,BufNewFile *.hoon setlocal commentstring=::\ %s
 
+  autocmd FileType go setlocal tabstop=8
+
 augroup END
 
 " Start vim in insert mode when editing git commit messages
