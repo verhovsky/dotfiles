@@ -33,7 +33,7 @@ if [ "$(uname)" = "Darwin" ]; then
   # by default Terminal.app doesn't read .bashrc, but .profile works
   echo 'source ~/.bashrc' > ~/.profile
 else
-  ln -s ~/dotfiles/bash_linux ~/.bash_linux
+  ln -s ~/dotfiles/bashlinux ~/.bashlinux
   ln -s ~/dotfiles/Xresources ~/.Xresources
   ln -s ~/dotfiles/xinitrc ~/.xinitrc
       # ubuntu doesn't run xinitrc or xsession
