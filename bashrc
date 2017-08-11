@@ -119,7 +119,7 @@ alias ssh-key="cat ~/.ssh/id_ed25519.pub"
 # if you need need a quick source of url-safe random data
 alias random-hash="head -c 1024 /dev/urandom | shasum -a 256"
 alias random-base64="head -c 1024 /dev/urandom | base64"
-alias random-number="shuf -i 1-1000000000000000000 -n 1"
+alias random-number="shuf --random-source=/dev/urandom -i 1-1000000000000000000 -n 1"
 
 # Rg interprets the second argument as the direcotory to search in, usually my query just has space in it
 rgg () {
