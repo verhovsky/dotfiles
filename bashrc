@@ -73,6 +73,8 @@ alias amend="git amend"
 alias lisp="clisp -q"
 # count how many lines of code are in the current directory
 alias cloc="cloc --vcs=git ."
+# shuf's builtin randomness generator is insecure
+alias shuf='shuf --random-source=/dev/urandom'
 # make a copy of a website for offline viewing
 # https://www.guyrutenberg.com/2014/05/02/make-offline-mirror-of-a-site-using-wget/
 alias mirror="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent"
@@ -80,10 +82,15 @@ y () {
      yarn $@ --silent --no-emoji
 }
 
-# Python
+# use python3 for everything
+alias python="python3"
+alias p="python3 -q"
+
+alias ipython="ipython3"
 alias py2="ipython2 --no-banner --no-confirm-exit"
-alias py3="ipython3 --no-banner --no-confirm-exit"
-alias py="py3"
+alias py="ipython3 --no-banner --no-confirm-exit"
+
+alias pip="pip3"
 
 # Open urls from the commandline.
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
@@ -104,9 +111,7 @@ alias chmox="chmod +x"
 # Updating
 # all pip packages. https://github.com/pypa/pip/issues/59
 alias pip2all="pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip2 install -U; pip2 install --upgrade pip"
-alias pip3all="pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U; pip3 install --upgrade pip"
-alias pipall="pip2all; pip3all"
-alias yarnall="yarn self-update; yarn global upgrade"
+alias pipall="pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip2 install -U; pip2 install --upgrade pip"
 alias macos-update="sudo softwareupdate -i -a"
 alias update="brew upgrade; pipall; macos-update"
 
@@ -118,8 +123,9 @@ alias ssh-key="cat ~/.ssh/id_ed25519.pub"
 
 # if you need need a quick source of url-safe random data
 alias random-hash="head -c 1024 /dev/urandom | shasum -a 256"
-alias random-base64="head -c 1024 /dev/urandom | base64"
+alias random-base64="head -c 30 /dev/urandom | base64"
 alias random-number="shuf --random-source=/dev/urandom -i 1-1000000000000000000 -n 1"
+alias correct-battery="curl -s https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt | shuf --random-source=/dev/urandom | head -n 4 | tr '\n' ' '; echo"
 
 # Rg interprets the second argument as the direcotory to search in, usually my query just has space in it
 rgg () {
@@ -144,7 +150,11 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 alias cdf='cd "$(osascript -e "tell application \"Finder\" to if window 1 exists then if target of window 1 as string is not \":\" then get POSIX path of (target of window 1 as alias)")"'
 
 o() { # with no arguments 'o' opens the current directory, otherwise opens the given location
-    open ${1:-.} # if $1 doesn't exist, open "."
+    if [[ "$#" -eq 0 ]]; then
+        open .
+    else
+        open $1
+    fi
 }
 
 # Start a server serving the current directory and open that server directory in the browser
