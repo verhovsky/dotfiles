@@ -1,21 +1,10 @@
-alias eu="tmux attach 2>/dev/null || tmux"
-alias top="top"
 alias bat="cat /sys/class/power_supply/BAT0/capacity"
-
-# set python3 as default
-alias py="ipython3 --no-banner --no-confirm-exit"
-# don't load matplotlib on a headless server
-alias spy="ipython3 --no-banner --no-confirm-exit -i -c 'import pandas as pd; import numpy as np; import theano; import theano.tensor as T'"
-alias spy2="ipython2 --no-banner --no-confirm-exit -i -c 'import pandas as pd; import numpy as np; import theano; import theano.tensor as T;'"
-alias spy3="ipython3 --no-banner --no-confirm-exit -i -c 'import pandas as pd; import numpy as np; import theano; import theano.tensor as T;'"
 
 # Update all pip packages. https://github.com/pypa/pip/issues/59
 # On linux requires root, sudo's -H flag silences an error about directory ownership
-alias pipall="sudo pip install --upgrade pip; pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo -H pip install -U"
-alias pip2all="sudo pip2 install --upgrade pip; pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo -H pip2 install -U"
-alias pip3all="sudo pip3 install --upgrade pip; pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo -H pip3 install -U"
+alias pipall="sudo pip3 install --upgrade pip; pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo -H pip3  install -U"
 # system wide update
-alias update="pip2all; pip3all; sudo apt-get update; sudo apt-get upgrade; sudo apt-get dist-upgrade"
+alias update="pipall; sudo apt-get update; sudo apt-get upgrade; sudo apt-get dist-upgrade"
 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
@@ -25,7 +14,3 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 alias keyboard_options="setxkbmap -option caps:ctrl_modifier; setxkbmap -option altwin:swap_lalt_lwin; xset r rate 200 30"
 alias reset_keyboard="setxkbmap -layout us -variant dvp; keyboard_options"
 alias us_keyboard="setxkbmap -layout us; keyboard_options"
-
-# CUDA for programming the GPU
-# PATH=$PATH:/usr/local/cuda/bin
-# LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
