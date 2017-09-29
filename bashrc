@@ -96,6 +96,7 @@ alias pip="pip3"
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
 alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
+alias c="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --headless --remote-debugging-port=9222" # a bit dangerous
 alias safari="open -a Safari"
 alias browser="chrome"
 alias b="browser"
@@ -110,8 +111,7 @@ alias chmox="chmod +x"
 
 # Updating
 # all pip packages. https://github.com/pypa/pip/issues/59
-alias pip2all="pip2 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip2 install -U; pip2 install --upgrade pip"
-alias pipall="pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip2 install -U; pip2 install --upgrade pip"
+alias pipall="pip3 install --upgrade pip; pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
 alias macos-update="sudo softwareupdate -i -a"
 alias update="brew upgrade; pipall; macos-update"
 
@@ -208,11 +208,12 @@ MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 PATH=$PATH:~/Library/Android/sdk/platform-tools/
 
-# cargo is rust's package manager
-PATH=$PATH:~/.cargo/bin
-
 # where to put go code
 export GOPATH=~/go
+# use go binaries
+PATH=$PATH:$GOPATH/bin
+# use rust binaries
+PATH=$PATH:~/.cargo/bin
 
 # cuda is nvidia's proprietary library for programming their GPUs
 # cudnn is an extension to cuda for running neural networks specifically
