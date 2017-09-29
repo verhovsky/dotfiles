@@ -164,9 +164,9 @@
 
 	insteadOf = "gist:"
 [user]
-	email = boris.verk@gmail.com
-	name = BorisVerk
+	email = boris@verhovs.ky
+	name = boris
 
 [github]
-	user = 
-	oauth-token = 
+	user =
+	oauth-token =
