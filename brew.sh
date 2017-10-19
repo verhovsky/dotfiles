@@ -62,12 +62,14 @@ brew cask install android-file-transfer
 brew cask install mpv
 brew cask install qlmarkdown
 brew cask install wireshark
+# screen saver from apple tv http://benjaminmayo.co.uk/watch-all-the-apple-tv-aerial-video-screensavers
+brew cask install aerial
 
 # mpv
 brew install mpv
 brew linkapps
 
-brew install urbit # a computer.
+brew install urbit
 
 # Remove outdated versions from the cellar
 brew cleanup

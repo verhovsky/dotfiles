@@ -32,7 +32,7 @@ alias n=$EDITOR
 alias nnn="$EDITOR ~/.bashrc"
 alias nnnn="$EDITOR ~/.config/nvim/init.vim"
 alias h="history"
-alias m="man"
+alias m="mkdir"
 alias t="trash"
 alias tt="rm -rf"
 # for when you actually want to delete a file
@@ -222,7 +222,7 @@ PATH=$PATH:~/.cargo/bin
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 PATH=/usr/local/cuda/bin:$PATH # don't need to export variables that are already defined
 
-# store a list of all the commands I've every issued in bash in ~/.bash_eternal_history
+# store a list of all the commands I've every issued in ~/.bash_eternal_history
 # https://stackoverflow.com/questions/9457233/unlimited-bash-history
 export HISTFILESIZE=
 export HISTSIZE=
