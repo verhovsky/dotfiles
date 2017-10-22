@@ -13,13 +13,11 @@ brew install openssh # overwrites builtin ssh
 brew install gcc
 brew install wget # download files
 
-brew install python
 brew install python3
-pip install ipython requests
 pip3 install ipython requests
+pip3 install sh flask pillow neovim numpy ipython hy
 
-#brew install bfg # Crypto Miner
-#brew install binwalk # Reverse engineering firware
+#brew install binwalk # Reverse engineering firmware
 #brew install fcrackzip # Brute force zip files
 #brew install foremost # Data carving
 #brew install hashpump # Hash length extension attack
