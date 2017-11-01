@@ -157,15 +157,8 @@ o() { # with no arguments 'o' opens the current directory, otherwise opens the g
     fi
 }
 
-# Start a server serving the current directory and open that server directory in the browser
-# usage: http [port]
-http() {
-    port=${1:-8484} # default to 8484 if no port name given
-    hostname=${2:-$(hostname)} # default to the computer hostname
-
-    browser http://$hostname:$port
-    python3 -m http.server $port --bind $hostname
-}
+# serve the current directory to the internet on port 8000
+alias http="python3 -m http.server"
 
 # finds a process and kills it
 find_kill() {
