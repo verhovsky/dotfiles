@@ -69,4 +69,5 @@ set-option -g message-fg black
 # -------------
 set -g status-left ''
 set -g status-right-length 150
-set -g status-right " #(bash ~/.tmux/scripts/decimal_time.sh)  -  %a %b %d %R " # Fri Jun 19 08:32
+set -g status-right " %Y:#(bash ~/.tmux/scripts/decimal_time.sh) "
+# set -g status-right " #(bash ~/.tmux/scripts/decimal_time.sh)  -  %a %b %d %R " # Fri Jun 19 08:32
