@@ -22,6 +22,8 @@ mkd() {
 }
 alias e="ls -t" # last modified date
 alias ee="ls -talhv"
+alias eee="tree -a"
+alias eeee="tree"
 alias u="cd"
 alias uu="cd ../"
 alias uuu="cd ../.."
@@ -38,7 +40,7 @@ alias tt="rm -rf"
 # for when you actually want to delete a file
 # (as long as you don't have an unencrypted ssd and aren't using a journaling file system. see `man shred`)
 #alias ttt="shred -zn 3 --remove"
-alias psg="pass generate -n" # don't use symbols in password manager
+alias psg="pass generate -n -c" # don't use symbols in password manager
 alias pss="pass show -c" # copy password to clipboard
 
 alias yt="youtube-dl"
