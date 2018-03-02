@@ -45,8 +45,8 @@ alias pss="pass show -c" # copy password to clipboard
 
 alias yt="youtube-dl"
 
-alias d="cd ~/dotfiles"
-alias dl="cd ~/Downloads"
+alias p="python -q"
+alias py="ipython3 --no-banner --no-confirm-exit"
 
 alias g="git"
 # View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -83,16 +83,6 @@ alias mirror="wget --mirror --convert-links --adjust-extension --page-requisites
 y () {
      yarn $@ --silent --no-emoji
 }
-
-# use python3 for everything
-alias python="python3"
-alias p="python3 -q"
-
-alias ipython="ipython3"
-alias py2="ipython2 --no-banner --no-confirm-exit"
-alias py="ipython3 --no-banner --no-confirm-exit"
-
-alias pip="pip3"
 
 # Open urls from the commandline.
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"

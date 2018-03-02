@@ -14,9 +14,10 @@ brew install openssl
 brew install gcc
 brew install wget # download files
 
-brew install python3
-pip3 install ipython requests
-pip3 install sh flask pillow neovim numpy ipython hy
+brew install python --HEAD # install the very latest version of python. risky
+brew postinstall python # when building from source, brew doesn't link pip
+pip install ipython requests
+pip install sh flask pillow neovim numpy ipython hy
 
 #brew install binwalk # Reverse engineering firmware
 #brew install fcrackzip # Brute force zip files
