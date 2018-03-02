@@ -2,7 +2,7 @@
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
-export EDITOR="nvim"
+export EDITOR="emacsclient"
 export VISUAL=$EDITOR
 
 # list of 200,000 english words

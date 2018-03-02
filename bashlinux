@@ -14,3 +14,5 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 alias keyboard_options="setxkbmap -option caps:ctrl_modifier; setxkbmap -option altwin:swap_lalt_lwin; xset r rate 200 30"
 alias reset_keyboard="setxkbmap -layout us -variant dvp; keyboard_options"
 alias us_keyboard="setxkbmap -layout us; keyboard_options"
+
+alias n="nvim"
