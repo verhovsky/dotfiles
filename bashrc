@@ -35,6 +35,7 @@ alias nnn="$EDITOR ~/.bashrc"
 alias nnnn="$EDITOR ~/.config/nvim/init.vim"
 alias h="history"
 alias m="mkdir"
+alias x="dtrx" # figure out what tar or unzip command to run
 alias t="trash"
 alias tt="rm -rf"
 # for when you actually want to delete a file
@@ -45,8 +46,8 @@ alias pss="pass show -c" # copy password to clipboard
 
 alias yt="youtube-dl"
 
-alias p="python -q"
-alias py="ipython3 --no-banner --no-confirm-exit"
+alias p="python3 -q"
+alias pp="ipython3 --no-banner --no-confirm-exit"
 
 alias g="git"
 # View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -176,6 +177,7 @@ shopt -s globstar
 # if not it goes through every director in $PATH (left to right) and executes the
 # first file with the filename `command` it finds. We want all the files we installed
 # ourselves (through homebrew) to be the first ones it looks for.
+PATH=/usr/local/sbin:$PATH
 PATH=/usr/local/bin:$PATH
 
 # macOS comes with a bunch of outdated commands. We want to use

@@ -16,3 +16,8 @@ alias reset_keyboard="setxkbmap -layout us -variant dvp; keyboard_options"
 alias us_keyboard="setxkbmap -layout us; keyboard_options"
 
 alias n="nvim"
+
+# ubuntu doesn't let you uninstall python2
+alias python="python3"
+alias pip="pip3"
+

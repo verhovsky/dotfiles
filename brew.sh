@@ -14,10 +14,11 @@ brew install openssl
 brew install gcc
 brew install wget # download files
 
-brew install python --HEAD # install the very latest version of python. risky
+brew install python # install python3
 brew postinstall python # when building from source, brew doesn't link pip
+brew install numpy --HEAD # this python library has to be installed from homebrew
 pip install ipython requests
-pip install sh flask pillow neovim numpy ipython hy
+pip install sh flask pillow ipython hy
 
 #brew install binwalk # Reverse engineering firmware
 #brew install fcrackzip # Brute force zip files
@@ -37,7 +38,7 @@ brew install nmap # scan networks for computers and what those computers are
 brew install youtube-dl # download videos from the internet
 brew install tmux # a terminal multiplexer
 brew install neovim # an editor
-brew install emacs # also an editor
+brew cask install emacs # also an editor, the app version of it.
 
 brew install pt # search file contents
 brew install node # installs `npm` too
