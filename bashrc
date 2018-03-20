@@ -46,8 +46,11 @@ alias pss="pass show -c" # copy password to clipboard
 
 alias yt="youtube-dl"
 
+alias python="python3"
+alias pip="pip3"
 alias p="python3 -q"
-alias pp="ipython3 --no-banner --no-confirm-exit"
+alias py="ipython3 --no-banner --no-confirm-exit"
+alias pp="pip3"
 
 alias g="git"
 # View abbreviated SHA, description, and history graph of the latest 20 commits

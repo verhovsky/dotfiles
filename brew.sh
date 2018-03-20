@@ -33,7 +33,7 @@ brew install nmap # scan networks for computers and what those computers are
 #brew install tcpreplay
 #brew install tcptrace # tcp dump file analysis
 #brew install ucspi-tcp # `tcpserver` et al.
-# brew install aircrack-ng # not very useful, use macOS's builtin wifi scanner
+#brew install aircrack-ng # not very useful, use macOS's builtin wifi scanner
 
 brew install youtube-dl # download videos from the internet
 brew install tmux # a terminal multiplexer
