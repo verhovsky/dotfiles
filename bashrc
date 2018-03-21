@@ -78,7 +78,7 @@ alias amend="git amend"
 # Commands with options
 alias lisp="clisp -q"
 # count how many lines of code are in the current directory
-alias cloc="cloc --vcs=git ."
+alias clc="cloc --vcs=git ."
 # shuf's builtin randomness generator is insecure
 alias shuf='shuf --random-source=/dev/urandom'
 # make a copy of a website for offline viewing
