@@ -86,12 +86,8 @@ brew cask install android-studio
 brew cask install mpv # watch videos. doesn't display colors properly, but can play files quicktime can't
 brew cask install qlmarkdown
 brew cask install wireshark # analyse network traffic
-brew cask install osxfuse # used for upspin
-brew cask install emacs # used for upspin
-# screen saver from apple tv
-# I don't use screen savers but this is really cool
-# http://benjaminmayo.co.uk/watch-all-the-apple-tv-aerial-video-screensavers
-# brew cask install aerial
+brew cask install osxfuse # used for sshfs
+brew cask install emacs
 
 # mpv
 brew install mpv

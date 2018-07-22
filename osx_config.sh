@@ -138,6 +138,10 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 #sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
 #sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
 
+# stop random processes from creating core dump files
+# https://apple.stackexchange.com/questions/215410/os-x-el-capitan-cores-directory-taking-up-a-lot-of-space
+sudo launchctl limit core 0 0
+
 ###############################################################################
 # SSD-specific tweaks                                                         #
 ###############################################################################
