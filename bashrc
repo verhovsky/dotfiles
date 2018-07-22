@@ -9,17 +9,12 @@ export VISUAL=$EDITOR
 export WORDLIST="/usr/share/dict/words"
 
 # The PS1 is the string bash prints after it finishes running a command
-# \w means the full path of current working directory
+# \H is the hostname
+# \w is the full path of current working directory
+# \u is the username
 PS1="\H:\w \u$ "
 
-# create a list of directories and cd into the last one.
-mkd() {
-    # in bash, you can refer to "all of the functions arguments" as either $@ or $*
-    # $@ means pass each argument on its own
-    # $* means pass all arguments as a single argument. Wrap it in quotes to be extra safe.
-    mkdir -p $@
-    cd ${@: -1} # the last argument
-}
+alias n="$EDITOR --no-wait --alternate-editor=vim 2>/dev/null"
 alias e="ls -t" # last modified date
 alias ee="ls -talhv"
 alias eee="tree -a"
@@ -29,12 +24,9 @@ alias uu="cd ../"
 alias uuu="cd ../.."
 alias uuuu="cd ../../.."
 alias uuuuu="cd ../../../.."
-alias n=$EDITOR
-# alias nn="$EDITOR your_most_important_file"
-alias nnn="$EDITOR ~/.bashrc"
-alias nnnn="$EDITOR ~/.config/nvim/init.vim"
+alias nn="nvim"
+alias nnn="n ~/.bashrc"
 alias h="history"
-alias m="mkdir"
 alias x="dtrx" # figure out what tar or unzip command to run
 alias t="trash"
 alias tt="rm -rf"
@@ -45,6 +37,14 @@ alias psg="pass generate -n -c" # don't use symbols in password manager
 alias pss="pass show -c" # copy password to clipboard
 
 alias yt="youtube-dl"
+# create a list of directories and cd into the last one.
+mkd() {
+    # in bash, you can refer to "all of the functions arguments" as either $@ or $*
+    # $@ means pass each argument on its own
+    # $* means pass all arguments as a single argument. Wrap it in quotes to be extra safe.
+    mkdir -p "$@"
+    cd "${@: -1}" # the last argument
+}
 
 alias python="python3"
 alias pip="pip3"
@@ -76,17 +76,13 @@ alias gcl="git clone"
 alias amend="git amend"
 
 # Commands with options
-alias lisp="clisp -q"
-# count how many lines of code are in the current directory
-alias cloc="cloc --vcs=git ."
+# count how many lines of code are in the current git repository
+alias cloc="cloc --vcs=git"
 # shuf's builtin randomness generator is insecure
 alias shuf='shuf --random-source=/dev/urandom'
 # make a copy of a website for offline viewing
 # https://www.guyrutenberg.com/2014/05/02/make-offline-mirror-of-a-site-using-wget/
 alias mirror="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent"
-y () {
-     yarn $@ --silent --no-emoji
-}
 
 # Open urls from the commandline.
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
@@ -109,18 +105,20 @@ alias chmox="chmod +x"
 # all pip packages. https://github.com/pypa/pip/issues/59
 alias pipall="pip3 install --upgrade pip; pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
 alias macos-update="sudo softwareupdate -i -a"
-alias update="brew upgrade; pipall; macos-update"
+alias update="brew upgrade; brew cleanup; pipall; macos-update"
 
 # Generate new ssh key as recommended by https://blog.g3rt.nl/upgrade-your-ssh-keys.html
 # the `-C ''` prevents storing hostname with ssh key
 alias new-ssh-key="ssh-keygen -o -a 100 -t ed25519 -C ''"
-# copy my ssh key to macOS clipboard
+# print main ssh key
 alias ssh-key="cat ~/.ssh/id_ed25519.pub"
 
 # if you need need a quick source of url-safe random data
 alias random-hash="head -c 1024 /dev/urandom | shasum -a 256"
+alias base32="head -c 30 /dev/urandom | base32"
 alias random-base64="head -c 30 /dev/urandom | base64"
 alias random-number="shuf --random-source=/dev/urandom -i 1-1000000000000000000 -n 1"
+alias random-letters="cat /dev/urandom | tr -dc 'a-z' | fold -w 32 | head -n 1"
 alias correct-battery="curl -s https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt | shuf --random-source=/dev/urandom | head -n 4 | tr '\n' ' '; echo"
 
 # Rg interprets the second argument as the direcotory to search in, usually my query just has space in it
@@ -149,7 +147,7 @@ o() { # with no arguments 'o' opens the current directory, otherwise opens the g
     if [[ "$#" -eq 0 ]]; then
         open .
     else
-        open $1
+        open "$1"
     fi
 }
 
@@ -204,6 +202,8 @@ export GOPATH=~/go
 PATH=$PATH:$GOPATH/bin
 # use rust binaries
 PATH=$PATH:~/.cargo/bin
+# brew installed golang main binary
+PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 # cuda is nvidia's proprietary library for programming their GPUs
 # cudnn is an extension to cuda for running neural networks specifically
