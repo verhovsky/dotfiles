@@ -96,16 +96,16 @@ alias b="browser"
 # Copy tmux buffer into system clipboard
 alias tmcp="tmux show-buffer | pbcopy"
 
-# get the day of the year (April 27 2017 is 117)
-alias day="python3 -c 'import datetime; print(datetime.datetime.now().timetuple().tm_yday)'"
-
 alias chmox="chmod +x"
 
 # Updating
 # all pip packages. https://github.com/pypa/pip/issues/59
-alias pipall="pip3 install --upgrade pip; pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
+pipall() {
+    pip3 install -U `pip3 list --outdated | tail -n +3 | shuf | awk '{print $1}'`
+}
 alias macos-update="sudo softwareupdate -i -a"
-alias update="brew upgrade; brew cleanup; pipall; macos-update"
+alias update="brew upgrade; brew cask upgrade; brew cleanup; pipall; macos-update"
+alias upgrade=update
 
 # Generate new ssh key as recommended by https://blog.g3rt.nl/upgrade-your-ssh-keys.html
 # the `-C ''` prevents storing hostname with ssh key
@@ -122,7 +122,7 @@ alias random-letters="cat /dev/urandom | tr -dc 'a-z' | fold -w 32 | head -n 1"
 alias correct-battery="curl -s https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt | shuf --random-source=/dev/urandom | head -n 4 | tr '\n' ' '; echo"
 
 # Rg interprets the second argument as the direcotory to search in, usually my query just has space in it
-rgg () {
+rgg() {
     rg "$*"
 }
 
@@ -227,6 +227,16 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # useful for copy pasting sensitive data
 alias forget="unset HISTFILE"
 
+journal() {
+    # don't get the date twice, in case I call it at midnight on the last day of the year
+    current_time=$(date)
+    year=$(date --date="$current_time" +%Y)
+    day_zero_indexed=$(printf "%0*d\n" 3 $(($(date --date="$current_time" +%j)-1)))
+    mkdir -p ~/Documents/journal/$year
+    em ~/Documents/journal/$year/$day_zero_indexed
+}
+alias j="journal"
+
 # If running on Linux, some aliases and functions won't work and should be redefined
 if [[ $(uname) == "Linux" ]] && [[ -f ~/.bashlinux ]]; then
     . ~/.bashlinux
@@ -234,4 +244,8 @@ fi
 # local config file not tracked by git
 if [[ -f ~/.bashlocal ]]; then
     . ~/.bashlocal
+fi
+# I put things I need to remember to do in this file
+if [[ -f ~/reminder ]]; then
+    cat ~/reminder
 fi
