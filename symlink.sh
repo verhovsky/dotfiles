@@ -7,8 +7,6 @@ sudo rm -rf ~/.spacemacs > /dev/null 2>&1
 sudo rm -rf ~/.gitconfig > /dev/null 2>&1
 sudo rm -rf ~/.gitignore > /dev/null 2>&1
 sudo rm -rf ~/.wgetrc > /dev/null 2>&1
-sudo rm -rf ~/.pentadactylrc > /dev/null 2>&1
-sudo rm -rf ~/.pentadactyl > /dev/null 2>&1
 sudo rm -rf ~/.inputrc > /dev/null 2>&1
 sudo rm -rf ~/.config > /dev/null 2>&1
 sudo rm -rf ~/.tmux.conf > /dev/null 2>&1
@@ -42,8 +40,6 @@ fi
 ln -s ~/dotfiles/gitconfig ~/.gitconfig
 ln -s ~/dotfiles/gitignore ~/.gitignore
 ln -s ~/dotfiles/wgetrc ~/.wgetrc
-ln -s ~/dotfiles/pentadactyl ~/.pentadactyl
-ln -s ~/dotfiles/pentadactylrc ~/.pentadactylrc
 ln -s ~/dotfiles/inputrc ~/.inputrc
 
 cp ~/dotfiles/agignore ~/.agignore
