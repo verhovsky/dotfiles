@@ -49,7 +49,7 @@ mkd() {
 alias python="python3"
 alias pip="pip3"
 alias p="python3 -q"
-alias py="ipython3 --no-banner --no-confirm-exit"
+alias py="ipython --no-banner --no-confirm-exit"
 alias pp="pip3"
 
 alias g="git"
@@ -83,6 +83,14 @@ alias shuf='shuf --random-source=/dev/urandom'
 # make a copy of a website for offline viewing
 # https://www.guyrutenberg.com/2014/05/02/make-offline-mirror-of-a-site-using-wget/
 alias mirror="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent"
+
+# check if you're connected to the internet by pinging google's DNS server
+alias four="ping 8.8.8.8"
+# check ipv6 by pinging sprint's website
+alias six="ping6 2600::"
+
+# transfer a file over ssh and keep partial files that haven't finished transferring if the connection is cut
+alias scp="rsync -P -e ssh"
 
 # Open urls from the commandline.
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
@@ -127,7 +135,7 @@ rgg() {
 }
 
 # is a string a top level domain?
-alias is-tld="curl -s https://data.iana.org/TLD/tlds-alpha-by-domain.txt | rg"
+alias is-tld="curl -s https://data.iana.org/TLD/tlds-alpha-by-domain.txt | rg -i"
 
 # if ssh [ip] works but ssh [hostname] doesn't, this might solve it
 # https://stackoverflow.com/a/40754476/3064538
@@ -180,6 +188,9 @@ shopt -s globstar
 # ourselves (through homebrew) to be the first ones it looks for.
 PATH=/usr/local/sbin:$PATH
 PATH=/usr/local/bin:$PATH
+
+# Use brew installed curl
+PATH=/usr/local/opt/curl/bin:$PATH
 
 # macOS comes with a bunch of outdated commands. We want to use
 # GNU's versions of these utilities. This might break your system, which is
