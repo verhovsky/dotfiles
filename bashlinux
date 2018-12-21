@@ -16,3 +16,4 @@ alias reset_keyboard="setxkbmap -layout us -variant dvp; keyboard_options"
 alias us_keyboard="setxkbmap -layout us; keyboard_options"
 
 alias n="nvim"
+alias pp="pip3 install --user"
