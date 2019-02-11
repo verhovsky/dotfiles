@@ -131,7 +131,7 @@ end
 
 # Start a server serving the current directory and open that server directory in chrome
 # argv is the port. By default uses port 8000
-function http -d "server current directory to the intranet"
+function http -d "serve current directory to the intranet"
   if [ (count $argv) = 0 ]
     chrome http://localhost:8000
   else
@@ -139,25 +139,6 @@ function http -d "server current directory to the intranet"
   end
   python -m SimpleHTTPServer $argv
 end
-
-function pandas -d "python prompt with pandas"
-  if test (count $argv) = 0
-    ipython3 --no-banner --no-confirm-exit -ic "from pylab import *; import pandas as pd; pd.set_option('display.width', 270)"
-  else
-    ipython3 --no-banner --no-confirm-exit -ic "from pylab import *; import pandas as pd; pd.set_option('display.width', 270); df = pd.read_csv('$argv'); df.head();"
-  end
-end
-
-# go
-# set -gx GOPATH $HOME/go
-# set -gx GOROOT /usr/local/opt/go/libexec
-# set -gx PATH $PATH $GOPATH/bin
-# set -gx PATH $PATH $GOROOT/bin
-# set -gx PATH $PATH $HOME/Library/Android/sdk/platform-tools
-# set -gx PATH $PATH /usr/local/sbin
-
-# NixOS, init script rewriten in fish, nixOS is missing too many packages, maybe later
-# source ~/.nix-profile/etc/profile.d/nix.fish
 
 function pw -d "get full path to current directory or to a specified file in current directory"
   if [ (count $argv) = 0 ]
@@ -175,4 +156,3 @@ end
 if test -e ~/.config/fish/local.fish
   . ~/.config/fish/local.fish
 end
-alias yt="youtube-dl"

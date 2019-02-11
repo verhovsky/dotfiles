@@ -35,6 +35,7 @@ alias tt="rm -rf"
 #alias ttt="shred -zn 3 --remove"
 alias psg="pass generate -n -c" # don't use symbols in password manager
 alias pss="pass show -c" # copy password to clipboard
+alias psi="pass insert"
 
 alias yt="youtube-dl"
 # create a list of directories and cd into the last one.
@@ -83,11 +84,13 @@ alias shuf='shuf --random-source=/dev/urandom'
 # make a copy of a website for offline viewing
 # https://www.guyrutenberg.com/2014/05/02/make-offline-mirror-of-a-site-using-wget/
 alias mirror="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent"
+alias pipi="pip install"
+alias brei="brew install"
 
 # check if you're connected to the internet by pinging google's DNS server
 alias four="ping 8.8.8.8"
 # check ipv6 by pinging sprint's website
-alias six="ping6 2600::"
+alias internet="ping6 2600::"
 
 # transfer a file over ssh and keep partial files that haven't finished transferring if the connection is cut
 alias scp="rsync -P -e ssh"
@@ -179,49 +182,23 @@ pw() { # get full path to current directory or to a specified file in current di
 # **/*.arc now matches a.arc b/c.arc d/e/f.arc
 shopt -s globstar
 
-# macOS comes with an older version of git in /usr/bin/git. You probably want to
-# `brew install git` for the newer version, brew puts a file `git` into
-# `/usr/local/bin/git`.
-# When you execute a `command` in bash, it checks if that command is a built in function,
-# if not it goes through every director in $PATH (left to right) and executes the
-# first file with the filename `command` it finds. We want all the files we installed
-# ourselves (through homebrew) to be the first ones it looks for.
-PATH=/usr/local/sbin:$PATH
-PATH=/usr/local/bin:$PATH
-
-# Use brew installed curl
-PATH=/usr/local/opt/curl/bin:$PATH
-
-# macOS comes with a bunch of outdated commands. We want to use
-# GNU's versions of these utilities. This might break your system, which is
-# why brew doesn't install it in /usr/local/bin and makes you add a separate
-# line to your bashrc.
-# Most stack overflow answers are written for GNU's coreutils though.
-# Concistency across all my systems is a plus too.
-PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-# Use the `man` command to learn more about different commands
-# This is similar to path, in that if you `man ls` it will show you the
-# man page of the brew installed `ls` rather than the one that came with your macos
-# see `brew info coreutils`
-MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+export GOPATH=~/go
 
 PATH=$PATH:~/Library/Android/sdk/platform-tools/
 
-# where to put go code
-export GOPATH=~/go
 # use go binaries
 PATH=$PATH:$GOPATH/bin
 # use rust binaries
 PATH=$PATH:~/.cargo/bin
 # brew installed golang main binary
-PATH=$PATH:/usr/local/opt/go/libexec/bin
+PATH=$PATH
 
-# cuda is nvidia's proprietary library for programming their GPUs
-# cudnn is an extension to cuda for running neural networks specifically
-# one day, when it doesn't cost billions of dollars to develop computing hardware,
-# we won't have to use proprietary software to use hardware we own
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-PATH=/usr/local/cuda/bin:$PATH # don't need to export variables that are already defined
+# use brew installed software (curl, coreutils, sed, go)
+# this also includes coreutils if you do `brew install coreutils`,
+# which might be a bad but has worked fine so far
+PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/curl/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/go/libexec/bin:$PATH"
+# use the man pages for the homebrew installed coreutils
+MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # store a list of all the commands I've every issued in ~/.bash_eternal_history
 # https://stackoverflow.com/questions/9457233/unlimited-bash-history
@@ -237,26 +214,37 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # stop collecting bash history in the current terminal
 # useful for copy pasting sensitive data
 alias forget="unset HISTFILE"
+export HISTCONTROL=ignorespace
 
 journal() {
+    birthday=19960201 # YYYYMMDD
+    days_since_birth=$(echo "( `date +%s` - `date -d $birthday +%s`) / (24*3600)" | bc)
+
     # don't get the date twice, in case I call it at midnight on the last day of the year
     current_time=$(date)
+
     year=$(date --date="$current_time" +%Y)
-    day_zero_indexed=$(printf "%0*d\n" 3 $(($(date --date="$current_time" +%j)-1)))
+    day_zero_indexed=$(printf "%0*d\n" 3 $((10#$(date --date="$current_time" +%j)-1)))
+
     mkdir -p ~/Documents/journal/$year
-    em ~/Documents/journal/$year/$day_zero_indexed
+    $EDITOR ~/Documents/journal/$year/$day_zero_indexed
 }
 alias j="journal"
+alias jj="cat ~/emacs.hlp"
+
+alias td="mkdir -p ~/todo && $EDITOR ~/todo/today.txt"
+alias tw="mkdir -p ~/todo && $EDITOR ~/todo/week.txt"
+alias tm="mkdir -p ~/todo && $EDITOR ~/todo/month.txt"
+alias ty="mkdir -p ~/todo && $EDITOR ~/todo/today.txt"
+alias ta="mkdir -p ~/todo && $EDITOR ~/todo/adaptam.txt"
 
 # If running on Linux, some aliases and functions won't work and should be redefined
 if [[ $(uname) == "Linux" ]] && [[ -f ~/.bashlinux ]]; then
     . ~/.bashlinux
 fi
 # local config file not tracked by git
-if [[ -f ~/.bashlocal ]]; then
-    . ~/.bashlocal
+if [[ -f ~/.secretbashrc ]]; then
+    . ~/.secretbashrc
 fi
-# I put things I need to remember to do in this file
-if [[ -f ~/reminder ]]; then
-    cat ~/reminder
-fi
+
+export CMAKE_PREFIX_PATH=/Applications/Qt/5.12.0/clang_64/lib/cmake/Qt5

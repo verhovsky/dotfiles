@@ -4,7 +4,7 @@ alias bat="cat /sys/class/power_supply/BAT0/capacity"
 # On linux requires root, sudo's -H flag silences an error about directory ownership
 alias pipall="sudo pip3 install --upgrade pip; pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo -H pip3  install -U"
 # system wide update
-alias update="pipall; sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoclean; sudo apt-get dist-upgrade; sudo apt-get autoclean"
+alias update="pipall; sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoclean; sudo apt-get dist-upgrade; sudo apt-get autoclean; sudo apt autoremove"
 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
