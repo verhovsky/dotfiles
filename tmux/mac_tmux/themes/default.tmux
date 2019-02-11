@@ -28,11 +28,11 @@ set-option -g status-fg white
 set-option -g status-attr default
 
 # default window title colors
-set-window-option -g window-status-fg brightblue #base0
+set-window-option -g window-status-fg colour246 # gray
 set-window-option -g window-status-bg black
 
 # active window title colors
-set-window-option -g window-status-current-fg white
+set-window-option -g window-status-current-fg colour255 # whiter than "white"
 set-window-option -g window-status-current-bg black
 
 # pane border
