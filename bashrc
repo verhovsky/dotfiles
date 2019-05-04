@@ -110,12 +110,17 @@ alias tmcp="tmux show-buffer | pbcopy"
 alias chmox="chmod +x"
 
 # Updating
-# all pip packages. https://github.com/pypa/pip/issues/59
-pipall() {
+pipall() {  # all pip packages. https://github.com/pypa/pip/issues/59
     pip3 install -U `pip3 list --outdated | tail -n +3 | shuf | awk '{print $1}'`
 }
 alias macos-update="sudo softwareupdate -i -a"
-alias update="brew upgrade; brew cask upgrade; brew cleanup; pipall; macos-update"
+update() {
+    brew upgrade
+    brew cask upgrade
+    brew cleanup
+    pipall
+    macos-update
+}
 alias upgrade=update
 
 # Generate new ssh key as recommended by https://blog.g3rt.nl/upgrade-your-ssh-keys.html
