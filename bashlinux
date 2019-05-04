@@ -1,19 +1,33 @@
-alias bat="cat /sys/class/power_supply/BAT0/capacity"
+alias n="emacsclient --no-wait --alternate-editor='emacs &'"
+#alias bat="cat /sys/class/power_supply/BAT0/capacity"
 
 # Update all pip packages. https://github.com/pypa/pip/issues/59
 # On linux requires root, sudo's -H flag silences an error about directory ownership
 alias pipall="sudo pip3 install --upgrade pip; pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo -H pip3  install -U"
 # system wide update
-alias update="pipall; sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoclean; sudo apt-get dist-upgrade; sudo apt-get autoclean; sudo apt autoremove"
+update() {
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    sudo apt-get autoclean
+    sudo apt-get dist-upgrade
+    sudo apt-get autoclean
+    sudo apt autoremove
+    pipall
+}
 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 # Switch between dvorak (default) and qwerty. Useful because everyone designs keyboard shortcuts for QWERTY
-alias keyboard_options="setxkbmap -option caps:ctrl_modifier; setxkbmap -option altwin:swap_lalt_lwin; xset r rate 200 30"
-alias reset_keyboard="setxkbmap -layout us -variant dvp; keyboard_options"
-alias us_keyboard="setxkbmap -layout us; keyboard_options"
+alias keyboard_options="setxkbmap -option caps:escape -option altwin:swap_lalt_lwin; xset r rate 200 30"
+alias aoeu="setxkbmap -layout us; keyboard_options"
+alias aoeuu="setxkbmap -layout ru; keyboard_options"
+alias фыва="setxkbmap -layout us -variant dvp; keyboard_options"
+alias asdf="setxkbmap -layout us -variant dvp; keyboard_options"
 
-alias n="nvim"
-alias pp="pip3 install --user"
+alias ver="lsb_release -a"
+
+alias pbpaste="xsel -o"
+alias ppbpaste="xsel -b -o"
+alias pbcopy="xsel -i"
