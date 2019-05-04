@@ -1,4 +1,4 @@
-URxvt.font: xft:Dina:size=10
+URxvt.font: xft:Source Code Pro:size=10
 
 
 URxvt*termName: rxvt-unicode-256color
