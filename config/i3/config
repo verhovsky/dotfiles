@@ -27,10 +27,14 @@ font xft:Inconsolata 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+# start a terminal from the same directory as the last terminal
+bindsym $mod+Return exec kitty -d "`xcwd`"
+
+# start a terminal, fallback command
+bindsym $mod+Shift+Return exec i3-sensible-terminal
+
 # start a browser
-bindsym $mod+e exec firefox
+bindsym $mod+e exec google-chrome
 
 # kill focused window
 bindsym $mod+Shift+quotedbl kill
@@ -143,6 +147,7 @@ mode "resize" {
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
+        bindsym Escape mode "default"
         bindsym Caps_Lock mode "default"
 }
 
@@ -180,7 +185,7 @@ bar {
 	strip_workspace_numbers yes
 
 	#tray_output none
-	position top
+	# position top
 	status_command i3status
 	colors {
 		background $bg
@@ -191,6 +196,24 @@ bar {
 		inactive_workspace $bg $ia $tx
 		urgent_workspace $rd $bg $rd
 	}
-
 }
 
+
+
+# screenshots
+# Capture and save entire screen
+bindsym Print exec gnome-screenshot
+# Capture and save selection
+bindsym Shift+Print exec "sleep 0.2; gnome-screenshot -a"
+# Capture and save active window
+bindsym Control+Print exec gnome-screenshot -w
+
+
+
+# https://www.reddit.com/r/i3wm/comments/8yx7ju/i3_screenshot_application/
+# Desktop screenshot
+bindsym --release Print gnome-screenshot
+# Choose window
+bindsym --release Mod1+Sys_Req exec "import -window `xwininfo | awk '/.*Window id:.*/ {print $4}'` ~/Bilder/Bildschirmfotos/$(date --iso-8601='seconds').png"
+# Selection screenshot
+bindsym --release Shift+Print exec "scrot ~/Bilder/Bildschirmfotos/$(date --iso-8601='seconds').png -s -e 'xclip -selection c -t image/png < $f'"
