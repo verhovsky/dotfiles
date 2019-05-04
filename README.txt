@@ -1,3 +1,3 @@
-git clone --recursive git@gitlab.com:borisv/dotfiles.git ~/dotfiles
+git clone --recursive git@github.com:verhovsky/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-source osx_init_everything.sh
+source symlink.sh
