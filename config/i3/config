@@ -34,7 +34,7 @@ bindsym $mod+Return exec kitty -d "`xcwd`"
 bindsym $mod+Shift+Return exec i3-sensible-terminal
 
 # start a browser
-bindsym $mod+b exec google-chrome
+bindsym $mod+b exec chromium-browser
 
 bindsym $mod+e exec emacs
 
