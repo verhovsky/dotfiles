@@ -28,7 +28,7 @@ font xft:Inconsolata 10
 floating_modifier $mod
 
 # start a terminal from the same directory as the last terminal
-bindsym $mod+Return exec kitty -d "`xcwd`"
+bindsym $mod+Return exec alacritty
 
 # start a terminal, fallback command
 bindsym $mod+Shift+Return exec i3-sensible-terminal
