@@ -15,8 +15,8 @@ export WORDLIST="/usr/share/dict/words"
 PS1="\H:\w \u$ "
 
 alias n="$EDITOR --no-wait --alternate-editor=vim 2>/dev/null"
-alias e="ls -t" # last modified date
-alias ee="ls -talhv"
+alias e="ls -t --color=auto --group-directories-first" # last modified date
+alias ee="ls -talhv --group-directories-first"
 alias eee="tree -a"
 alias eeee="tree"
 alias u="cd"
