@@ -24,7 +24,7 @@ run_watch VPN {
 }
 
 ipv6 {
-      	format_up = "%ip  "
+        format_up = "%ip  "
 }
 
 wireless _first_ {
