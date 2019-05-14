@@ -8,3 +8,4 @@ config/*
 !config/mpv
 !config/nvim
 !config/youtube-dl
+!config/doom
