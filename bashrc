@@ -47,11 +47,9 @@ mkd() {
     cd "${@: -1}" # the last argument
 }
 
-alias python="python3"
+alias python="python3 -c 'import random, datetime, os, pprint, re, sys, time'"
 alias pip="pip3"
-alias p="python3 -q"
-alias py="ipython --no-banner --no-confirm-exit"
-alias pp="pip3"
+alias py="python3 -q"
 
 alias g="git"
 # View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -136,6 +134,18 @@ alias random-base64="head -c 30 /dev/urandom | base64"
 alias random-number="shuf --random-source=/dev/urandom -i 1-1000000000000000000 -n 1"
 alias random-letters="cat /dev/urandom | tr -dc 'a-z' | fold -w 32 | head -n 1"
 alias correct-battery="curl -s https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt | shuf --random-source=/dev/urandom | head -n 4 | tr '\n' ' '; echo"
+
+random() {
+    if [ "$#" -eq 0 ]; then
+        shuf -i 0-10000 -n 1 --random-source=/dev/urandom
+    fi
+    if [ "$#" -eq 1 ]; then
+        shuf -i 0-$1 -n 1 --random-source=/dev/urandom
+    fi
+    if [ "$#" -eq 2 ]; then
+        shuf -i $1-$2 -n 1 --random-source=/dev/urandom
+    fi
+}
 
 # Rg interprets the second argument as the direcotory to search in, usually my query just has space in it
 rgg() {
