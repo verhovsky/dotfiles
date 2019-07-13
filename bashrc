@@ -258,8 +258,8 @@ if [[ $(uname) == "Linux" ]] && [[ -f ~/.bashlinux ]]; then
     . ~/.bashlinux
 fi
 # local config file not tracked by git
-if [[ -f ~/.secretbashrc ]]; then
-    . ~/.secretbashrc
+if [[ -f ~/.bashlocal ]]; then
+    . ~/.bashlocal
 fi
 
 export CMAKE_PREFIX_PATH=/Applications/Qt/5.12.0/clang_64/lib/cmake/Qt5
