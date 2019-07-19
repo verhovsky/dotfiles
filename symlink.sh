@@ -20,7 +20,7 @@ fi
 
 ln -s ~/dotfiles/config ~/.config
 ln -s ~/dotfiles/spacemacs ~/.spacemacs
-ln -s ~/dotfiles/bashrc ~/.bashrc
+ln -s ~/dotfiles/bashrc.sh ~/.bashrc
 ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/tmux/mac_tmux ~/.tmux
 

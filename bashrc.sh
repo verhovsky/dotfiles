@@ -199,7 +199,7 @@ shopt -s globstar
 
 export GOPATH=~/go
 
-PATH=$PATH:~/Library/Android/sdk/platform-tools/
+PATH=$PATH:~/Library/Android/sdk/platform-tools
 
 # use go binaries
 PATH=$PATH:$GOPATH/bin
@@ -251,7 +251,6 @@ alias td="mkdir -p ~/todo && $EDITOR ~/todo/today.txt"
 alias tw="mkdir -p ~/todo && $EDITOR ~/todo/week.txt"
 alias tm="mkdir -p ~/todo && $EDITOR ~/todo/month.txt"
 alias ty="mkdir -p ~/todo && $EDITOR ~/todo/today.txt"
-alias ta="mkdir -p ~/todo && $EDITOR ~/todo/adaptam.txt"
 
 # If running on Linux, some aliases and functions won't work and should be redefined
 if [[ $(uname) == "Linux" ]] && [[ -f ~/.bashlinux ]]; then
