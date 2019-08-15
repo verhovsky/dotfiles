@@ -5,11 +5,10 @@ bindsym $mod+shift+minus scratchpad show
 for_window [title="^browser_save_dialog$"] move scratchpad; scratchpad show
 
 # set background
-exec --no-startup-id xsetroot -solid "#242424"
+exec --no-startup-id xsetroot -solid "#000000"
 # autostart a terminal window
-exec --no-startup-id i3-sensible-terminal
-# and tint the screen orange when it's dark for that sweet placebo
-exec --no-startup-id redshift
+#exec --no-startup-id i3-sensible-terminal
+exec --no-startup-id code
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -37,6 +36,7 @@ bindsym $mod+Shift+Return exec i3-sensible-terminal
 bindsym $mod+b exec chromium-browser
 
 bindsym $mod+e exec emacs
+bindsym $mod+c exec code
 
 # kill focused window
 bindsym $mod+Shift+quotedbl kill
@@ -86,7 +86,7 @@ bindsym $mod+comma layout tabbed
 bindsym $mod+quote layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f floating toggle
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
