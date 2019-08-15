@@ -47,9 +47,10 @@ mkd() {
     cd "${@: -1}" # the last argument
 }
 
-alias python="python3 -c 'import random, datetime, os, pprint, re, sys, time'"
-alias pip="pip3"
-alias py="python3 -q"
+alias python="python3"
+alias pip="python -m pip"
+# I'm tempted to add import requests but startup increase like 10x
+alias py="python3 -q -i -c 'import random, time, datetime, math, collections, itertools, re, string, sys, subprocess, json, base64, pickle; from pathlib import Path; from pprint import pprint'"
 
 alias g="git"
 # View abbreviated SHA, description, and history graph of the latest 20 commits
