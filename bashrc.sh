@@ -3,18 +3,24 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
 export EDITOR="emacsclient"
-export VISUAL=$EDITOR
+export VISUAL=$EDITOR  # the variable that actually gets used for everything
 
-# list of 200,000 english words
+# list of ~100,000 english words
 export WORDLIST="/usr/share/dict/words"
 
 # The PS1 is the string bash prints after it finishes running a command
 # \H is the hostname
 # \w is the full path of current working directory
 # \u is the username
-PS1="\H:\w \u$ "
+# PS1="\u:\H:\w$ "  # this is Ubuntu's default and I don't mind it
 
-alias n="$EDITOR --no-wait --alternate-editor=vim 2>/dev/null"
+# enable recursive wildcard
+# **/*.png will match a.png b/c.png d/e/f.png
+shopt -s globstar
+
+
+alias n="$VISUAL --no-wait --alternate-editor=vim 2>/dev/null"
+alias nn="nvim"
 alias e="ls -t --color=auto --group-directories-first" # last modified date
 alias ee="ls -talhv --group-directories-first"
 alias eee="tree -a"
@@ -24,8 +30,6 @@ alias uu="cd ../"
 alias uuu="cd ../.."
 alias uuuu="cd ../../.."
 alias uuuuu="cd ../../../.."
-alias nn="nvim"
-alias nnn="n ~/.bashrc"
 alias h="history"
 alias x="dtrx" # figure out what tar or unzip command to run
 alias t="trash"
@@ -33,11 +37,9 @@ alias tt="rm -rf"
 # for when you actually want to delete a file
 # (as long as you don't have an unencrypted ssd and aren't using a journaling file system. see `man shred`)
 #alias ttt="shred -zn 3 --remove"
-alias psg="pass generate -n -c" # don't use symbols in password manager
-alias pss="pass show -c" # copy password to clipboard
-alias psi="pass insert"
 
 alias yt="youtube-dl"
+
 # create a list of directories and cd into the last one.
 mkd() {
     # in bash, you can refer to "all of the functions arguments" as either $@ or $*
@@ -49,8 +51,15 @@ mkd() {
 
 alias python="python3"
 alias pip="python -m pip"
-# I'm tempted to add import requests but startup increase like 10x
+# I'm tempted to add import requests but startup time increase like 10x
 alias py="python3 -q -i -c 'import random, time, datetime, math, collections, itertools, re, string, sys, subprocess, json, base64, pickle; from pathlib import Path; from pprint import pprint'"
+
+# serve the current directory to the internet on port 8000
+alias http="python3 -m http.server"
+
+alias psg="pass generate -n -c" # don't use symbols in password manager
+alias pss="pass show -c" # copy password to clipboard
+alias psi="pass insert"
 
 alias g="git"
 # View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -68,12 +77,12 @@ alias gc="git commit -v"
 alias ga="git add"
 # Commit all changes
 alias gca="git add -A && git commit -av"
-
-alias gp="git p"
-alias gpl="git pl"
+# defined in dotfiles/gitconfig
+alias gp="git p" # push
+alias gpl="git pl" # pull
 alias gpll="git pull"
 alias gcl="git clone"
-alias amend="git amend"
+alias amend="git amend" # commit --amend
 
 # Commands with options
 # count how many lines of code are in the current git repository
@@ -83,56 +92,40 @@ alias shuf='shuf --random-source=/dev/urandom'
 # make a copy of a website for offline viewing
 # https://www.guyrutenberg.com/2014/05/02/make-offline-mirror-of-a-site-using-wget/
 alias mirror="wget --mirror --convert-links --adjust-extension --page-requisites --no-parent"
-alias pipi="pip install"
-alias brei="brew install"
-
-# check if you're connected to the internet by pinging google's DNS server
-alias four="ping 8.8.8.8"
-# check ipv6 by pinging sprint's website
-alias internet="ping6 2600::"
-
 # transfer a file over ssh and keep partial files that haven't finished transferring if the connection is cut
 alias scp="rsync -P -e ssh"
 
+# check if you're connected to the IPv4 internet by pinging google's DNS server
+alias four="ping 8.8.8.8"
+alias internet="ping 2001:4860:4860::8888"
+# another option is sprint's website `ping 2600::`
+
 # Open urls from the commandline.
-alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
-alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
-alias c="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --headless --remote-debugging-port=9222" # a bit dangerous
-alias safari="open -a Safari"
-alias browser="chrome"
+alias browser="chromium-browser"
 alias b="browser"
 # use chrome headless as curl
-alias get="browser --headless --disable-gpu --dump-dom"
+alias churl="browser --headless --dump-dom"
 
 # Copy tmux buffer into system clipboard
 alias tmcp="tmux show-buffer | pbcopy"
 
+# make a file executable
 alias chmox="chmod +x"
 
 # Updating
 pipall() {  # all pip packages. https://github.com/pypa/pip/issues/59
     pip3 install -U `pip3 list --outdated | tail -n +3 | shuf | awk '{print $1}'`
 }
-alias macos-update="sudo softwareupdate -i -a"
-update() {
-    brew upgrade
-    brew cask upgrade
-    brew cleanup
-    pipall
-    macos-update
-}
-alias upgrade=update
 
 # Generate new ssh key as recommended by https://blog.g3rt.nl/upgrade-your-ssh-keys.html
-# the `-C ''` prevents storing hostname with ssh key
+# the `-C ''` prevents storing hostname with the ssh key
 alias new-ssh-key="ssh-keygen -o -a 100 -t ed25519 -C ''"
 # print main ssh key
 alias ssh-key="cat ~/.ssh/id_ed25519.pub"
 
 # if you need need a quick source of url-safe random data
 alias random-hash="head -c 1024 /dev/urandom | shasum -a 256"
-alias base32="head -c 30 /dev/urandom | base32"
+alias random-base32="head -c 30 /dev/urandom | base32"
 alias random-base64="head -c 30 /dev/urandom | base64"
 alias random-number="shuf --random-source=/dev/urandom -i 1-1000000000000000000 -n 1"
 alias random-letters="cat /dev/urandom | tr -dc 'a-z' | fold -w 32 | head -n 1"
@@ -158,30 +151,13 @@ rgg() {
 # is a string a top level domain?
 alias is-tld="curl -s https://data.iana.org/TLD/tlds-alpha-by-domain.txt | rg -i"
 
-# if ssh [ip] works but ssh [hostname] doesn't, this might solve it
-# https://stackoverflow.com/a/40754476/3064538
-alias fix-dns="sudo killall -HUP mDNSResponder"
-
-# Ring the terminal bell, and put a badge on Terminal.app's Dock icon
-alias badge="tput bel"
-
-# Hide/show all desktop icons
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-
-# cd into the top-most Finder window directory
-alias cdf='cd "$(osascript -e "tell application \"Finder\" to if window 1 exists then if target of window 1 as string is not \":\" then get POSIX path of (target of window 1 as alias)")"'
-
 o() { # with no arguments 'o' opens the current directory, otherwise opens the given location
     if [[ "$#" -eq 0 ]]; then
-        open .
+        xdg-open .
     else
-        open "$1"
+        xdg-open "$1"
     fi
 }
-
-# serve the current directory to the internet on port 8000
-alias http="python3 -m http.server"
 
 # finds a process and kills it
 find_kill() {
@@ -196,27 +172,11 @@ pw() { # get full path to current directory or to a specified file in current di
     fi
 }
 
-# enable recursive wildcard
-# **/*.arc now matches a.arc b/c.arc d/e/f.arc
-shopt -s globstar
-
 export GOPATH=~/go
-
-PATH=$PATH:~/Library/Android/sdk/platform-tools
-
 # use go binaries
 PATH=$PATH:$GOPATH/bin
 # use rust binaries
 PATH=$PATH:~/.cargo/bin
-# brew installed golang main binary
-PATH=$PATH
-
-# use brew installed software (curl, coreutils, sed, go)
-# this also includes coreutils if you do `brew install coreutils`,
-# which might be a bad but has worked fine so far
-PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/curl/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/go/libexec/bin:$PATH"
-# use the man pages for the homebrew installed coreutils
-MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # store a list of all the commands I've every issued in ~/.bash_eternal_history
 # https://stackoverflow.com/questions/9457233/unlimited-bash-history
@@ -245,23 +205,21 @@ journal() {
     day_zero_indexed=$(printf "%0*d\n" 3 $((10#$(date --date="$current_time" +%j)-1)))
 
     mkdir -p ~/Documents/journal/$year
-    $EDITOR ~/Documents/journal/$year/$day_zero_indexed
+    $VISUAL ~/Documents/journal/$year/$day_zero_indexed
 }
 alias j="journal"
-alias jj="cat ~/emacs.hlp"
-
-alias td="mkdir -p ~/todo && $EDITOR ~/todo/today.txt"
-alias tw="mkdir -p ~/todo && $EDITOR ~/todo/week.txt"
-alias tm="mkdir -p ~/todo && $EDITOR ~/todo/month.txt"
-alias ty="mkdir -p ~/todo && $EDITOR ~/todo/today.txt"
 
 # If running on Linux, some aliases and functions won't work and should be redefined
 if [[ $(uname) == "Linux" ]] && [[ -f ~/.bashlinux ]]; then
     . ~/.bashlinux
 fi
+# macOS specific aliases
+if [[ $(uname) == "Darwin" ]] && [[ -f ~/.bashmac ]]; then
+    . ~/.bashmac
+fi
+
 # local config file not tracked by git
 if [[ -f ~/.bashlocal ]]; then
     . ~/.bashlocal
 fi
 
-export CMAKE_PREFIX_PATH=/Applications/Qt/5.12.0/clang_64/lib/cmake/Qt5

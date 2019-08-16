@@ -22,7 +22,7 @@ sudo rm -rf ~/.config > /dev/null 2>&1
 sudo rm -rf ~/.tmux.conf > /dev/null 2>&1
 sudo rm -rf ~/.tmux > /dev/null 2>&1
 if [ "$(uname)" = "Darwin" ]; then
-  :
+  sudo rm -rf ~/.bashmac > /dev/null 2>&1
 else
   sudo rm -rf ~/.Xresources > /dev/null 2>&1
   sudo rm -rf ~/.xinitrc > /dev/null 2>&1
@@ -41,6 +41,7 @@ if [ "$(uname)" = "Darwin" ]; then
   # Terminal.app doesn't read .bashrc, but .profile works
   echo >> ~/.profile
   echo 'source ~/.bashrc' >> ~/.profile
+  ln -s ~/dotfiles/bashmac.sh ~/.bashmac
 else
   ln -s ~/dotfiles/bashlinux.sh ~/.bashlinux
   ln -s ~/dotfiles/Xresources ~/.Xresources
