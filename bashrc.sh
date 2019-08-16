@@ -102,6 +102,8 @@ alias c="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --headle
 alias safari="open -a Safari"
 alias browser="chrome"
 alias b="browser"
+# use chrome headless as curl
+alias get="browser --headless --disable-gpu --dump-dom"
 
 # Copy tmux buffer into system clipboard
 alias tmcp="tmux show-buffer | pbcopy"
