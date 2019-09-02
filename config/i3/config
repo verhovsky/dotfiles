@@ -26,8 +26,9 @@ font xft:Inconsolata 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal from the same directory as the last terminal
-bindsym $mod+Return exec alacritty
+# start a terminal
+# TODO: start it from the same directory as the last terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
 # start a terminal, fallback command
 bindsym $mod+Shift+Return exec i3-sensible-terminal
