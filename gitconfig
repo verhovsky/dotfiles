@@ -15,9 +15,9 @@
 	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
 	# Pull in remote changes for the current repository and all its submodules
-  pl = pull --rebase
+	pl = pull --rebase
 
-  # Push local changes upstream
+	# Push local changes upstream
 	p = push
 
 	# Make a commit, showing a full diff for all changes
