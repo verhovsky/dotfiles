@@ -3,7 +3,9 @@
 xrdb -merge ~/.Xresources
 
 # use the Dvorak-programmer layout
-setxkbmap -layout us -variant dvp
+setxkbmap -layout "us,ru" -variant "dvp,"
+# press both Shift keys to change the keyboard layout
+setxkbmap -option grp:shifts_toggle
 # remap caps to esc
 setxkbmap -option caps:escape
 # swap alt and super, like on mac keyboard
