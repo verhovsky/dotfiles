@@ -1,14 +1,8 @@
 #!/bin/bash
-#
+
 echo "hopefully you read the source code of the script you're about to run"
 echo "because I'm about to delete a bunch of files"
-read -p  "continue? (y/N) > " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-    # handle exits from shell or function but don't exit interactive shell
-    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
-fi
+sleep 3
 
 sudo rm -rf ~/.bashrc > /dev/null 2>&1
 sudo rm -rf ~/.nvimrc > /dev/null 2>&1
@@ -22,7 +16,7 @@ sudo rm -rf ~/.config > /dev/null 2>&1
 sudo rm -rf ~/.tmux.conf > /dev/null 2>&1
 sudo rm -rf ~/.tmux > /dev/null 2>&1
 if [ "$(uname)" = "Darwin" ]; then
-  sudo rm -rf ~/.bashmac > /dev/null 2>&1
+  sudo rm -rf ~/.bash_mac > /dev/null 2>&1
 else
   sudo rm -rf ~/.Xresources > /dev/null 2>&1
   sudo rm -rf ~/.xinitrc > /dev/null 2>&1
@@ -41,9 +35,9 @@ if [ "$(uname)" = "Darwin" ]; then
   # Terminal.app doesn't read .bashrc, but .profile works
   echo >> ~/.profile
   echo 'source ~/.bashrc' >> ~/.profile
-  ln -s ~/dotfiles/bashmac.sh ~/.bashmac
+  ln -s ~/dotfiles/bash_mac.sh ~/.bash_mac
 else
-  ln -s ~/dotfiles/bashlinux.sh ~/.bashlinux
+  ln -s ~/dotfiles/bash_linux.sh ~/.bash_linux
   ln -s ~/dotfiles/Xresources ~/.Xresources
   ln -s ~/dotfiles/xinitrc ~/.xinitrc
   # ubuntu doesn't run xinitrc or xsession

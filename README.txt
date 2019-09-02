@@ -1,3 +1,1 @@
-git clone --recursive git@github.com:verhovsky/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-source symlink.sh
+wget -q -O - https://raw.githubusercontent.com/verhovsky/dotfiles/master/install.sh | bash
