@@ -177,6 +177,8 @@ export GOPATH=~/go
 PATH=$PATH:$GOPATH/bin
 # use rust binaries
 PATH=$PATH:~/.cargo/bin
+# use doom emacs commands
+PATH=$PATH:~/.emacs.d/bin
 
 # store a list of all the commands I've every issued in ~/.bash_eternal_history
 # https://stackoverflow.com/questions/9457233/unlimited-bash-history
