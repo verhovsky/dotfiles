@@ -72,12 +72,19 @@ alias gc="git commit -v"
 alias ga="git add"
 # Commit all changes
 alias gca="git add -A && git commit -av"
+# pull changes to local checkout of fork from upstream
+alias gu="git pull upstream master --rebase"
 # defined in dotfiles/gitconfig
 alias gp="git p" # push
 alias gpl="git pl" # pull
 alias gpll="git pull"
 alias gcl="git clone"
 alias amend="git amend" # commit --amend
+
+gau() {
+    echo git remote add upstream git://github.com/$1.git
+    git remote add upstream git://github.com/$1.git
+}
 
 # Commands with options
 # count how many lines of code are in the current git repository
@@ -255,13 +262,13 @@ elif _is_callable xsel; then
   alias y='xsel -i --clipboard'
   alias p='xsel -o --clipboard'
 fi
- 
+
 # macOS specific aliases
-if [[ $(uname) == "Darwin" ]] && [[ -f ~/.bashmac ]]; then
-    . ~/.bashmac
+if [[ $(uname) == "Darwin" ]] && [[ -f ~/.bash_mac ]]; then
+    . ~/.bash_mac
 fi
 
 # local config file not tracked by git
-if [[ -f ~/.bashlocal ]]; then
-    . ~/.bashlocal
+if [[ -f ~/.bash_local ]]; then
+    . ~/.bash_local
 fi

@@ -35,7 +35,7 @@ if [ "$(uname)" = "Darwin" ]; then
   # Terminal.app doesn't read .bashrc, but .profile works
   echo >> ~/.profile
   echo 'source ~/.bashrc' >> ~/.profile
-  ln -s ~/dotfiles/bash_mac.sh ~/.bash_mac
+  ln -s ~/dotfiles/macos/bash_mac.sh ~/.bash_mac
 else
   ln -s ~/dotfiles/Xresources ~/.Xresources
   ln -s ~/dotfiles/xinitrc ~/.xinitrc
