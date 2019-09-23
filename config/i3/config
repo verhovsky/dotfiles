@@ -8,14 +8,13 @@ for_window [title="^browser_save_dialog$"] move scratchpad; scratchpad show
 exec --no-startup-id xsetroot -solid "#000000"
 # autostart a terminal window
 #exec --no-startup-id i3-sensible-terminal
-exec --no-startup-id code
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
-font xft:Inconsolata 10
+font pango:Source Code Pro 10
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -34,7 +33,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Return exec i3-sensible-terminal
 
 # start a browser
-bindsym $mod+b exec chromium-browser
+bindsym $mod+b exec google-chrome
 
 bindsym $mod+e exec emacs
 bindsym $mod+c exec code
@@ -188,7 +187,7 @@ bar {
 	strip_workspace_numbers yes
 
 	#tray_output none
-	# position top
+	position top
 	status_command i3status
 	colors {
 		background $bg
@@ -201,8 +200,6 @@ bar {
 	}
 }
 
-
-
 # screenshots
 # Capture and save entire screen
 bindsym Print exec gnome-screenshot
@@ -211,11 +208,9 @@ bindsym Shift+Print exec "sleep 0.2; gnome-screenshot -a"
 # Capture and save active window
 bindsym Control+Print exec gnome-screenshot -w
 
-
-
 # https://www.reddit.com/r/i3wm/comments/8yx7ju/i3_screenshot_application/
 # Desktop screenshot
-bindsym --release Print gnome-screenshot
+bindsym --release Print exec gnome-screenshot
 # Choose window
 bindsym --release Mod1+Sys_Req exec "import -window `xwininfo | awk '/.*Window id:.*/ {print $4}'` ~/Bilder/Bildschirmfotos/$(date --iso-8601='seconds').png"
 # Selection screenshot

@@ -37,7 +37,6 @@ if [ "$(uname)" = "Darwin" ]; then
   echo 'source ~/.bashrc' >> ~/.profile
   ln -s ~/dotfiles/bash_mac.sh ~/.bash_mac
 else
-  ln -s ~/dotfiles/bash_linux.sh ~/.bash_linux
   ln -s ~/dotfiles/Xresources ~/.Xresources
   ln -s ~/dotfiles/xinitrc ~/.xinitrc
   # ubuntu doesn't run xinitrc or xsession

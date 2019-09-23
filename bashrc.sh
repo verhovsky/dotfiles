@@ -1,7 +1,3 @@
-# Prefer US English and UTF-8
-export LC_ALL="en_US.UTF-8"
-export LANG="en_US.UTF-8"
-
 export EDITOR="emacsclient"
 export VISUAL=$EDITOR  # the variable that actually gets used for everything
 
@@ -18,8 +14,7 @@ export WORDLIST="/usr/share/dict/words"
 # **/*.png will match a.png b/c.png d/e/f.png
 shopt -s globstar
 
-
-alias n="$VISUAL --no-wait --alternate-editor=vim 2>/dev/null"
+alias n="$VISUAL --no-wait --alternate-editor='emacs &'"
 alias nn="nvim"
 alias e="ls -t --color=auto --group-directories-first" # last modified date
 alias ee="ls -talhv --group-directories-first"
@@ -114,8 +109,20 @@ alias chmox="chmod +x"
 
 # Updating
 pipall() {  # all pip packages. https://github.com/pypa/pip/issues/59
+    pip3 install --upgrade pip
     pip3 install -U `pip3 list --outdated | tail -n +3 | shuf | awk '{print $1}'`
 }
+# system wide update
+update() {
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    sudo apt-get autoclean
+    sudo apt-get dist-upgrade
+    sudo apt-get autoclean
+    sudo apt autoremove
+    pipall
+}
+
 
 # Generate new ssh key as recommended by https://blog.g3rt.nl/upgrade-your-ssh-keys.html
 # the `-C ''` prevents storing hostname with the ssh key
@@ -179,6 +186,7 @@ PATH=$PATH:$GOPATH/bin
 PATH=$PATH:~/.cargo/bin
 # use doom emacs commands
 PATH=$PATH:~/.emacs.d/bin
+PATH=$PATH:/snap/bin
 
 # store a list of all the commands I've every issued in ~/.bash_eternal_history
 # https://stackoverflow.com/questions/9457233/unlimited-bash-history
@@ -211,10 +219,43 @@ journal() {
 }
 alias j="journal"
 
-# If running on Linux, some aliases and functions won't work and should be redefined
-if [[ $(uname) == "Linux" ]] && [[ -f ~/.bashlinux ]]; then
-    . ~/.bashlinux
+# Switch between dvorak (default) and qwerty. Useful because everyone designs keyboard shortcuts for QWERTY
+alias keyboard_options="setxkbmap -option caps:escape -option altwin:swap_lalt_lwin; xset r rate 200 30"
+alias aoeu="setxkbmap -layout us; keyboard_options"
+alias aoeuu="setxkbmap -layout ru; keyboard_options"
+alias фыва="setxkbmap -layout us -variant dvp; keyboard_options"
+alias asdf="setxkbmap -layout us -variant dvp; keyboard_options"
+
+alias yayc='yay -Sc'    # clean pacman
+alias yayo='yay -Qtdq'  # orphaned packages
+
+alias reboot='sudo systemctl reboot'
+alias shutdown='sudo systemctl poweroff'
+
+function _os {
+  case $OSTYPE in
+    linux*) if   [[ -f /etc/arch-release   ]]; then echo arch
+            elif [[ -f /etc/debian_version ]]; then echo debian
+            fi ;;
+    darwin*) echo macos ;;
+  esac
+}
+
+function _is_callable {
+  for cmd in "$@"; do
+    command -v "$cmd" >/dev/null || return 1
+  done
+}
+
+# Clipboard pipes
+if _is_callable xclip; then
+  alias y='xclip -selection clipboard -in'
+  alias p='xclip -selection clipboard -out'
+elif _is_callable xsel; then
+  alias y='xsel -i --clipboard'
+  alias p='xsel -o --clipboard'
 fi
+ 
 # macOS specific aliases
 if [[ $(uname) == "Darwin" ]] && [[ -f ~/.bashmac ]]; then
     . ~/.bashmac
@@ -224,4 +265,3 @@ fi
 if [[ -f ~/.bashlocal ]]; then
     . ~/.bashlocal
 fi
-
