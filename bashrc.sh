@@ -32,6 +32,8 @@ alias tt="rm -rf"
 # for when you actually want to delete a file
 # (as long as you don't have an unencrypted ssd and aren't using a journaling file system. see `man shred`)
 #alias ttt="shred -zn 3 --remove"
+# find file
+alias ff="find . | rg"
 
 alias yt="youtube-dl"
 
@@ -63,6 +65,7 @@ alias gl="git log --pretty=oneline -n 20 --graph --abbrev-commit"
 alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 # View the current working tree status using the short format
 alias gs="git status -s"
+alias gb="git branch"
 # Show the diff between the latest commit and the current state
 alias gd="git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 # `git di $number` shows the diff between the state `$number` revisions ago and the current state
@@ -80,6 +83,8 @@ alias gpl="git pl" # pull
 alias gpll="git pull"
 alias gcl="git clone"
 alias amend="git amend" # commit --amend
+alias gsu="git pull && git submodule update --recursive --remote" # pull current repo and all submodules
+
 
 gau() {
     echo git remote add upstream git://github.com/$1.git
@@ -114,10 +119,14 @@ alias tmcp="tmux show-buffer | pbcopy"
 # make a file executable
 alias chmox="chmod +x"
 
+# alert for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
 # Updating
 pipall() {  # all pip packages. https://github.com/pypa/pip/issues/59
     pip3 install --upgrade pip
-    pip3 install -U `pip3 list --outdated | tail -n +3 | shuf | awk '{print $1}'`
+    pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
 }
 # system wide update
 update() {
