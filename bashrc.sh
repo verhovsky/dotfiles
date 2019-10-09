@@ -211,6 +211,8 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 alias forget="unset HISTFILE"
 export HISTCONTROL=ignorespace
 
+export RIPGREP_CONFIG_PATH=~/.config/ripgrep.conf
+
 journal() {
     birthday=19960201 # YYYYMMDD
     days_since_birth=$(echo "( `date +%s` - `date -d $birthday +%s`) / (24*3600)" | bc)

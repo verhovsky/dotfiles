@@ -9,3 +9,4 @@ config/*
 !config/nvim
 !config/youtube-dl
 !config/doom
+!config/ripgrep.conf
