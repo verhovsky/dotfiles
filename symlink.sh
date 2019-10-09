@@ -4,6 +4,11 @@ echo "hopefully you read the source code of the script you're about to run"
 echo "because I'm about to delete a bunch of files"
 sleep 3
 
+remove_old_file() {
+    echo mkdir -p $(dirname $1)
+    echo sudo mv $1 /tmp/bak/$(basename $1)
+}
+
 sudo rm -rf ~/.bashrc > /dev/null 2>&1
 sudo rm -rf ~/.nvimrc > /dev/null 2>&1
 sudo rm -rf ~/.nvim > /dev/null 2>&1
@@ -12,7 +17,9 @@ sudo rm -rf ~/.gitconfig > /dev/null 2>&1
 sudo rm -rf ~/.gitignore > /dev/null 2>&1
 sudo rm -rf ~/.wgetrc > /dev/null 2>&1
 sudo rm -rf ~/.inputrc > /dev/null 2>&1
-sudo rm -rf ~/.config > /dev/null 2>&1
+#sudo rm -rf ~/.config > /dev/null 2>&1
+mv ~/.config/* ~/dotfiles/config
+
 sudo rm -rf ~/.tmux.conf > /dev/null 2>&1
 sudo rm -rf ~/.tmux > /dev/null 2>&1
 if [ "$(uname)" = "Darwin" ]; then
