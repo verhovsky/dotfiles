@@ -48,6 +48,7 @@ software=(
     #alacritty    # a terminal emulator
     #kitty        # a terminal emulator
     python3 python3-pip python3-dev
+    python3.8 python3.8-dev
     python3-setuptools python3-matplotlib
     nodejs npm
     # $latest_nvidia_driver
@@ -75,7 +76,7 @@ fc-cache -f -v # update font cache
 # fonts I don't like as much
 # sudo apt install fonts-dejavu fonts-open-sans fonts-go
 
-sudo pip3 install requests black youtube-dl
+sudo pip3 install requests black youtube-dl python-dateutil
 
 # install rust nightly
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -101,6 +102,15 @@ echo "Installing Doom Emacs"
 git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
 # saving the environment variables from this shell doesn't seem great, so don't generate an env file
 ~/.emacs.d/bin/doom install -y --no-env
+
+# set the latest version of python as the default python3
+# sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
+# sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 2
+
+# sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.7 1
+# sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
+
+# sudo apt-mark hold python
 
 # Configure custom system default fonts
 # gsettings set org.gnome.desktop.interface document-font-name 'Sans 10'

@@ -108,7 +108,7 @@ alias internet="ping 2001:4860:4860::8888"
 # another option is sprint's website `ping 2600::`
 
 # Open urls from the commandline.
-alias browser="chromium-browser"
+alias browser="google-chrome"
 alias b="browser"
 # use chrome headless as curl
 alias churl="browser --headless --dump-dom"
@@ -118,6 +118,9 @@ alias tmcp="tmux show-buffer | pbcopy"
 
 # make a file executable
 alias chmox="chmod +x"
+
+# open files with gui apps on Linux
+alias open=xdg-open
 
 # alert for long running commands.  Use like so:
 #   sleep 10; alert
@@ -136,8 +139,11 @@ update() {
     sudo apt-get dist-upgrade
     sudo apt-get autoclean
     sudo apt autoremove
-    pipall
+    sudo pip3 install --upgrade pip
+    sudo pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo pip3 install -U
+    doom refresh && doom upgrade
 }
+alias upgrade=update
 
 
 # Generate new ssh key as recommended by https://blog.g3rt.nl/upgrade-your-ssh-keys.html
@@ -153,6 +159,9 @@ alias random-base64="head -c 30 /dev/urandom | base64"
 alias random-number="shuf --random-source=/dev/urandom -i 1-1000000000000000000 -n 1"
 alias random-letters="cat /dev/urandom | tr -dc 'a-z' | fold -w 32 | head -n 1"
 alias correct-battery="curl -s https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt | shuf --random-source=/dev/urandom | head -n 4 | tr '\n' ' '; echo"
+
+# press ctrl-d when you want to stop timing
+alias stopwatch="echo press Ctrl-c to stop the timer.; TIMEFORMAT=%R; time cat; unset TIMEFORMAT"
 
 random() {
     if [ "$#" -eq 0 ]; then
