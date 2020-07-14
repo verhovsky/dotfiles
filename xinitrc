@@ -21,9 +21,9 @@ setxkbmap -option altwin:swap_alt_win
 # type the correct one with the modifier key
 xmodmap -e "keycode 9 = dollar"
 
-# set keyboard key repeat delay (200ms) and rate
+# set keyboard key repeat delay (180ms) and rate
 # (key is repeated once for every 30ms it's held down)
-xset r rate 200 30
+xset r rate 180 30
 
 
 # disable audible bell
