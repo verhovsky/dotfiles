@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+# first upgrade Ubuntu
+#     sudo nano /etc/update-manager/release-upgrades
+#         change Prompt=lts to Prompt=normal
+#     sudo apt update
+#     sudo apt upgrade
+#     do-release-upgrade
+# change the logged in user's password
+#     passwd
+# reconfigure login screen password
+#     sudo dpkg-reconfigure keyboard-configuration
+# change locale to en_US.UTF-8
+
 echo first make the current user a sudoer by doing
 echo su -
 echo "adduser <username> sudo"
@@ -18,6 +30,10 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 sudo apt-get update
 sudo apt-get install google-chrome-stable
+
+# make `apt install git` install the latest version of git
+sudo apt-add-repository ppa:git-core/ppa
+sudo apt-get update
 
 software=(
     git
@@ -41,6 +57,7 @@ software=(
     caffeine # prevent computer from going to sleep
     calibre
     zathura zathura-djvu # read ebooks
+    fd-find   # search for files
     cloc # count lines of code
     zip  # compress directories
     zstd # more modern compression library and utility
@@ -53,6 +70,9 @@ software=(
     nodejs npm
     # $latest_nvidia_driver
     fonts-noto # a font with tons of characters
+    pngcrush # compress png files
+    trash-cli # like rm -rf but safer. You have to clear the trash from time to time though
+    unattended-upgrades # install security updates automatically
 )
 sudo apt -y install ${software[@]}
 
@@ -125,4 +145,9 @@ git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
 # TODO: set gnome-terminal theme to white and font
 # TODO: set chromium Gmail to open mailto: links
 # TODO: set chromium fonts (Noto and Noto Mono)
-
+# TODO: add `"detachKeys": "ctrl-e,e"` to ~/.docker/config.json
+# TODO: up the number of inotify watches
+# https://code.visualstudio.com/docs/setup/linux#_visual-studio-code-is-unable-to-watch-for-file-changes-in-this-large-workspace-error-enospc
+# TODO: enable and configure unattended-upgrades
+# sudo dpkg-reconfigure --priority=low unattended-upgrades
+# /etc/apt/apt.conf.d/50unattended-upgrades
