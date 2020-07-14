@@ -20,6 +20,7 @@ Thumbs.db
 
 # Doom Emacs
 .project
+.projectile
 
 # personal realtime revision control system
 *.history/
