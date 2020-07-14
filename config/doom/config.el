@@ -2,7 +2,7 @@
 
 (setq doom-theme 'doom-one-light)
 (set-frame-font "Source Code Pro")
-(setq python-shell-interpreter "python3.8")
+(setq python-shell-interpreter "python3")
 ;; don't walk back character when exiting insert mode
 (setq evil-move-cursor-back nil)
 ;; don't treat underscores as word delimeters
