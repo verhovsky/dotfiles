@@ -1,8 +1,11 @@
+# don't screen tear. hopefully.
+exec --no-startup-id picom --config ~/.config/picom.conf -b
+
 set $mod Mod4
 
 # trying to get a ranger save dialog
-bindsym $mod+shift+minus scratchpad show
-for_window [title="^browser_save_dialog$"] move scratchpad; scratchpad show
+# bindsym $mod+shift+minus scratchpad show
+# for_window [title="^browser_save_dialog$"] move scratchpad; scratchpad show
 
 # set background
 exec --no-startup-id xsetroot -solid "#000000"

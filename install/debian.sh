@@ -38,6 +38,7 @@ sudo apt-get update
 software=(
     git
     i3
+    compton # I use picom instead
     xsel # access the clipboard from the terminal. xclip is really similar
     gnome-tweaks # customize which fonts Ubuntu uses
     irssi # IRC chat client
@@ -151,3 +152,5 @@ git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
 # TODO: enable and configure unattended-upgrades
 # sudo dpkg-reconfigure --priority=low unattended-upgrades
 # /etc/apt/apt.conf.d/50unattended-upgrades
+# TODO: install picom
+# https://github.com/yshui/picom#build

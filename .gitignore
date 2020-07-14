@@ -1,12 +1,18 @@
-# ignore most things in config/
+# don't save anything in ~/.config
 config/*
 
 # except these directories
 !config/fish
+
 !config/i3
 !config/i3status
-!config/mpv
-!config/nvim
+!config/picom.conf
+
 !config/youtube-dl
+!config/mpv
+
+!config/nvim
 !config/doom
+
+# and these files
 !config/ripgrep.conf
