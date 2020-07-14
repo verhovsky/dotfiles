@@ -32,10 +32,9 @@ alias tt="rm -rf"
 # for when you actually want to delete a file
 # (as long as you don't have an unencrypted ssd and aren't using a journaling file system. see `man shred`)
 #alias ttt="shred -zn 3 --remove"
-# find file
-alias ff="find . | rg"
 
 alias yt="youtube-dl"
+alias fd=fdfind  # installed as fdfind on debian based OSes
 
 # create a list of directories and cd into the last one.
 mkd() {
@@ -46,13 +45,12 @@ mkd() {
     cd "${@: -1}" # the last argument
 }
 
-alias python="python3"
 alias pip="python -m pip"
-# I'm tempted to add import requests but startup time increase like 10x
-alias py="python3 -q -i -c 'import random, time, datetime, math, collections, itertools, re, string, sys, subprocess, json, base64, pickle; from pathlib import Path; from pprint import pprint'"
+# I want to add `import requests` but startup time increase like 10x
+alias py="python3.8 -q -i -c 'import random, time, math, statistics, collections, itertools, re, string, argparse, sys, traceback, csv, subprocess, shutil, json, base64, pickle; from pathlib import Path; from urllib.parse import urlparse; from pprint import pprint; from dis import dis; from datetime import datetime, timedelta'"
 
 # serve the current directory to the internet on port 8000
-alias http="python3 -m http.server"
+alias http="python -m http.server"
 
 alias psg="pass generate -n -c" # don't use symbols in password manager
 alias pss="pass show -c" # copy password to clipboard
@@ -92,8 +90,6 @@ gau() {
 }
 
 # Commands with options
-# count how many lines of code are in the current git repository
-alias cloc="cloc --vcs=git"
 # shuf's builtin randomness generator is insecure
 alias shuf='shuf --random-source=/dev/urandom'
 # make a copy of a website for offline viewing
@@ -109,7 +105,6 @@ alias internet="ping 2001:4860:4860::8888"
 
 # Open urls from the commandline.
 alias browser="google-chrome"
-alias b="browser"
 # use chrome headless as curl
 alias churl="browser --headless --dump-dom"
 
@@ -125,6 +120,12 @@ alias open=xdg-open
 # alert for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# delete useless python interpreter artifacts
+# TODO: I think the .py[co] part might not be necessary, and all those files are in __pycache__
+pyclean () {
+    find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
+}
 
 # Updating
 pipall() {  # all pip packages. https://github.com/pypa/pip/issues/59
@@ -144,6 +145,8 @@ update() {
     doom refresh && doom upgrade
 }
 alias upgrade=update
+
+alias reinstall_doom="rm -rf ~/.emacs.d/ && git clone https://github.com/hlissner/doom-emacs ~/.emacs.d && ~/.emacs.d/bin/doom install"
 
 
 # Generate new ssh key as recommended by https://blog.g3rt.nl/upgrade-your-ssh-keys.html
@@ -247,11 +250,11 @@ journal() {
 alias j="journal"
 
 # Switch between dvorak (default) and qwerty. Useful because everyone designs keyboard shortcuts for QWERTY
-alias keyboard_options="setxkbmap -option caps:escape -option altwin:swap_lalt_lwin; xset r rate 200 30"
-alias aoeu="setxkbmap -layout us; keyboard_options"
-alias aoeuu="setxkbmap -layout ru; keyboard_options"
-alias фыва="setxkbmap -layout us -variant dvp; keyboard_options"
-alias asdf="setxkbmap -layout us -variant dvp; keyboard_options"
+alias keyboard_options="setxkbmap -option caps:escape -option altwin:swap_alt_win; xset r rate 180 30"
+alias aoeu="setxkbmap -layout us,ru,us -variant dvp,,; keyboard_options"
+# alias aoeuu="setxkbmap -layout ru; keyboard_options"
+# alias фыва="setxkbmap -layout us -variant dvp; keyboard_options"
+# alias asdf="setxkbmap -layout us -variant dvp; keyboard_options"
 
 alias yayc='yay -Sc'    # clean pacman
 alias yayo='yay -Qtdq'  # orphaned packages
@@ -281,6 +284,9 @@ if _is_callable xclip; then
 elif _is_callable xsel; then
   alias y='xsel -i --clipboard'
   alias p='xsel -o --clipboard'
+elif _is_callable pbcopy; then
+  alias y='pbcopy'
+  alias p='pbpaste'
 fi
 
 # macOS specific aliases
