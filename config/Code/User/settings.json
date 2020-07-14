@@ -1,0 +1,126 @@
+{
+    "workbench.colorTheme": "GitHub Plus",
+    "editor.fontFamily": "'Source Code Pro'",
+    "editor.fontSize": 16,
+    // "editor.fontFamily": "Fira Code",
+    // "editor.fontLigatures": true,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "python.autoComplete.addBrackets": false,
+    "python.formatting.provider": "black",
+    "python.pythonPath": "/usr/bin/python3",
+    "[python]": {
+        "editor.rulers": [
+            88
+        ],
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true,
+        "python.formatting.provider": "black",
+        "files.autoSave": "afterDelay",
+    },
+    "search.exclude": {
+        "**/.git": false,
+        "**/.git/objects/": true,
+        "**/.git/refs/": true,
+        "**/.git/logs/": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/*.pyc": {
+            "when": "$(basename).py"
+        },
+        "**/__pycache__": true,
+        "**/.mypy_cache/": true,
+        "**/.vscode/": true,
+        "**/.pytest_cache/": true,
+        "**/.project": true,
+        "**/.projectile": true,
+        "**/*.min.*": true,
+    },
+    "files.exclude": {
+        "**/.git": false,
+        "**/.git/objects/": true,
+        "**/.git/refs/": true,
+        "**/.git/logs/": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/*.pyc": {
+            "when": "$(basename).py"
+        },
+        "**/__pycache__": true,
+        "**/.mypy_cache/": true,
+        "**/.vscode/": true,
+        "**/.pytest_cache/": true,
+        "**/.project": true,
+        "**/.projectile": true,
+    },
+    // TODO: make this line 
+    // https://github.com/wk-j/vscode-save-and-run/blob/1f7f8770454108d37496a9366919651236322c6b/src/runner.ts#L93
+    // also respect "silent": true
+    "saveAndRun": {
+        "commands": [
+            {
+                "match": "\\.py$",
+                "cmd": "pyupgrade --py37-plus ${file}",
+                // "useShortcut": false,
+                "silent": true
+            }
+        ]
+    },
+    // let me remap caps lock to escape
+    "keyboard.dispatch": "keyCode",
+    "gitlens.codeLens.recentChange.enabled": false,
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "vim.easymotion": true,
+    "vim.sneak": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    // "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.handleKeys": {
+        "<C-w>": false,
+        // "<C-a>": false,
+        // "<C-f>": false,
+    },
+    "search.exclude": {
+        "**/.git": true,
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/tmp": true,
+        "**/third_party": true
+    },
+    "window.zoomLevel": -2,
+    "workbench.startupEditor": "newUntitledFile",
+    "C_Cpp.updateChannel": "Insiders",
+    "files.trimFinalNewlines": true,
+    "editor.acceptSuggestionOnEnter": "smart",
+    // "explorer.sortOrder": "filesFirst",
+    "explorer.sortOrder": "type",
+    "workbench.editor.highlightModifiedTabs": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--line-length=88"
+    ],
+    // "python.linting.mypyEnabled": true,
+    "python.linting.pylintArgs": [
+        // when you subclass and the parent class defines some properties in __init__ 
+        // and your subclass doesn't, pylint will tell you that they don't exist if 
+        // you try to access them from the subclass
+        "--disable=E1101"
+    ],
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.jediEnabled": false,
+    "sync.gist": "a6c172f9c4b86da632d7910b4a56ef9a",
+    "workbench.sideBar.location": "right",
+    "kite.showWelcomeNotificationOnStartup": false,
+    "[javascript]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+}

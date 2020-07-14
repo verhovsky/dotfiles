@@ -16,3 +16,12 @@ config/*
 
 # and these files
 !config/ripgrep.conf
+
+# VS Code config directory contains a bunch of noise, we just want
+# config/Code/User/settings.json
+# TODO: this can't be necessary
+!config/Code
+config/Code/*
+!config/Code/User
+config/Code/User/*
+!config/Code/User/settings.json
