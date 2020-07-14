@@ -13,7 +13,7 @@ general {
 # order += "disk /"
 # order += "load"
 # order += "cpu_usage 0"
-order += "cpu_temperature 0"
+# order += "cpu_temperature 0"
 # order += "memory"
 # order += "battery 0"
 order += "tztime local"
@@ -68,8 +68,8 @@ battery 0 {
         format = "%percentage"
 }
 
-
 tztime local {
-        format = " %a %Y-%m-%d %H:%M"
+        format = "%a %Y-%m-%d %H:%M:%S%z"
 }
+
 
