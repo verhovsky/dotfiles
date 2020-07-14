@@ -1,5 +1,6 @@
 # Compiled Python files
 *.pyc
+.mypy_cache
 
 # Folder view configuration files
 .DS_Store
@@ -13,8 +14,12 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 
-# emacs
+# Emacs
 .\#*
+.projectile
+
+# Doom Emacs
+.project
 
 # personal realtime revision control system
 *.history/
