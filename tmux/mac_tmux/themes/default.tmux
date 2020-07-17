@@ -8,10 +8,8 @@ set -g default-terminal "screen-256color"
 # -------------
 set-option -g status-position top
 set -g status-justify left
-set -g status-bg black
-set -g status-bg colour236
-set -g status-fg white
-set -g status-interval 4
+# status bar refresh-rate in seconds
+set -g status-interval 1
 
 # -------------
 # window status
@@ -23,25 +21,19 @@ setw -g window-status-current-format " #W "
 # colors
 # -------------
 # default statusbar colors
-set-option -g status-bg black #base02
-set-option -g status-fg white
-set-option -g status-attr default
+set-option -g status-style fg=white,bg=black  # white is actually grey, colour255 is white
 
 # default window title colors
-set-window-option -g window-status-fg colour246 # gray
-set-window-option -g window-status-bg black
-
+set-window-option -g window-status-style fg=colour246,bg=black  # gray
 # active window title colors
-set-window-option -g window-status-current-fg colour255 # whiter than "white"
-set-window-option -g window-status-current-bg black
+set-window-option -g window-status-current-style fg=black,bg=white
 
 # pane border
-set-option -g pane-border-fg black #base02
-set-option -g pane-active-border-fg brightgreen
+set-option -g pane-border-style fg=black
+set-option -g pane-active-border-style fg=brightgreen
 
 # message text
-set-option -g message-bg white
-set-option -g message-fg black
+set-option -g message-style fg=black,bg=white
 
 # Solarized colours for future reference
 # SOLARIZED TERMCOL  XTERM
@@ -70,4 +62,4 @@ set-option -g message-fg black
 set -g status-left ''
 set -g status-right-length 150
 #set -g status-right " #(bash ~/.tmux/scripts/decimal_time.sh)  #(bash ~/.tmux/scripts/age.sh) "
-set -g status-right " #(bash ~/.tmux/scripts/decimal_time.sh)  -  #(date --iso-8601)  -  %a %b %d %R " # Fri Jun 19 08:32
+set -g status-right " #(bash ~/.tmux/scripts/decimal_time.sh)   #(date --iso-8601)   %a %b %d %R " # Fri Jun 19 08:32
