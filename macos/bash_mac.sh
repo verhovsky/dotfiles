@@ -8,11 +8,17 @@ alias c="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --headle
 alias safari="open -a Safari"
 
 alias macos-update="sudo softwareupdate -i -a"
+pipall() {  # all pip packages. https://github.com/pypa/pip/issues/59
+    # TODO: fix this
+    pip3 install --upgrade pip
+    pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
+}
 update() {
     brew upgrade
     brew cask upgrade
     brew cleanup
     pipall
+    doom -y upgrade
     macos-update
 }
 alias upgrade=update
@@ -42,6 +48,9 @@ MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # Android SDK
 PATH=$PATH:~/Library/Android/sdk/platform-tools
+
+unalias fd
+unalias open
 
 o() { # with no arguments 'o' opens the current directory, otherwise opens the given location
     if [[ "$#" -eq 0 ]]; then

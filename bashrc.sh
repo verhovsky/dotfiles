@@ -50,7 +50,7 @@ alias pip="python -m pip"
 alias py="python3.8 -q -i -c 'import random, time, math, statistics, collections, itertools, re, string, argparse, sys, traceback, csv, subprocess, shutil, json, base64, pickle; from pathlib import Path; from urllib.parse import urlparse; from pprint import pprint; from dis import dis; from datetime import datetime, timedelta'"
 
 # serve the current directory to the internet on port 8000
-alias http="python -m http.server"
+alias http="python3 -m http.server"
 
 alias psg="pass generate -n -c" # don't use symbols in password manager
 alias pss="pass show -c" # copy password to clipboard
@@ -116,6 +116,10 @@ alias chmox="chmod +x"
 
 # open files with gui apps on Linux
 alias open=xdg-open
+
+# lowercase and uppercase stdin
+alias lower="tr '[:upper:]' '[:lower:]'"
+alias upper="tr '[:lower:]' '[:upper:]'"
 
 # alert for long running commands.  Use like so:
 #   sleep 10; alert
@@ -184,7 +188,14 @@ rgg() {
 }
 
 # is a string a top level domain?
-alias is-tld="curl -s https://data.iana.org/TLD/tlds-alpha-by-domain.txt | rg -i"
+alias tlds="curl -s https://data.iana.org/TLD/tlds-alpha-by-domain.txt | lower"
+is_tld() {
+    if [[ "$#" -eq 0 ]]; then
+        tlds
+    else
+        tlds | rg -i "$1"
+    fi
+}
 
 o() { # with no arguments 'o' opens the current directory, otherwise opens the given location
     if [[ "$#" -eq 0 ]]; then
