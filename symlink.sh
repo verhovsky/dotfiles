@@ -37,7 +37,7 @@ ln -s ~/dotfiles/tmux/mac_tmux ~/.tmux
 if [ "$(uname)" = "Darwin" ]; then
   mkdir -p ~/Library/KeyBindings
   # TODO: does this still add anything?
-  ln -s ~/dotfiles/system_wide_emacs_movement.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
+  ln -s ~/dotfiles/macos/system_wide_emacs_movement.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
 
   # Terminal.app doesn't read .bashrc, but .profile works
   echo >> ~/.profile
