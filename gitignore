@@ -17,6 +17,7 @@ Thumbs.db
 # Emacs
 .\#*
 .projectile
+flycheck_*.py
 
 # Doom Emacs
 .project
