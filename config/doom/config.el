@@ -1,10 +1,13 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
 (setq doom-theme 'doom-one-light)
-(setq doom-font (font-spec :family "Source Code Pro" :size 18))
+(setq doom-font (font-spec :family "Source Code Pro" :size 16))
 ;; start in fullscreen
 (add-to-list 'initial-frame-alist '(fullscreen . fullboth))
 (setq python-shell-interpreter "python3")
+
+(after! dired
+  (setq dired-listing-switches "-ahl -v --group-directories-first -I .mypy_cache -I __pycache__"))
 
 ;; don't walk back character when exiting insert mode
 (setq evil-move-cursor-back nil)
