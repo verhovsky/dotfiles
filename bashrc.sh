@@ -45,9 +45,24 @@ mkd() {
     cd "${@: -1}" # the last argument
 }
 
-alias pip="python -m pip"
-# I want to add `import requests` but startup time increase like 10x
-alias py="python3.8 -q -i -c 'import random, time, math, statistics, collections, itertools, re, string, argparse, sys, traceback, csv, subprocess, shutil, json, base64, pickle; from pathlib import Path; from urllib.parse import urlparse; from pprint import pprint; from dis import dis; from datetime import datetime, timedelta'"
+alias pip="python3 -m pip --use-feature=2020-resolver"
+alias py="python3 -q -i -c 'import \
+math, statistics, random, secrets, \
+collections, itertools, functools, bisect, \
+copy, operator, \
+time, \
+sys, os, traceback, subprocess, shutil, argparse, stat, hashlib, io, \
+re, string, difflib, base64, \
+csv, json, pickle; \
+from pathlib import Path; \
+from decimal import Decimal; \
+from io import StringIO, BytesIO; \
+from urllib.parse import urlparse; \
+from pprint import pprint; \
+from dis import dis; \
+from datetime import datetime, timedelta;\
+import requests;\
+'"
 
 # serve the current directory to the internet on port 8000
 alias http="python3 -m http.server"
@@ -101,7 +116,8 @@ alias scp="rsync -P -e ssh"
 # check if you're connected to the IPv4 internet by pinging google's DNS server
 alias four="ping 8.8.8.8"
 alias internet="ping 2001:4860:4860::8888"
-# another option is sprint's website `ping 2600::`
+# another option is Sprint's website
+#alias internet="ping 2600::"
 
 # Open urls from the commandline.
 alias browser="google-chrome"
@@ -182,7 +198,8 @@ random() {
     fi
 }
 
-# Rg interprets the second argument as the direcotory to search in, usually my query just has space in it
+# Rg interprets the second argument as the direcotory to search in,
+# usually my query just has a space in it
 rgg() {
     rg "$*"
 }
@@ -197,7 +214,10 @@ is_tld() {
     fi
 }
 
-o() { # with no arguments 'o' opens the current directory, otherwise opens the given location
+# with no arguments 'o' opens the current directory,
+# otherwise opens the given location
+o() {
+
     if [[ "$#" -eq 0 ]]; then
         xdg-open .
     else
@@ -214,7 +234,7 @@ pw() { # get full path to current directory or to a specified file in current di
     if [[ "$#" -eq 0 ]]; then
         pwd
     else
-        echo "$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
+        readlink -m "$@"
     fi
 }
 
