@@ -19,7 +19,8 @@ setxkbmap -option altwin:swap_alt_win
 # it should be
 # Unfortunately this makes it the wrong key on QWERTY, but you can still
 # type the correct one with the modifier key
-xmodmap -e "keycode 9 = dollar"
+# This doesn't work in Chrome.
+xmodmap -e "keycode 9 = dollar asciitilde"
 
 # set keyboard key repeat delay (180ms) and rate
 # (key is repeated once for every 30ms it's held down)
