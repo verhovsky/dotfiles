@@ -5,6 +5,8 @@
 ;; start in fullscreen
 (add-to-list 'initial-frame-alist '(fullscreen . fullboth))
 (setq python-shell-interpreter "python3")
+;; If I want to exit, I want to exit.
+(setq confirm-kill-emacs nil)
 
 (after! dired
   (setq dired-listing-switches "-ahl -v --group-directories-first -I .mypy_cache -I __pycache__"))
