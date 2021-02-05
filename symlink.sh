@@ -11,18 +11,18 @@ rm_rf_if_not_link(){ [ -L "$1" ] || sudo rm -rf "$1" > /dev/null 2>&1; }
 
 rm_if_not_link ~/.bashrc
 rm_if_not_link ~/.nvimrc
-rm_if_not_link ~/.nvim 
-rm_if_not_link ~/.spacemacs 
+rm_if_not_link ~/.nvim
+rm_if_not_link ~/.spacemacs
 rm_if_not_link ~/.gitconfig
-rm_if_not_link ~/.gitignore 
-rm_if_not_link ~/.wgetrc 
+rm_if_not_link ~/.gitignore
+rm_if_not_link ~/.wgetrc
 rm_if_not_link ~/.inputrc
 rm_if_not_link ~/.Xmodmap
 
 #rm_rf_if_not_link ~/.config
 mv ~/.config/* ~/dotfiles/config
-rm_rf_if_not_link ~/.tmux.conf 
-rm_rf_if_not_link ~/.tmux 
+rm_rf_if_not_link ~/.tmux.conf
+rm_rf_if_not_link ~/.tmux
 
 if [ "$(uname)" = "Darwin" ]; then
   rm_if_not_link ~/.bash_mac
