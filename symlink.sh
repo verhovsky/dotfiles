@@ -4,56 +4,64 @@ echo "hopefully you read the source code of the script you're about to run"
 echo "because I'm about to delete a bunch of files"
 sleep 3
 
-DOTFILES_PREFIX=~/dotfiles
+DOTFILES=~/dotfiles
+BACKUP_DIRECTORY="$DOTFILES"/.linked_over_files_backup
 
-rm_if_not_link(){ [ -L "$1" ] || sudo rm "$1" > /dev/null 2>&1; }
-rm_rf_if_not_link(){ [ -L "$1" ] || sudo rm -rf "$1" > /dev/null 2>&1; }
+# if the last argument is not a symlink, move it to a backup directory
+# then link (ln -s) the second-last argument to that path instead
+ln_if_not_link() {
+  mkdir -p "$BACKUP_DIRECTORY"
+  if [ ! -L "${@: -1}" ]; then
+    sudo mv "${@: -1}" "$BACKUP_DIRECTORY"/"${@: -1}"
+    ln -s "$DOTFILES"/"${@: -2}"  ~/"${@: -1}"
+  fi
+}
 
-rm_if_not_link ~/.bashrc
-rm_if_not_link ~/.nvimrc
-rm_if_not_link ~/.nvim
-rm_if_not_link ~/.spacemacs
-rm_if_not_link ~/.gitconfig
-rm_if_not_link ~/.gitignore
-rm_if_not_link ~/.wgetrc
-rm_if_not_link ~/.inputrc
-rm_if_not_link ~/.Xmodmap
+backup_if_not_link() {
+  if [ ! -L "${@: -1}" ]; then
+    # TODO: mkdir -p the parent if arg is a directory
+    sudo mv "${@: -1}" "$BACKUP_DIRECTORY"/"${@: -1}"
+  fi
+}
 
-#rm_rf_if_not_link ~/.config
-mv ~/.config/* ~/dotfiles/config
-rm_rf_if_not_link ~/.tmux.conf
-rm_rf_if_not_link ~/.tmux
+# if the last argument is a symlink, pass all arguments to an "rm" command
+rm_if_not_link() {
+  if [ ! -L "${@: -1}" ]; then
+    sudo rm "$@"
+  fi
+}
 
-if [ "$(uname)" = "Darwin" ]; then
-  rm_if_not_link ~/.bash_mac
-else
-  rm_if_not_link ~/.Xresources
-  rm_if_not_link ~/.xinitrc
+ln_if_not_link bashrc    ~/.bashrc     > /dev/null 2>&1;
+ln_if_not_link gitconfig ~/.gitconfig  > /dev/null 2>&1;
+ln_if_not_link gitignore ~/.gitignore  > /dev/null 2>&1;
+ln_if_not_link wgetrc    ~/.wgetrc     > /dev/null 2>&1;
+ln_if_not_link inputrc   ~/.inputrc    > /dev/null 2>&1;
+
+ln_if_not_link "$DOTFILES_PREFIX"/tmux.conf ~/.tmux.conf
+ln_if_not_link "$DOTFILES_PREFIX"/tmux/ ~/.tmux
+
+# TODO: do this idempotently and safely
+# TODO: should I remove untracked files with git checkout -- ./config
+# should probably prompt on that...
+# Avoid getting into an incosistent state if you can't copy something from the existing ~/.config
+# because it already exists in ~/dotfiles/config
+if [[ ! -L ~/.config ]]; then
+  cp ~/.config/* "$DOTFILES"/config
+  ln -s "$DOTFILES"/config ~/.config
 fi
 
+# It's in ~/dotfiles/config/nvim/init.vim
+rm_if_not_link ~/.nvimrc               > /dev/null 2>&1;
+rm_if_not_link ~/.nvim                 > /dev/null 2>&1;
 
-ln -s "$DOTFILES_PREFIX"/config ~/.config
-ln -s "$DOTFILES_PREFIX"/bashrc.sh ~/.bashrc
-ln -s "$DOTFILES_PREFIX"/tmux/tmux.conf ~/.tmux.conf
-ln -s "$DOTFILES_PREFIX"/tmux/mac_tmux ~/.tmux
-ln -s "$DOTFILES_PREFIX"/gitconfig ~/.gitconfig
-ln -s "$DOTFILES_PREFIX"/gitignore ~/.gitignore
-ln -s "$DOTFILES_PREFIX"/wgetrc ~/.wgetrc
-ln -s "$DOTFILES_PREFIX"/inputrc ~/.inputrc
-ln -s "$DOTFILES_PREFIX"/Xmodmap ~/.Xmodmap
-
+# macOS specific
 if [ "$(uname)" = "Darwin" ]; then
-  mkdir -p ~/Library/KeyBindings
-  # TODO: does this still add anything?
-  ln -s  "$DOTFILES_PREFIX"/macos/system_wide_emacs_movement.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
-
   # Terminal.app doesn't read .bashrc, but .profile works
   echo >> ~/.profile
   echo 'source ~/.bashrc' >> ~/.profile
-  ln -s "$DOTFILES_PREFIX"/macos/bash_mac.sh ~/.bash_mac
-else
-  ln -s "$DOTFILES_PREFIX"/Xresources ~/.Xresources
-  ln -s "$DOTFILES_PREFIX"/xinitrc ~/.xinitrc
-  # ubuntu doesn't run xinitrc or xsession
-  ln -s "$DOTFILES_PREFIX"/xinitrc ~/.xsessionrc
+  ln_if_not_link macos/bash_mac.sh ~/.bash_mac
+
+  # TODO: check if this still has any effect
+  mkdir -p ~/Library/KeyBindings
+  ln_if_not_link macos/system_wide_emacs_movement.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
 fi
