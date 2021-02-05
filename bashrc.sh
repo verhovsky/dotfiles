@@ -1,4 +1,5 @@
 export EDITOR="emacsclient"
+export DOOMDIR="~/.config/doom"
 export VISUAL=$EDITOR  # the variable that actually gets used for everything
 
 # list of ~100,000 english words
