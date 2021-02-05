@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
 
+DOTFILES=~/dotfiles
+
+OS_NAME=$(grep '^NAME=' /etc/os-release)
+if [[ "$OS_NAME" == "NAME=NixOS" ]]; then
+  # TODO: link ~/dotfiles/nixos to /etc/nixos instead? can I?
+  echo you need to do something like
+  echo ln -s "$DOTFILES"/nixos/configuration.nix /etc/nixos/configuration.nix
+  echo ln -s "$DOTFILES"/nixos/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
+fi
+
+
 echo "hopefully you read the source code of the script you're about to run"
-echo "because I'm about to delete a bunch of files"
 sleep 3
 
-DOTFILES=~/dotfiles
 BACKUP_DIRECTORY="$DOTFILES"/.linked_over_files_backup
 
 # if the last argument is not a symlink, move it to a backup directory
