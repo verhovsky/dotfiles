@@ -1,4 +1,4 @@
-export EDITOR="emacsclient"
+export EDITOR="nvim"
 export VISUAL=$EDITOR  # the variable that actually gets used for everything
 
 # list of ~100,000 english words
@@ -14,7 +14,8 @@ export WORDLIST="/usr/share/dict/words"
 # **/*.png will match a.png b/c.png d/e/f.png
 shopt -s globstar
 
-alias n="$VISUAL --no-wait --alternate-editor='emacs &'"
+# alias n="$VISUAL --no-wait --alternate-editor='emacs &'"
+alias n="nvim"
 alias nn="nvim"
 alias e="ls -t --color=auto --group-directories-first" # last modified date
 alias ee="ls -talhv --group-directories-first"
@@ -35,6 +36,7 @@ alias tt="rm -rf"
 
 alias yt="youtube-dl"
 alias fd=fdfind  # installed as fdfind on debian based OSes
+alias vim=nvim
 
 # create a list of directories and cd into the last one.
 mkd() {
@@ -45,27 +47,32 @@ mkd() {
     cd "${@: -1}" # the last argument
 }
 
-alias pip="python3 -m pip --use-feature=2020-resolver"
-alias py="python3 -q -i -c 'import \
-math, statistics, random, secrets, \
+alias python="python3.9"
+alias python3="python3.9"
+alias pip="python3.9 -m pip"
+alias pip3="python3.9 -m pip"
+alias py="python3.9 -q -i -c 'import \
+math, statistics, random, secrets, uuid, \
 collections, itertools, functools, bisect, \
-copy, operator, \
+copy, operator, inspect, \
 time, \
 sys, os, traceback, subprocess, shutil, argparse, stat, hashlib, io, \
 re, string, difflib, base64, \
 csv, json, pickle; \
+from collections import Counter, defaultdict; \
 from pathlib import Path; \
 from decimal import Decimal; \
+from fractions import Fraction; \
 from io import StringIO, BytesIO; \
 from urllib.parse import urlparse; \
 from pprint import pprint; \
-from dis import dis; \
+from dis import dis; import ast; \
 from datetime import datetime, timedelta;\
 import requests;\
 '"
 
 # serve the current directory to the internet on port 8000
-alias http="python3 -m http.server"
+alias http="python3.9 -m http.server"
 
 alias psg="pass generate -n -c" # don't use symbols in password manager
 alias pss="pass show -c" # copy password to clipboard
@@ -150,19 +157,7 @@ pyclean () {
 # Updating
 pipall() {  # all pip packages. https://github.com/pypa/pip/issues/59
     pip3 install --upgrade pip
-    pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
-}
-# system wide update
-update() {
-    sudo apt-get update
-    sudo apt-get upgrade -y
-    sudo apt-get autoclean
-    sudo apt-get dist-upgrade
-    sudo apt-get autoclean
-    sudo apt autoremove
-    sudo pip3 install --upgrade pip
-    sudo pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo pip3 install -U
-    doom refresh && doom upgrade
+    pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
 }
 alias upgrade=update
 
@@ -280,12 +275,11 @@ journal() {
 }
 alias j="journal"
 
-# Switch between dvorak (default) and qwerty. Useful because everyone designs keyboard shortcuts for QWERTY
-alias keyboard_options="setxkbmap -option caps:escape -option altwin:swap_alt_win; xset r rate 180 30"
+# Switch between dvorak (default), russian and qwerty.
+alias keyboard_options='setxkbmap -option caps:escape -option grp:shifts_toggle;\
+    xset r rate 180 30; xmodmap -e "keycode 9 = dollar asciitilde"'
 alias aoeu="setxkbmap -layout us,ru,us -variant dvp,,; keyboard_options"
-# alias aoeuu="setxkbmap -layout ru; keyboard_options"
-# alias фыва="setxkbmap -layout us -variant dvp; keyboard_options"
-# alias asdf="setxkbmap -layout us -variant dvp; keyboard_options"
+alias asdf="aoeu"
 
 alias yayc='yay -Sc'    # clean pacman
 alias yayo='yay -Qtdq'  # orphaned packages
