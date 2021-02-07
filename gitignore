@@ -21,7 +21,6 @@ flycheck_*.py
 
 # Doom Emacs
 .project
-.projectile
 
 # personal realtime revision control system
 *.history/
