@@ -126,6 +126,8 @@
 [push]
 	# Suppress warning message
 	default = simple
+	# Use a faster diffing algorithm (default: myers)
+	algorithm = histogram
 
 [user]
 	email = boris@verhovs.ky
