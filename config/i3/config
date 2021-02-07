@@ -17,7 +17,7 @@ exec --no-startup-id xsetroot -solid "#000000"
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
-font pango:Source Code Pro 10
+font pango:Source Code Pro 14
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -165,11 +165,11 @@ focus_follows_mouse no
 # disable window titles
 new_window 1pixel
 
-# color defines for zenburn styled i3
-set $bg     #2c2c2e
+# color definitions
+set $bg     #333333
 set $fg     #9f9f9f
 set $hi     #efef8f
-set $ac     #a0afa0
+set $ac     #ff3d00
 set $tx     #040404
 set $ia     #8f8f8f
 set $be     #8faf9f
@@ -190,7 +190,7 @@ bar {
     strip_workspace_numbers yes
 
     #tray_output none
-    position top
+    position bottom
     status_command i3status
     colors {
         background $bg
