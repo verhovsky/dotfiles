@@ -48,11 +48,7 @@ mkd() {
     cd "${@: -1}" # the last argument
 }
 
-alias python="python3.9"
-alias python3="python3.9"
-alias pip="python3.9 -m pip"
-alias pip3="python3.9 -m pip"
-alias py="python3.9 -q -i -c 'import \
+alias py="python -q -i -c 'import \
 math, statistics, random, secrets, uuid, \
 collections, itertools, functools, bisect, \
 copy, operator, inspect, \
@@ -66,6 +62,7 @@ from decimal import Decimal; \
 from fractions import Fraction; \
 from io import StringIO, BytesIO; \
 from urllib.parse import urlparse; \
+from urllib.parse import urlunparse; \
 from pprint import pprint; \
 from dis import dis; import ast; \
 from datetime import datetime, timedelta;\
@@ -73,7 +70,7 @@ import requests;\
 '"
 
 # serve the current directory to the internet on port 8000
-alias http="python3.9 -m http.server"
+alias http="python -m http.server"
 
 alias psg="pass generate -n -c" # don't use symbols in password manager
 alias pss="pass show -c" # copy password to clipboard
@@ -121,11 +118,12 @@ alias mirror="wget --mirror --convert-links --adjust-extension --page-requisites
 # transfer a file over ssh and keep partial files that haven't finished transferring if the connection is cut
 alias scp="rsync -P -e ssh"
 
-# check if you're connected to the IPv4 internet by pinging google's DNS server
-alias four="ping 8.8.8.8"
-alias internet="ping 2001:4860:4860::8888"
+# check internet connection by pinging Google's DNS server
+alias internet4="ping 8.8.8.8"
+alias internet6="ping 2001:4860:4860::8888"
 # another option is Sprint's website
-#alias internet="ping 2600::"
+#alias internet6="ping 2600::"
+alias internet=internet4
 
 # Open urls from the commandline.
 alias browser="google-chrome"
@@ -162,8 +160,7 @@ pipall() {  # all pip packages. https://github.com/pypa/pip/issues/59
 }
 alias upgrade=update
 
-alias reinstall_doom="rm -rf ~/.emacs.d/ && git clone https://github.com/hlissner/doom-emacs ~/.emacs.d && ~/.emacs.d/bin/doom install"
-
+alias reinstall_doom="rm -rf ~/.emacs.d/ && git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d && ~/.emacs.d/bin/doom -y install"
 
 # Generate new ssh key as recommended by https://blog.g3rt.nl/upgrade-your-ssh-keys.html
 # the `-C ''` prevents storing hostname with the ssh key
@@ -177,10 +174,14 @@ alias random-base32="head -c 30 /dev/urandom | base32"
 alias random-base64="head -c 30 /dev/urandom | base64"
 alias random-number="shuf --random-source=/dev/urandom -i 1-1000000000000000000 -n 1"
 alias random-letters="cat /dev/urandom | tr -dc 'a-z' | fold -w 32 | head -n 1"
-alias correct-battery="curl -s https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt | shuf --random-source=/dev/urandom | head -n 4 | tr '\n' ' '; echo"
+# correct battery horse staple
+alias random-password="curl -s https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt | shuf --random-source=/dev/urandom | head -n 4 | tr '\n' ' '; echo"
 
 # press ctrl-d when you want to stop timing
 alias stopwatch="echo press Ctrl-c to stop the timer.; TIMEFORMAT=%R; time cat; unset TIMEFORMAT"
+
+alias hideprompt="export PS1='$ '"
+alias hideps1=hideprompt
 
 random() {
     if [ "$#" -eq 0 ]; then
