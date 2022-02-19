@@ -130,7 +130,9 @@
 	algorithm = histogram
 
 [user]
-	email = boris@verhovs.ky
-	name = boris
+	email = boris.verk@gmail.com
+	name = Boris Verkhovskiy
 [github]
 	user = verhovsky
+[init]
+	defaultBranch = master
