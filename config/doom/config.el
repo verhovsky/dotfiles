@@ -19,8 +19,10 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Source Code Pro" :size 28 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "sans" :size 28))
+;; (setq doom-font (font-spec :family "SF Mono" :size 12 :weight 'semi-light)
+;;       doom-variable-pitch-font (font-spec :family "SF Pro" :size 12))
+(setq doom-font (font-spec :family "Source Code Pro" :size 16 :weight 'normal)
+      doom-variable-pitch-font (font-spec :family "Source Code Pro" :size 16))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -29,9 +31,10 @@
 
 ;; start in fullscreen
 (add-to-list 'initial-frame-alist '(fullscreen . fullboth))
+
 ;; don't ask if I'm sure I want to exit
 (setq confirm-kill-emacs nil)
-(setq python-shell-interpreter "python3.9")
+(setq python-shell-interpreter "python")
 
 ;; don't walk back a character when exiting insert mode
 (setq evil-move-cursor-back nil)
@@ -53,10 +56,10 @@
 
 (defun pyupgrade ()
   (interactive)
-  (shell-command (format "pyupgrade --py38-plus %S" buffer-file-name))
+  (shell-command (format "pyupgrade --py39-plus %S" buffer-file-name))
   (revert-buffer nil t))
-(add-hook! 'python-mode-hook
-  (add-hook 'after-save-hook #'pyupgrade nil 'local))
+;; (add-hook! 'python-mode-hook
+;;   (add-hook 'after-save-hook #'pyupgrade nil 'local))
 
 
 (setq-default whitespace-style '(face trailing lines-tail))
@@ -67,11 +70,22 @@
 (setq-hook! 'magit-mode-hook whitespace-line-column 89)
 
 (after! magit
+  ;; make deleting a lot of files fast
+  ;; https://github.com/magit/magit/discussions/4635#discussioncomment-2373684
+  (setq magit-delete-by-moving-to-trash nil)
   ;; when creating a branch, ask for the name of the branch before the name of the branch to start
   ;; from
   (setq magit-branch-read-upstream-first nil)
   ;; enable character-wise highlights in diffs
-  (setq magit-diff-refine-hunk 'all))
+  (setq magit-diff-refine-hunk 'all)
+  ;; Make the previous commit the first choice for magit-reset
+  ;; https://github.com/magit/magit/issues/4189#issuecomment-672573499
+  (defun my/magit-read-branch-or-commit (fn prompt &optional secondary-default)
+    (funcall fn prompt
+             (if (string-match-p "\\`magit-reset" (symbol-name this-command))
+                 "HEAD~1"
+                 secondary-default)))
+  (advice-add 'magit-read-branch-or-commit :around #'my/magit-read-branch-or-commit))
 
 
 ;; only autoformat python
