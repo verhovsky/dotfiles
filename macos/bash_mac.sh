@@ -62,7 +62,7 @@ o() { # with no arguments 'o' opens the current directory, otherwise opens the g
 
 # Ring the terminal bell, and put a badge on Terminal.app's Dock icon
 alias badge="tput bel"
-alias internet="ping6 2001:4860:4860::8888"
+alias beep=badge
 
 journal() {
     birthday=19960201 # YYYYMMDD

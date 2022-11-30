@@ -9,7 +9,8 @@ export WORDLIST="/usr/share/dict/words"
 # \H is the hostname
 # \w is the full path of current working directory
 # \u is the username
-# PS1="\u:\H:\w$ "  # this is Ubuntu's default and I don't mind it
+# PS1="\u:\H:\w$ "  # Ubuntu's default
+PS1="\w$ "
 
 # enable recursive wildcard
 # **/*.png will match a.png b/c.png d/e/f.png
@@ -55,18 +56,21 @@ copy, operator, inspect, \
 time, \
 sys, os, traceback, subprocess, shutil, argparse, stat, hashlib, io, \
 re, string, difflib, base64, \
-csv, json, pickle; \
+csv, json, pickle, \
+http; \
 from collections import Counter, defaultdict; \
 from pathlib import Path; \
 from decimal import Decimal; \
 from fractions import Fraction; \
 from io import StringIO, BytesIO; \
+import urllib; \
 from urllib.parse import urlparse; \
 from urllib.parse import urlunparse; \
 from pprint import pprint; \
+import pdb; \
 from dis import dis; import ast; \
-from datetime import datetime, timedelta;\
-import requests;\
+from datetime import datetime, timedelta; \
+import requests; \
 '"
 
 # serve the current directory to the internet on port 8000
@@ -105,8 +109,8 @@ alias gsu="git pull && git submodule update --recursive --remote" # pull current
 
 
 gau() {
-    echo git remote add upstream git://github.com/$1.git
-    git remote add upstream git://github.com/$1.git
+    echo git remote add upstream git@github.com:$1.git
+    git remote add upstream git@github.com:$1.git && git pull upstream
 }
 
 # Commands with options
@@ -160,7 +164,7 @@ pipall() {  # all pip packages. https://github.com/pypa/pip/issues/59
 }
 alias upgrade=update
 
-alias reinstall_doom="rm -rf ~/.emacs.d/ && git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d && ~/.emacs.d/bin/doom -y install"
+alias reinstall_doom="rm -rf ~/.emacs.d/ && git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d && ~/.emacs.d/bin/doom install --env --fonts"
 
 # Generate new ssh key as recommended by https://blog.g3rt.nl/upgrade-your-ssh-keys.html
 # the `-C ''` prevents storing hostname with the ssh key
@@ -258,7 +262,7 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # stop collecting bash history in the current terminal
 # useful for copy pasting sensitive data
 alias forget="unset HISTFILE"
-export HISTCONTROL=ignorespace
+#export HISTCONTROL=ignoreboth
 
 export RIPGREP_CONFIG_PATH=~/.config/ripgrep.conf
 
