@@ -1,9 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Boris Verkhovskiy"
@@ -21,8 +17,8 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "SF Mono" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "SF Pro" :size 12))
-(setq doom-font (font-spec :family "Source Code Pro" :size 16 :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "Source Code Pro" :size 16))
+(setq doom-font (font-spec :family "SF Mono" :size 16 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "SF Mono" :size 16 :weight 'semi-light))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -62,12 +58,12 @@
 ;;   (add-hook 'after-save-hook #'pyupgrade nil 'local))
 
 
-(setq-default whitespace-style '(face trailing lines-tail))
-(setq-default whitespace-line-column 88)
-(global-whitespace-mode t)
+;; (setq-default whitespace-style '(face trailing lines-tail))
+;; (setq-default whitespace-line-column 88)
+;; (global-whitespace-mode t)
 ;; In Magit diffs, lines can start with - or + which causes lines that go up to the line length
 ;; limit to be highlighted.
-(setq-hook! 'magit-mode-hook whitespace-line-column 89)
+;; (setq-hook! 'magit-mode-hook whitespace-line-column 89)
 
 (after! magit
   ;; make deleting a lot of files fast
@@ -78,6 +74,10 @@
   (setq magit-branch-read-upstream-first nil)
   ;; enable character-wise highlights in diffs
   (setq magit-diff-refine-hunk 'all)
+  ;; refresh magit state on repo change
+  (magit-auto-revert-mode 1)
+  ;; more lines when getting git log
+  (setq magit-log-section-commit-count 2000)
   ;; Make the previous commit the first choice for magit-reset
   ;; https://github.com/magit/magit/issues/4189#issuecomment-672573499
   (defun my/magit-read-branch-or-commit (fn prompt &optional secondary-default)
@@ -90,6 +90,15 @@
 
 ;; only autoformat python
 ;; (we're not autoformatting markdown, so have to specify file types manually)
-(add-to-list '+format-on-save-enabled-modes 'python-mode)
+;; (add-to-list '+format-on-save-enabled-modes 'python-mode)
 
 
+(defun open-magit-on-startup ()
+  (magit-status-setup-buffer "~/code/learnxinyminutes")
+  ;; (magit-status-setup-buffer "~/code/curlconverter")
+  (current-buffer))
+
+;; (setq initial-buffer-choice #'open-magit-on-startup)
+
+;; wrap lines
+(global-visual-line-mode 1)

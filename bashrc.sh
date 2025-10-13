@@ -20,7 +20,7 @@ shopt -s globstar
 alias n="nvim"
 alias nn="nvim"
 alias e="ls -t --color=auto --group-directories-first" # last modified date
-alias ee="ls -talhv --group-directories-first"
+alias ee="ls -alvSr --group-directories-first"
 alias eee="tree -a"
 alias eeee="tree"
 alias u="cd"
@@ -28,6 +28,11 @@ alias uu="cd ../"
 alias uuu="cd ../.."
 alias uuuu="cd ../../.."
 alias uuuuu="cd ../../../.."
+alias uuuuuu="cd ../../../../.."
+alias uuuuuuu="cd ../../../../../.."
+alias uuuuuuuu="cd ../../../../../../.."
+alias uuuuuuuuu="cd ../../../../../../../.."
+alias uuuuuuuuuu="cd ../../../../../../../../.."
 alias h="history"
 alias x="dtrx" # figure out what tar or unzip command to run
 alias t="trash"
@@ -74,7 +79,7 @@ import requests; \
 '"
 
 # serve the current directory to the internet on port 8000
-alias http="python -m http.server"
+alias http="echo 'http://127.0.0.1:8000'; python -m http.server"
 
 alias psg="pass generate -n -c" # don't use symbols in password manager
 alias pss="pass show -c" # copy password to clipboard
@@ -87,6 +92,7 @@ alias gl="git log --pretty=oneline -n 20 --graph --abbrev-commit"
 alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 # View the current working tree status using the short format
 alias gs="git status -s"
+alias gss="git status"
 alias gb="git branch"
 # Show the diff between the latest commit and the current state
 alias gd="git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
@@ -124,9 +130,9 @@ alias scp="rsync -P -e ssh"
 
 # check internet connection by pinging Google's DNS server
 alias internet4="ping 8.8.8.8"
-alias internet6="ping 2001:4860:4860::8888"
+alias internet6="ping6 2001:4860:4860::8888"
 # another option is Sprint's website
-#alias internet6="ping 2600::"
+#alias internet6="ping6 2600::"
 alias internet=internet4
 
 # Open urls from the commandline.
@@ -160,11 +166,11 @@ pyclean () {
 # Updating
 pipall() {  # all pip packages. https://github.com/pypa/pip/issues/59
     pip3 install --upgrade pip
-    pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
+    pip3 --disable-pip-version-check list --outdated --format=json | python -c "import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))" | xargs -n1 pip install -U
 }
 alias upgrade=update
 
-alias reinstall_doom="rm -rf ~/.emacs.d/ && git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d && ~/.emacs.d/bin/doom install --env --fonts"
+alias reinstall_doom="rm -rf ~/.config/emacs/ && git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.config/emacs && ~/.config/emacs/bin/doom install --env --fonts"
 
 # Generate new ssh key as recommended by https://blog.g3rt.nl/upgrade-your-ssh-keys.html
 # the `-C ''` prevents storing hostname with the ssh key
@@ -179,13 +185,23 @@ alias random-base64="head -c 30 /dev/urandom | base64"
 alias random-number="shuf --random-source=/dev/urandom -i 1-1000000000000000000 -n 1"
 alias random-letters="cat /dev/urandom | tr -dc 'a-z' | fold -w 32 | head -n 1"
 # correct battery horse staple
-alias random-password="curl -s https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt | shuf --random-source=/dev/urandom | head -n 4 | tr '\n' ' '; echo"
+random-password() {
+  local cache_file="/tmp/google-10000-english.txt"
+
+  # Cache if missing
+  if [ ! -f "$cache_file" ]; then
+    curl -s -o "$cache_file" \
+      https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt
+  fi
+
+  shuf --random-source=/dev/urandom "$cache_file" | head -n 4 | xargs
+}
+alias correct_battery="random-password"
 
 # press ctrl-d when you want to stop timing
 alias stopwatch="echo press Ctrl-c to stop the timer.; TIMEFORMAT=%R; time cat; unset TIMEFORMAT"
 
 alias hideprompt="export PS1='$ '"
-alias hideps1=hideprompt
 
 random() {
     if [ "$#" -eq 0 ]; then
@@ -214,6 +230,7 @@ is_tld() {
         tlds | rg -i "$1"
     fi
 }
+alias istld="is_tld"
 
 # with no arguments 'o' opens the current directory,
 # otherwise opens the given location
@@ -245,7 +262,7 @@ PATH=$PATH:$GOPATH/bin
 # use rust binaries
 PATH=$PATH:~/.cargo/bin
 # use doom emacs commands
-PATH=$PATH:~/.emacs.d/bin
+PATH=$PATH:~/.config/emacs/bin
 PATH=$PATH:/snap/bin
 
 # store a list of all the commands I've every issued in ~/.bash_eternal_history
@@ -310,14 +327,26 @@ function _is_callable {
 
 # Clipboard pipes
 if _is_callable xclip; then
-  alias y='xclip -selection clipboard -in'
-  alias p='xclip -selection clipboard -out'
+    alias y='xclip -selection clipboard -in'
+    alias p='xclip -selection clipboard -out'
 elif _is_callable xsel; then
-  alias y='xsel -i --clipboard'
-  alias p='xsel -o --clipboard'
+    alias y='xsel -i --clipboard'
+    alias p='xsel -o --clipboard'
 elif _is_callable pbcopy; then
-  alias y='pbcopy'
-  alias p='pbpaste'
+    p() {
+        if [[ -n "$1" ]]; then
+            pbpaste > "$1"
+        else
+            pbpaste
+        fi
+    }
+    y() {
+        if [[ -n "$@" ]]; then
+            cat "$@" | pbcopy
+        else
+            pbcopy
+        fi
+    }
 fi
 
 # macOS specific aliases

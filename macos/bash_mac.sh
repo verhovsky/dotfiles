@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
 alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
@@ -8,16 +7,11 @@ alias c="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --headle
 alias safari="open -a Safari"
 
 alias macos-update="sudo softwareupdate -i -a"
-pipall() {  # all pip packages. https://github.com/pypa/pip/issues/59
-    # TODO: fix this
-    pip3 install --upgrade pip
-    pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
-}
 update() {
     brew upgrade
-    brew cask upgrade
+    brew upgrade --cask
     brew cleanup
-    pipall
+    # pipall
     doom -y upgrade
     macos-update
 }
@@ -42,7 +36,7 @@ alias cdf='cd "$(osascript -e "tell application \"Finder\" to if window 1 exists
 # use brew installed software (curl, coreutils, sed, go)
 # this also includes coreutils if you do `brew install coreutils`,
 # which might be a bad but has worked fine so far
-PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/curl/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/go/libexec/bin:$PATH"
+PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/curl/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/go/libexec/bin:$PATH"
 # use the man pages for the homebrew installed coreutils
 MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
@@ -64,10 +58,26 @@ o() { # with no arguments 'o' opens the current directory, otherwise opens the g
 alias badge="tput bel"
 alias beep=badge
 
-journal() {
-    birthday=19960201 # YYYYMMDD
-    days_since_birth=$(echo "( `date -u +%s` - `date -u -d $birthday +%s`) / (24*3600)" | bc)
+# Use UTF-8 in Neovim
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
-    mkdir -p ~/Documents/journal/
-    $VISUAL ~/Documents/journal/$days_since_birth
-}
+# journal() {
+#     birthday=19960201 # YYYYMMDD
+#     days_since_birth=$(echo "( `date -u +%s` - `date -u -d $birthday +%s`) / (24*3600)" | bc)
+
+#     mkdir -p ~/Documents/journal/
+#     $VISUAL ~/Documents/journal/$days_since_birth
+# }
+
+# install homebrew's bash completions
+if type brew &>/dev/null; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+    done
+  fi
+fi

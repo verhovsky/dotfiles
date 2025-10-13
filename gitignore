@@ -21,6 +21,9 @@ flycheck_*.py
 
 # Doom Emacs
 .project
+# JetBrains
+.idea
 
-# personal realtime revision control system
-*.history/
+# Claude code
+CLAUDE.md
+AGENTS.md
