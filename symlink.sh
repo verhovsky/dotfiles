@@ -36,6 +36,8 @@ ln_if_not_link gitignore ~/.gitignore  > /dev/null 2>&1;
 ln_if_not_link wgetrc    ~/.wgetrc     > /dev/null 2>&1;
 ln_if_not_link inputrc   ~/.inputrc    > /dev/null 2>&1;
 
+ln_if_not_link ideavimrc ~/.ideavimrc
+
 ln_if_not_link tmux.conf ~/.tmux.conf
 ln_if_not_link tmux      ~/.tmux
 
