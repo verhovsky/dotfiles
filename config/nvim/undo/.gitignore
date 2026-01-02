@@ -1,4 +1,0 @@
-# ignore all files in this dir
-*
-# except this one, otherwise the directory won't be checked into git
-!.gitignore

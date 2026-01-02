@@ -1,6 +1,2 @@
-.netrwhist
-backups/*
-undo/*
-swaps/*
-plugged/*
-!autoload/plug.vim
+README.md
+lazy-lock.json
