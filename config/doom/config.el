@@ -92,6 +92,14 @@
 ;; (we're not autoformatting markdown, so have to specify file types manually)
 ;; (add-to-list '+format-on-save-enabled-modes 'python-mode)
 
+(use-package! magit-delta
+  :after magit
+  :config
+  (setq magit-delta-default-dark-theme "Monokai Extended"
+        magit-delta-default-light-theme "GitHub"
+        magit-delta-hide-plus-minus-markers 1)
+  (magit-delta-mode))
+
 
 (defun open-magit-on-startup ()
   (magit-status-setup-buffer "~/code/learnxinyminutes")

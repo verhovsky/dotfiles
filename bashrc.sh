@@ -42,7 +42,6 @@ alias tt="rm -rf"
 #alias ttt="shred -zn 3 --remove"
 
 alias yt="youtube-dl"
-alias fd=fdfind  # installed as fdfind on debian based OSes
 alias vim=nvim
 
 # create a list of directories and cd into the last one.
