@@ -231,17 +231,6 @@ is_tld() {
 }
 alias istld="is_tld"
 
-# with no arguments 'o' opens the current directory,
-# otherwise opens the given location
-o() {
-
-    if [[ "$#" -eq 0 ]]; then
-        xdg-open .
-    else
-        xdg-open "$1"
-    fi
-}
-
 # finds a process and kills it
 find_kill() {
     kill `ps aux | grep $@ | awk '{print $2}'`
