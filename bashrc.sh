@@ -88,7 +88,7 @@ alias g="git"
 # View abbreviated SHA, description, and history graph of the latest 20 commits
 alias gl="git log --pretty=oneline -n 20 --graph --abbrev-commit"
 # view abbreviated SHA, description, time since commit, username, and history graph of all commits
-alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%aN>%Creset' --abbrev-commit"
 # View the current working tree status using the short format
 alias gs="git status -s"
 alias gss="git status"
@@ -269,9 +269,6 @@ PATH=$PATH:/snap/bin
 export HISTFILESIZE=
 export HISTSIZE=
 export HISTTIMEFORMAT="[%F %T] "
-# Change the file location because certain bash sessions truncate .bash_history file upon close.
-# https://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
-export HISTFILE=~/.bash_eternal_history
 # Force prompt to write history after every command.
 # https://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
@@ -296,12 +293,6 @@ journal() {
     $VISUAL ~/Documents/journal/$year/$day_zero_indexed
 }
 alias j="journal"
-
-# Switch between dvorak (default), russian and qwerty.
-alias keyboard_options='setxkbmap -option caps:escape -option grp:shifts_toggle;\
-    xset r rate 180 30; xmodmap -e "keycode 9 = dollar asciitilde"'
-alias aoeu="setxkbmap -layout us,ru,us -variant dvp,,; keyboard_options"
-alias asdf="aoeu"
 
 alias yayc='yay -Sc'    # clean pacman
 alias yayo='yay -Qtdq'  # orphaned packages
