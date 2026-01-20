@@ -43,9 +43,6 @@ MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 # Android SDK
 PATH=$PATH:~/Library/Android/sdk/platform-tools
 
-unalias fd
-unalias open
-
 o() { # with no arguments 'o' opens the current directory, otherwise opens the given location
     if [[ "$#" -eq 0 ]]; then
         open .

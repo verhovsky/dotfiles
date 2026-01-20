@@ -2,7 +2,10 @@ export EDITOR="nvim"
 export DOOMDIR="~/.config/doom"
 export VISUAL=$EDITOR  # the variable that actually gets used for everything
 
-# list of ~100,000 english words
+shopt -s globstar
+shopt -s nullglob
+
+# list of ~200,000 English words
 export WORDLIST="/usr/share/dict/words"
 
 # The PS1 is the string bash prints after it finishes running a command
@@ -14,7 +17,7 @@ PS1="\w$ "
 
 # enable recursive wildcard
 # **/*.png will match a.png b/c.png d/e/f.png
-shopt -s globstar
+# shopt -s globstar
 
 # alias n="$VISUAL --no-wait --alternate-editor='emacs &'"
 alias n="nvim"
@@ -144,9 +147,6 @@ alias tmcp="tmux show-buffer | pbcopy"
 
 # make a file executable
 alias chmox="chmod +x"
-
-# open files with gui apps on Linux
-alias open=xdg-open
 
 # lowercase and uppercase stdin
 alias lower="tr '[:upper:]' '[:lower:]'"
