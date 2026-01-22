@@ -1,5 +1,7 @@
 set clipboard+=unnamed
+map Y y$
 
-Plug 'tpope/vim-commentary'
+set incsearch
+
+Plug 'tpop/vim-commentary'
 Plug 'tpope/vim-surround'
-
