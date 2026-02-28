@@ -3,5 +3,5 @@ map Y y$
 
 set incsearch
 
-Plug 'tpop/vim-commentary'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
