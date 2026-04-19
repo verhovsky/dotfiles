@@ -253,7 +253,7 @@ PATH=$PATH:~/.cargo/bin
 PATH=$PATH:~/.config/emacs/bin
 PATH=$PATH:/snap/bin
 
-# store a list of all the commands I've every issued in ~/.bash_eternal_history
+# store a list of all the commands I've every issued in ~/.bash_history
 # https://stackoverflow.com/questions/9457233/unlimited-bash-history
 export HISTFILESIZE=
 export HISTSIZE=
