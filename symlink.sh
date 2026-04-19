@@ -1,65 +1,59 @@
 #!/usr/bin/env bash
 
-DOTFILES=~/dotfiles
+# Location of current file
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "hopefully you read the source code of the script you're about to run"
-sleep 3
-
-BACKUP_DIR="$DOTFILES"/.linked_over_files_backup
-
-# if the last argument is already a symlink, do nothing
-# if the last argument is a file, move it to $BACKUP_DIR 
-# finally, link (ln -s) the second-last arg to the last
+# if the first arg exists, print an rm and ln command to stdout
+# that the user can then execute later
+# if it doesn't exist, run the ln command directly
 ln_if_not_link() {
-  if [ -L "${@: -1}" ]; then
-    return 1
-  fi
-  if [ -f "${@: -1}" ]; then
-    mkdir -p "$BACKUP_DIR"
-    mv "${@: -1}" "$BACKUP_DIR"/"$(basename "${@: -1}")"
-  fi
-  echo ln -s "$DOTFILES"/"${@: -2:1}"  "${@: -1}"
-  ln -s "$DOTFILES"/"${@: -2:1}"  "${@: -1}"
-}
-
-# if the last argument exists and is not a symlink, 
-# pass all arguments to an "rm" command
-rm_if_normal_file() {
-  if [ -f "${@: -1}" ]; then
-    sudo rm "$@"
+  if [ -e "${@: -1}" ]; then
+    echo "rm $DOTFILES/$1"
+    echo ln -s "$DOTFILES/$1" "$2"
+  else
+    echo ln -s "$DOTFILES/$1" "$2"
   fi
 }
 
-ln_if_not_link bashrc.sh ~/.bashrc     > /dev/null 2>&1;
-ln_if_not_link gitconfig ~/.gitconfig  > /dev/null 2>&1;
-ln_if_not_link gitignore ~/.gitignore  > /dev/null 2>&1;
-ln_if_not_link wgetrc    ~/.wgetrc     > /dev/null 2>&1;
-ln_if_not_link inputrc   ~/.inputrc    > /dev/null 2>&1;
+# if the last argument is a symlink, pass all arguments to an "rm" command
+rm_if_not_link() {
+  if [ ! -L "${@: -1}" ]; then
+    echo "rm $1"
+  fi
+}
+
+ln_if_not_link bashrc    ~/.bashrc
+ln_if_not_link gitconfig ~/.gitconfig
+ln_if_not_link gitignore ~/.gitignore
+ln_if_not_link wgetrc    ~/.wgetrc
+ln_if_not_link inputrc   ~/.inputrc
 
 ln_if_not_link ideavimrc ~/.ideavimrc
 
 ln_if_not_link tmux.conf ~/.tmux.conf
-ln_if_not_link tmux      ~/.tmux
+ln_if_not_link tmux/ ~/.tmux
 
 # TODO: do this idempotently and safely
-# TODO: should I remove untracked files with git checkout -- ./config
 # should probably prompt on that...
 # Avoid getting into an incosistent state if you can't copy something from the existing ~/.config
 # because it already exists in ~/dotfiles/config
 if [[ ! -L ~/.config ]]; then
-  cp ~/.config/* "$DOTFILES"/config
-  ln -s "$DOTFILES"/config ~/.config
+  echo cp ~/.config/* "$DOTFILES"/config
+  echo ln -s "$DOTFILES"/config ~/.config
 fi
 
-# It's in ~/dotfiles/config/nvim/init.vim
-rm_if_normal_file ~/.nvimrc               > /dev/null 2>&1;
-rm_if_normal_file ~/.nvim                 > /dev/null 2>&1;
+# It's in ~/dotfiles/config/nvim/init.lua
+rm_if_not_link ~/.nvimrc               > /dev/null 2>&1;
+rm_if_not_link ~/.nvim                 > /dev/null 2>&1;
 
 # macOS specific
 if [ "$(uname)" = "Darwin" ]; then
   # Terminal.app doesn't read .bashrc, but .profile works
-  echo >> ~/.profile
-  echo 'source ~/.bashrc' >> ~/.profile
+  # Check if `source ~/.bashrc` is already in .profile
+  grep -q 'source ~/.bashrc' ~/.profile ||  {
+    echo >> ~/.profile
+    echo 'source ~/.bashrc' >> ~/.profile
+  }
   ln_if_not_link macos/bash_mac.sh ~/.bash_mac
 
   # enable things like alt-b to move back a word system-wide
