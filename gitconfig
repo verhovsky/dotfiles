@@ -89,6 +89,7 @@
 	# [default] trailing-space: looks for spaces at the end of a line
 	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
 	whitespace = -indent-with-non-tab,trailing-space
+	pager = delta
 
 [color]
 	# Use colors in Git commands that are capable of colored output when
@@ -122,6 +123,7 @@
 [merge]
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
+	conflictStyle = zdiff3
 
 [push]
 	# Suppress warning message
@@ -136,3 +138,5 @@
 	user = verhovsky
 [init]
 	defaultBranch = master
+[interactive]
+	diffFilter = delta --color-only
