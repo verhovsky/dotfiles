@@ -10,9 +10,6 @@ vim.o.softtabstop = 4
 -- Don't move back a character when exiting insert mode
 vim.keymap.set("i", "<Esc>", "<C-o>:stopinsert<CR>", { silent = true })
 
--- save file
-vim.keymap.set("n", "<leader>fs", "<cmd>w<CR>", { desc = "[F]ile [S]ave" })
-
 -- Move cursor to end of pasted text
 vim.keymap.set("n", "p", "gp", { noremap = true })
 vim.keymap.set("n", "P", "gP", { noremap = true })
@@ -22,6 +19,9 @@ vim.keymap.set("n", "P", "gP", { noremap = true })
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+-- save file
+vim.keymap.set("n", "<leader>fs", "<cmd>w<CR>", { desc = "[F]ile [S]ave" })
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
